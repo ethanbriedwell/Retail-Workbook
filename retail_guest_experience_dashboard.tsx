@@ -1,8 +1,41 @@
 import React, { useState, useMemo } from 'react';
 import { Settings, MapPin, Calendar, TrendingUp, AlertCircle, CheckCircle2, ChevronRight, X, ArrowUp, ArrowDown, Minus } from 'lucide-react';
 
+// --- TYPES ---
+interface DriverMetrics {
+  current: string;
+  previous: string;
+  ytd: string;
+}
+
+interface StoreMetrics {
+  nps: number;
+  previousNps: number;
+  opWalk: number;
+  clo: number;
+  drivers: {
+    Friendly: DriverMetrics;
+    Efficient: DriverMetrics;
+    Cleanliness: DriverMetrics;
+    Restroom: DriverMetrics;
+    "Quality of Food": DriverMetrics;
+  };
+}
+
+interface StoreData {
+  [location: string]: StoreMetrics;
+}
+
+interface Insights {
+  watchArea: string;
+  watchValue: string;
+  strongest: string;
+  strongestValue: string;
+  npsDelta: "positive" | "negative";
+}
+
 // --- CONSTANTS & INITIAL DATA ---
-const LOCATION_REGIONS = {
+const LOCATION_REGIONS: Record<string, string> = {
   // South Region
   "Durant East": "South",
   "Durant West": "South",
@@ -26,17 +59,20 @@ const LOCATION_REGIONS = {
   "Wilburton": "Central"
 };
 
+const DRIVER_SCALE_MAX = 5.0;
+const CLO_GOAL = 75;
+const NPS_POSITIVE_THRESHOLD = 40;
+
 // Generate initial mock data for all 18 locations
-const generateInitialData = () => {
-  const data = {};
+const generateInitialData = (): StoreData => {
+  const data: StoreData = {};
   Object.keys(LOCATION_REGIONS).forEach(loc => {
-    // Randomize some realistic looking default data
-    const nps = Math.floor(Math.random() * 201) - 100; // -100 to 100
+    const nps = Math.floor(Math.random() * 201) - 100;
     data[loc] = {
       nps: nps,
-      previousNps: Math.max(-100, Math.min(100, nps - (Math.floor(Math.random() * 21) - 10))), // Delta between -10 and +10
-      opWalk: Math.floor(Math.random() * 20) + 70, // 70-90%
-      clo: Math.floor(Math.random() * 45) + 50, // 50-95% to test the 75% threshold
+      previousNps: Math.max(-100, Math.min(100, nps - (Math.floor(Math.random() * 21) - 10))),
+      opWalk: Math.floor(Math.random() * 20) + 70,
+      clo: Math.floor(Math.random() * 45) + 50,
       drivers: {
         Friendly: { current: (Math.random() * 1.5 + 3.0).toFixed(1), previous: (Math.random() * 1.5 + 3.0).toFixed(1), ytd: (Math.random() * 1.5 + 3.0).toFixed(1) },
         Efficient: { current: (Math.random() * 1.5 + 2.8).toFixed(1), previous: (Math.random() * 1.5 + 2.8).toFixed(1), ytd: (Math.random() * 1.5 + 2.8).toFixed(1) },
@@ -47,12 +83,12 @@ const generateInitialData = () => {
     };
   });
   
-  // Hardcode Durant East to somewhat match the visual mockup
+  // Hardcode Durant East to match the visual mockup
   data["Durant East"] = {
     nps: 45,
-    previousNps: 41, // Hardcoded previous month
+    previousNps: 41,
     opWalk: 82,
-    clo: 82, // Hardcoded above 75% to show green by default
+    clo: 82,
     drivers: {
       Friendly: { current: "3.5", previous: "3.1", ytd: "3.3" },
       Efficient: { current: "3.2", previous: "3.4", ytd: "3.3" },
@@ -65,38 +101,136 @@ const generateInitialData = () => {
   return data;
 };
 
+// --- KPI CARD COMPONENTS ---
+
+interface NPSCardProps {
+  nps: number;
+  previousNps: number;
+}
+
+function NPSCard({ nps, previousNps }: NPSCardProps) {
+  const npsDelta = nps - previousNps;
+  const isPositive = npsDelta > 0;
+  const isNegative = npsDelta < 0;
+  
+  let cardBg = "bg-white";
+  let topBorder = "bg-[#D2B48C]";
+  let circleBorder = "border-[#8B1A1A]";
+  let valueColor = "text-[#8B1A1A]";
+  let deltaText = "text-slate-500";
+  
+  if (isPositive) {
+    cardBg = "bg-green-50";
+    topBorder = "bg-green-500";
+    circleBorder = "border-green-600";
+    valueColor = "text-green-700";
+    deltaText = "text-green-600";
+  } else if (isNegative) {
+    cardBg = "bg-red-50";
+    topBorder = "bg-red-500";
+    circleBorder = "border-red-600";
+    valueColor = "text-red-700";
+    deltaText = "text-red-600";
+  }
+
+  return (
+    <div className={`flex flex-col items-center justify-center p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group transition-colors duration-300 ${cardBg}`}>
+      <div className={`absolute top-0 w-full h-1 ${topBorder}`} />
+      <div className={`w-32 h-32 rounded-full border-[6px] flex items-center justify-center mb-2 shadow-inner bg-slate-50 transition-colors duration-300 ${circleBorder}`}>
+        <span className={`text-4xl font-black ${valueColor}`}>{nps}%</span>
+      </div>
+      
+      <div className="flex items-center gap-1 mb-2">
+        {isPositive ? <ArrowUp size={16} className="text-green-600" /> : isNegative ? <ArrowDown size={16} className="text-red-600" /> : <Minus size={16} className="text-slate-400" />}
+        <span className={`text-sm font-bold ${deltaText}`}>
+          {Math.abs(npsDelta)}% vs Last Month
+        </span>
+      </div>
+
+      <h3 className="font-bold text-slate-700 tracking-wide text-center">RETAIL NPS</h3>
+    </div>
+  );
+}
+
+interface OpWalkCardProps {
+  opWalk: number;
+}
+
+function OpWalkCard({ opWalk }: OpWalkCardProps) {
+  return (
+    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+      <div className="absolute top-0 w-full h-1 bg-[#556B2F]" />
+      <div className="w-32 h-32 rounded-full border-[6px] border-[#556B2F] flex items-center justify-center mb-4 shadow-inner bg-slate-50">
+        <span className="text-4xl font-black text-[#556B2F]">{opWalk}%</span>
+      </div>
+      <h3 className="font-bold text-slate-700 tracking-wide text-center">OPWALK</h3>
+    </div>
+  );
+}
+
+interface LanguageUtilizationCardProps {
+  clo: number;
+}
+
+function LanguageUtilizationCard({ clo }: LanguageUtilizationCardProps) {
+  const isPositive = clo >= CLO_GOAL;
+  
+  let cardBg = isPositive ? "bg-green-50" : "bg-red-50";
+  let topBorder = isPositive ? "bg-green-500" : "bg-red-500";
+  let circleBorder = isPositive ? "border-green-600" : "border-red-600";
+  let valueColor = isPositive ? "text-green-700" : "text-red-700";
+  let statusText = isPositive ? "text-green-600" : "text-red-600";
+
+  return (
+    <div className={`flex flex-col items-center justify-center p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden transition-colors duration-300 ${cardBg}`}>
+      <div className={`absolute top-0 w-full h-1 ${topBorder}`} />
+      <div className={`w-32 h-32 rounded-full border-[6px] flex items-center justify-center mb-2 shadow-inner bg-slate-50 transition-colors duration-300 ${circleBorder}`}>
+        <span className={`text-4xl font-black ${valueColor}`}>{clo}%</span>
+      </div>
+      
+      <div className="flex items-center gap-1 mb-2">
+        <span className={`text-sm font-bold ${statusText}`}>
+          Goal: {CLO_GOAL}%
+        </span>
+      </div>
+
+      <h3 className="font-bold text-slate-700 tracking-wide text-center uppercase text-sm leading-tight">Choctaw Language<br/>Utilization</h3>
+    </div>
+  );
+}
+
 // --- MAIN COMPONENT ---
 export default function App() {
   const [reportPeriod, setReportPeriod] = useState("MAY FY26");
   const [selectedLocation, setSelectedLocation] = useState("Durant East");
   const [isEditMode, setIsEditMode] = useState(false);
-  const [storeData, setStoreData] = useState(generateInitialData());
+  const [storeData, setStoreData] = useState<StoreData>(generateInitialData());
 
   const currentRegion = LOCATION_REGIONS[selectedLocation];
   const currentMetrics = storeData[selectedLocation];
 
   // Derived Insights
-  const insights = useMemo(() => {
+  const insights = useMemo((): Insights => {
     const drivers = currentMetrics.drivers;
     let maxDriver = "Friendly";
     let minDriver = "Friendly";
     
     Object.keys(drivers).forEach(key => {
-      if (parseFloat(drivers[key].current) > parseFloat(drivers[maxDriver].current)) maxDriver = key;
-      if (parseFloat(drivers[key].current) < parseFloat(drivers[minDriver].current)) minDriver = key;
+      if (parseFloat(drivers[key as keyof typeof drivers].current) > parseFloat(drivers[maxDriver as keyof typeof drivers].current)) maxDriver = key;
+      if (parseFloat(drivers[key as keyof typeof drivers].current) < parseFloat(drivers[minDriver as keyof typeof drivers].current)) minDriver = key;
     });
 
     return {
       watchArea: minDriver,
-      watchValue: drivers[minDriver].current,
+      watchValue: drivers[minDriver as keyof typeof drivers].current,
       strongest: maxDriver,
-      strongestValue: drivers[maxDriver].current,
-      npsDelta: currentMetrics.nps > 40 ? "positive" : "negative"
+      strongestValue: drivers[maxDriver as keyof typeof drivers].current,
+      npsDelta: currentMetrics.nps > NPS_POSITIVE_THRESHOLD ? "positive" : "negative"
     };
   }, [currentMetrics]);
 
   // Handlers
-  const handleDataChange = (field, value) => {
+  const handleDataChange = (field: keyof StoreMetrics, value: string | number) => {
     setStoreData(prev => {
       const updated = { ...prev };
       updated[selectedLocation] = {
@@ -107,7 +241,7 @@ export default function App() {
     });
   };
 
-  const handleDriverChange = (driver, metricType, value) => {
+  const handleDriverChange = (driver: keyof StoreMetrics["drivers"], metricType: keyof DriverMetrics, value: string) => {
     setStoreData(prev => {
       const updated = { ...prev };
       updated[selectedLocation].drivers = {
@@ -206,19 +340,19 @@ export default function App() {
                 <h4 className="font-semibold text-slate-300">Core Metrics</h4>
                 <div>
                   <label className="block text-xs text-slate-400 mb-1">Retail NPS (%)</label>
-                  <input type="number" min="-100" max="100" value={currentMetrics.nps} onChange={(e) => handleDataChange('nps', e.target.value)} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C]" />
+                  <input type="number" min="-100" max="100" value={currentMetrics.nps} onChange={(e) => handleDataChange('nps', parseInt(e.target.value))} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" />
                 </div>
                 <div>
                   <label className="block text-xs text-slate-400 mb-1">Previous Month NPS (%)</label>
-                  <input type="number" min="-100" max="100" value={currentMetrics.previousNps} onChange={(e) => handleDataChange('previousNps', e.target.value)} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C]" />
+                  <input type="number" min="-100" max="100" value={currentMetrics.previousNps} onChange={(e) => handleDataChange('previousNps', parseInt(e.target.value))} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" />
                 </div>
                 <div>
                   <label className="block text-xs text-slate-400 mb-1">OpWalk (%)</label>
-                  <input type="number" value={currentMetrics.opWalk} onChange={(e) => handleDataChange('opWalk', e.target.value)} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C]" />
+                  <input type="number" value={currentMetrics.opWalk} onChange={(e) => handleDataChange('opWalk', parseInt(e.target.value))} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" />
                 </div>
                 <div>
                   <label className="block text-xs text-slate-400 mb-1">Choctaw Language Utilization (%)</label>
-                  <input type="number" value={currentMetrics.clo} onChange={(e) => handleDataChange('clo', e.target.value)} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C]" />
+                  <input type="number" value={currentMetrics.clo} onChange={(e) => handleDataChange('clo', parseInt(e.target.value))} className="w-full bg-slate-700 rounded px-3 py-2 outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" />
                 </div>
               </div>
 
@@ -235,8 +369,8 @@ export default function App() {
                           <input 
                             type="number" step="0.1" min="0" max="5"
                             value={vals.current} 
-                            onChange={(e) => handleDriverChange(driver, 'current', e.target.value)} 
-                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C]" 
+                            onChange={(e) => handleDriverChange(driver as keyof StoreMetrics["drivers"], 'current', e.target.value)} 
+                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" 
                           />
                         </div>
                         <div>
@@ -244,8 +378,8 @@ export default function App() {
                           <input 
                             type="number" step="0.1" min="0" max="5"
                             value={vals.previous} 
-                            onChange={(e) => handleDriverChange(driver, 'previous', e.target.value)} 
-                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C]" 
+                            onChange={(e) => handleDriverChange(driver as keyof StoreMetrics["drivers"], 'previous', e.target.value)} 
+                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" 
                           />
                         </div>
                         <div>
@@ -253,8 +387,8 @@ export default function App() {
                           <input 
                             type="number" step="0.1" min="0" max="5"
                             value={vals.ytd} 
-                            onChange={(e) => handleDriverChange(driver, 'ytd', e.target.value)} 
-                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C]" 
+                            onChange={(e) => handleDriverChange(driver as keyof StoreMetrics["drivers"], 'ytd', e.target.value)} 
+                            className="w-full bg-slate-700 rounded px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#D2B48C] text-white" 
                           />
                         </div>
                       </div>
@@ -276,89 +410,9 @@ export default function App() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* KPI 1: Retail NPS */}
-              {(() => {
-                const npsDelta = currentMetrics.nps - currentMetrics.previousNps;
-                const isPositive = npsDelta > 0;
-                const isNegative = npsDelta < 0;
-                
-                let cardBg = "bg-white";
-                let topBorder = "bg-[#D2B48C]";
-                let circleBorder = "border-[#8B1A1A]";
-                let valueColor = "text-[#8B1A1A]";
-                let deltaText = "text-slate-500";
-                
-                if (isPositive) {
-                  cardBg = "bg-green-50";
-                  topBorder = "bg-green-500";
-                  circleBorder = "border-green-600";
-                  valueColor = "text-green-700";
-                  deltaText = "text-green-600";
-                } else if (isNegative) {
-                  cardBg = "bg-red-50";
-                  topBorder = "bg-red-500";
-                  circleBorder = "border-red-600";
-                  valueColor = "text-red-700";
-                  deltaText = "text-red-600";
-                }
-
-                return (
-                  <div className={`flex flex-col items-center justify-center p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group transition-colors duration-300 ${cardBg}`}>
-                    <div className={`absolute top-0 w-full h-1 ${topBorder}`} />
-                    <div className={`w-32 h-32 rounded-full border-[6px] flex items-center justify-center mb-2 shadow-inner bg-slate-50 transition-colors duration-300 ${circleBorder}`}>
-                      <span className={`text-4xl font-black ${valueColor}`}>{currentMetrics.nps}%</span>
-                    </div>
-                    
-                    {/* Delta Shift Indicator */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {isPositive ? <ArrowUp size={16} className="text-green-600" /> : isNegative ? <ArrowDown size={16} className="text-red-600" /> : <Minus size={16} className="text-slate-400" />}
-                      <span className={`text-sm font-bold ${deltaText}`}>
-                        {Math.abs(npsDelta)}% vs Last Month
-                      </span>
-                    </div>
-
-                    <h3 className="font-bold text-slate-700 tracking-wide text-center">RETAIL NPS</h3>
-                  </div>
-                );
-              })()}
-
-              {/* KPI 2: OpWalk */}
-              <div className="flex flex-col items-center justify-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
-                <div className="absolute top-0 w-full h-1 bg-[#556B2F]" />
-                <div className="w-32 h-32 rounded-full border-[6px] border-[#556B2F] flex items-center justify-center mb-4 shadow-inner bg-slate-50">
-                  <span className="text-4xl font-black text-[#556B2F]">{currentMetrics.opWalk}%</span>
-                </div>
-                <h3 className="font-bold text-slate-700 tracking-wide text-center">OPWALK</h3>
-              </div>
-
-              {/* KPI 3: Language */}
-              {(() => {
-                const isPositive = currentMetrics.clo >= 75;
-                
-                let cardBg = isPositive ? "bg-green-50" : "bg-red-50";
-                let topBorder = isPositive ? "bg-green-500" : "bg-red-500";
-                let circleBorder = isPositive ? "border-green-600" : "border-red-600";
-                let valueColor = isPositive ? "text-green-700" : "text-red-700";
-                let statusText = isPositive ? "text-green-600" : "text-red-600";
-
-                return (
-                  <div className={`flex flex-col items-center justify-center p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden transition-colors duration-300 ${cardBg}`}>
-                     <div className={`absolute top-0 w-full h-1 ${topBorder}`} />
-                    <div className={`w-32 h-32 rounded-full border-[6px] flex items-center justify-center mb-2 shadow-inner bg-slate-50 transition-colors duration-300 ${circleBorder}`}>
-                      <span className={`text-4xl font-black ${valueColor}`}>{currentMetrics.clo}%</span>
-                    </div>
-                    
-                    {/* Goal Indicator */}
-                    <div className="flex items-center gap-1 mb-2">
-                      <span className={`text-sm font-bold ${statusText}`}>
-                        Goal: 75%
-                      </span>
-                    </div>
-
-                    <h3 className="font-bold text-slate-700 tracking-wide text-center uppercase text-sm leading-tight">Choctaw Language<br/>Utilization</h3>
-                  </div>
-                );
-              })()}
+              <NPSCard nps={currentMetrics.nps} previousNps={currentMetrics.previousNps} />
+              <OpWalkCard opWalk={currentMetrics.opWalk} />
+              <LanguageUtilizationCard clo={currentMetrics.clo} />
             </div>
           </div>
 
@@ -395,8 +449,8 @@ export default function App() {
                     const isPositiveMom = momDelta > 0;
                     const isNegativeMom = momDelta < 0;
 
-                    const currentHeight = (currentVal / 5) * 100;
-                    const ytdHeight = (ytdVal / 5) * 100;
+                    const currentHeight = (currentVal / DRIVER_SCALE_MAX) * 100;
+                    const ytdHeight = (ytdVal / DRIVER_SCALE_MAX) * 100;
                     
                     // Colors matching the PDF mockup
                     const colors = [
@@ -431,12 +485,12 @@ export default function App() {
                             className="w-1/3 max-w-[16px] sm:max-w-[20px] bg-slate-200 rounded-t-sm transition-all duration-300 relative group/ytd"
                             style={{ height: `${ytdHeight}%`, minHeight: '10px' }}
                           >
-                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-500 bg-white shadow-sm px-1 rounded opacity-0 group-hover/ytd:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">YTD {ytdVal.toFixed(1)}</span>
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-500 bg-white shadow-sm px-1 rounded opacity-0 group-hover/ytd:opacity-100 transition-opacity duration-200">{ytdVal.toFixed(1)}</span>
                           </div>
                           
                           {/* Current Bar */}
                           <div 
-                            className={`w-2/3 max-w-[32px] sm:max-w-[40px] rounded-t-lg transition-all duration-500 ease-out shadow-sm group-hover:opacity-90 group-hover:-translate-y-1 ${barColor} ${isWatchArea ? 'ring-2 ring-red-400 ring-offset-2' : ''}`}
+                            className={`w-2/3 max-w-[32px] sm:max-w-[40px] rounded-t-lg transition-all duration-500 ease-out shadow-sm group-hover:opacity-90 group-hover:-translate-y-1 ${barColor}`}
                             style={{ height: `${currentHeight}%`, minHeight: '10px' }}
                           />
                         </div>
@@ -464,7 +518,7 @@ export default function App() {
                   <TrendingUp size={18} className="text-[#D2B48C]" /> Summary
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  For the <span className="font-semibold">{reportPeriod}</span> reporting period, <span className="font-semibold text-[#8B1A1A]">{selectedLocation}</span> achieved a Retail NPS of <span className="font-semibold">{currentMetrics.nps}%</span>. The strongest operational driver was <span className="font-semibold text-[#556B2F]">{insights.strongest}</span>.
+                  For the <span className="font-semibold">{reportPeriod}</span> reporting period, <span className="font-semibold text-[#8B1A1A]">{selectedLocation}</span> achieved a Retail NPS of <span className="font-semibold text-[#8B1A1A]">{currentMetrics.nps}</span>, with an OpWalk score of <span className="font-semibold">{currentMetrics.opWalk}%</span>.
                 </p>
               </div>
 
@@ -474,7 +528,7 @@ export default function App() {
                   <AlertCircle size={18} className="text-red-600" /> Watch Area
                 </h3>
                 <p className="text-sm text-red-800 leading-relaxed">
-                  Focus is needed on <span className="font-bold underline decoration-red-300">{insights.watchArea}</span>, currently tracking at a low of <span className="font-bold">{insights.watchValue}</span>. Immediate operational review of this guest touchpoint is advised.
+                  Focus is needed on <span className="font-bold underline decoration-red-300">{insights.watchArea}</span>, currently tracking at a low of <span className="font-bold">{insights.watchValue}</span> on the 5.0 scale.
                 </p>
               </div>
 
