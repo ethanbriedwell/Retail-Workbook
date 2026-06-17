@@ -1,0 +1,204 @@
+# Retail Guest Experience HTML Document Anatomy
+This is a computed technical breakdown of the uploaded HTML document. Measurements were taken in Chromium at a fixed viewport of **1680 x 1200**, device pixel ratio **1**, after the JavaScript rendered the KPI cards, chart, top stores, and editable controls.
+Exact pixel dimensions can change if the browser window, zoom level, installed fonts, or content values change. The structure, selectors, and relationships stay the same.
+## Measurement Context
+- Source file: `retail_guest_experience_report_template_clean_typography (1).html`
+- Viewport measured: `1680 x 1200`
+- Document scroll size: `1680 x 1558`
+- Main report canvas: `1194.00 x 1514.08`
+- Control panel: `420.00 x 1164.00`
+
+## Approved Brand Variables Detected
+| CSS Variable | Value |
+|---|---|
+| `--choctaw-red` | `#AB2328` |
+| `--deep-red` | `#AB2328` |
+| `--brand-brown` | `#4F2C1D` |
+| `--burnt` | `#4F2C1D` |
+| `--gold` | `#EBB000` |
+| `--olive` | `#548235` |
+| `--sage` | `#548235` |
+| `--mustard` | `#EBB000` |
+| `--blue` | `#1F4E79` |
+| `--light-blue` | `#3C88CF` |
+| `--black` | `#000000` |
+| `--ink` | `#4F2C1D` |
+| `--muted` | `rgba(79, 44, 29, 0.72)` |
+| `--paper` | `#f7f3ed` |
+| `--line` | `rgba(171, 35, 40, 0.35)` |
+| `--card` | `rgba(255, 253, 247, 0.86)` |
+| `--good` | `#548235` |
+| `--warn` | `#EBB000` |
+| `--bad` | `#AB2328` |
+| `--shadow` | `0 18px 60px rgba(79, 44, 29, 0.14)` |
+| `--font-body` | `GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif` |
+| `--font-semibold` | `GillSans-SemiBold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif` |
+| `--font-bold` | `GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif` |
+
+## Document Architecture at a Glance
+| Layer | Selector / Function | Job |
+|---|---|---|
+| Application wrapper | `.app` | Two-column workspace: report canvas plus control panel. |
+| Report canvas | `.report` | Polished visual report intended for viewing/printing. |
+| Header | `.topbar` | Brand, title, location, region, period. |
+| KPI cards | `.snapshot-grid`, `.kpi-card` | Retail NPS, OpWalk, CLO. Built dynamically. |
+| Middle row | `.middle-grid` | Drivers on the left, Top Performing Stores on the right. |
+| Summary | `.summary`, `.summary-grid` | Key Insights, Watch Area, Recommendation. |
+| Editor | `.control-panel` | Sticky right-side form that updates the report. |
+| Data engine | `buildDemoData()`, `loadData()`, `saveData()` | Creates, loads, and persists data. |
+| Render engine | `renderReport()`, `renderSnapshot()`, `renderDriverChart()`, `renderTopStores()`, `renderInsights()` | Turns data into visible UI. |
+
+# Section 1 - Topbar / Report Header
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Section 1: Topbar | `.topbar` | div | 1124.00 x 164.72 | x 57.00, y 55.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 22px 0px | generic / No | Grid wrapper for logo, title, and report filter fields. |
+| Topbar Logo Container | `.brand-badge` | div | 132.00 x 126.00 | x 57.00, y 55.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Visual brand holder. Has aria-label on wrapper but no interactive behavior. |
+| Topbar Logo Image | `.brand-badge img` | img | 132.00 x 132.00 | x 57.00, y 55.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | img / No | Embedded base64 image. Role is image through img tag. Not keyboard focusable. |
+| Topbar Title | `h1` | h1 | 970.00 x 92.72 | x 211.00, y 59.00 | 50.4px / 46.368px, weight 600, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 4px 0px 20px 0px | heading / No | Main report title. The visual anchor of the page. |
+| Header Inputs Grid | `.header-inputs` | div | 970.00 x 48.00 | x 211.00, y 171.72 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Three-column grid for Location, Region, Report Period. |
+| Header Field: Location | `.header-field:nth-child(1)` | div | 367.22 x 48.00 | x 211.00, y 171.72 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.38); Border: 2px rgb(171, 35, 40) | 0px 0px 0px 0px | generic / No | Pill wrapper around Location label and location select. |
+| Header Label: Location | `.header-field:nth-child(1) .label` | span | 63.33 x 15.00 | x 227.00, y 188.22 | 13px / normal, weight 600, GillSans-SemiBold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 0px 0px | generic / No | Static text label. Black. |
+| Header Input: Location Select | `#locationSelect` | select | 261.89 x 21.00 | x 300.33, y 185.22 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | combobox / Yes | Interactive dropdown. Keyboard focusable. |
+| Header Field: Region | `.header-field:nth-child(2)` | div | 255.45 x 48.00 | x 592.22, y 171.72 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.38); Border: 2px rgb(171, 35, 40) | 0px 0px 0px 0px | generic / No | Pill wrapper around Region label and auto-populated value. |
+| Header Label: Region | `.header-field:nth-child(2) .label` | span | 49.81 x 15.00 | x 608.22, y 188.22 | 13px / normal, weight 600, GillSans-SemiBold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 0px 0px | generic / No | Static text label. Black. |
+| Header Value: Region | `#regionDisplay` | span | 46.70 x 19.00 | x 668.03, y 186.22 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Generated from selected location. It is text, not an input. |
+| Header Field: Report Period | `.header-field:nth-child(3)` | div | 319.31 x 48.00 | x 861.67, y 171.72 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.38); Border: 2px rgb(171, 35, 40) | 0px 0px 0px 0px | generic / No | Pill wrapper around Report Period label and text input. |
+| Header Label: Report Period | `.header-field:nth-child(3) .label` | span | 97.84 x 15.00 | x 877.67, y 188.22 | 13px / normal, weight 600, GillSans-SemiBold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 0px 0px | generic / No | Static text label. Black. |
+| Header Input: Report Period | `#periodInput` | input | 179.47 x 21.00 | x 985.52, y 185.22 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | textbox / Yes | Interactive manual text input. Keyboard focusable. |
+
+# Section 2 - Core Performance Snapshot
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Section 2 Heading: Core Performance Snapshot | `h2.section-title` | h2 | 1124.00 x 47.03 | x 57.00, y 241.72 | 48px / 47.04px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(171, 35, 40); Background: rgba(0, 0, 0, 0); Border: 0px rgb(171, 35, 40) | 18px 0px 18px 0px | heading / No | Section heading. |
+| Section 2: Snapshot Grid | `.snapshot-grid` | div | 1124.00 x 258.00 | x 57.00, y 306.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Three-column KPI card grid. |
+| KPI Card 1: Retail NPS | `.snapshot-grid .kpi-card:nth-child(1)` | article | 360.00 x 232.00 | x 57.00, y 306.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 253, 247, 0.86); Border: 1px rgba(84, 130, 53, 0.62) | 0px 0px 0px 0px | article / No | Dynamic KPI card. Conditional class can change card treatment. |
+| KPI Card 1 Gauge | `.snapshot-grid .kpi-card:nth-child(1) .gauge` | div | 112.00 x 112.00 | x 76.00, y 367.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Donut/gauge visual. |
+| KPI Card 1 Title | `.snapshot-grid .kpi-card:nth-child(1) .kpi-title` | div | 194.00 x 19.44 | x 204.00, y 343.03 | 18px / 19.44px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 9px 0px | generic / No | Static KPI title. Should remain black. |
+| KPI Card 2: OpWalk | `.snapshot-grid .kpi-card:nth-child(2)` | article | 360.00 x 232.00 | x 439.00, y 306.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 253, 247, 0.86); Border: 1px rgba(171, 35, 40, 0.15) | 0px 0px 0px 0px | article / No | Dynamic KPI card. |
+| KPI Card 2 Gauge | `.snapshot-grid .kpi-card:nth-child(2) .gauge` | div | 112.00 x 112.00 | x 458.00, y 367.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Donut/gauge visual. |
+| KPI Card 2 Title | `.snapshot-grid .kpi-card:nth-child(2) .kpi-title` | div | 194.00 x 19.44 | x 586.00, y 343.03 | 18px / 19.44px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 9px 0px | generic / No | Static KPI title. Should remain black. |
+| KPI Card 3: Choctaw Language Utilization | `.snapshot-grid .kpi-card:nth-child(3)` | article | 360.00 x 232.00 | x 821.00, y 306.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 253, 247, 0.86); Border: 1px rgba(171, 35, 40, 0.15) | 0px 0px 0px 0px | article / No | Dynamic KPI card. Uses CLO goal threshold logic. |
+| KPI Card 3 Gauge | `.snapshot-grid .kpi-card:nth-child(3) .gauge` | div | 112.00 x 112.00 | x 840.00, y 367.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Donut/gauge visual. |
+| KPI Card 3 Title | `.snapshot-grid .kpi-card:nth-child(3) .kpi-title` | div | 194.00 x 38.88 | x 968.00, y 333.31 | 18px / 19.44px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(0, 0, 0); Background: rgba(0, 0, 0, 0); Border: 0px rgb(0, 0, 0) | 0px 0px 9px 0px | generic / No | Static KPI title. Should remain black. |
+
+# Section 3 - Drivers
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Middle Grid Wrapper | `.middle-grid` | div | 1124.00 x 488.22 | x 57.00, y 564.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Two-column middle layout containing Drivers and Top Performing Stores. |
+| Section 3: Drivers Panel | `.drivers-panel` | div | 685.62 x 486.22 | x 57.00, y 564.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Left-side driver chart panel. |
+| Drivers Heading | `.drivers-panel .panel-title` | h2 | 651.62 x 43.11 | x 65.00, y 586.75 | 44px / 43.12px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(171, 35, 40); Background: rgba(0, 0, 0, 0); Border: 0px rgb(171, 35, 40) | 0px 0px 16px 0px | heading / No | Section title. |
+| Driver Chart Container | `#driverChart` | div | 651.62 x 305.00 | x 65.00, y 645.86 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.42); Border: 1px rgba(171, 35, 40, 0.12) | 0px 0px 0px 0px | img / No | HTML container that receives a generated SVG chart. |
+| Driver SVG | `#driverChart svg` | svg | 625.62 x 279.00 | x 78.00, y 660.86 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | graphics-document / No | Dynamic SVG bar chart generated by JavaScript. |
+| Driver Legend | `.chart-legend` | div | 643.62 x 15.00 | x 73.00, y 960.86 | 13px / normal, weight 600, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 10px 0px 0px 8px | generic / No | Legend for Month, Last Month, YTD, Watch Area. |
+
+# Section 4 - Top Performing Stores
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Section 4: Top Performing Stores Panel | `.stores-panel` | div | 438.38 x 486.22 | x 742.62, y 564.75 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Right-side panel within the middle grid. |
+| Top Stores Heading | `.stores-panel .panel-title` | h2 | 412.38 x 86.22 | x 768.62, y 586.75 | 44px / 43.12px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(171, 35, 40); Background: rgba(0, 0, 0, 0); Border: 0px rgb(171, 35, 40) | 0px 0px 16px 0px | heading / No | Section title. |
+| Top Stores List | `#topStores` | div | 412.38 x 348.00 | x 768.62, y 688.97 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 10px 0px 0px 0px | generic / No | Dynamic list generated by JavaScript. |
+| Top Stores Row 1 | `#topStores .store-row:nth-child(1)` | div | 412.38 x 60.00 | x 768.62, y 688.97 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.46); Border: 1px rgba(171, 35, 40, 0.12) | 0px 0px 0px 0px | generic / No | One top-store row with rank, store, region, and score. |
+
+# Section 5 - Summary
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Section 5: Summary | `.summary` | section | 1124.00 x 456.11 | x 57.00, y 1052.97 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | region / No | Narrative summary section. |
+| Summary Heading | `.summary .section-title` | h2 | 1124.00 x 47.03 | x 57.00, y 1068.97 | 48px / 47.04px, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(171, 35, 40); Background: rgba(0, 0, 0, 0); Border: 0px rgb(171, 35, 40) | 0px 0px 12px 0px | heading / No | Section title. |
+| Summary Grid | `.summary-grid` | div | 1124.00 x 273.47 | x 57.00, y 1128.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | generic / No | Two-column narrative grid. |
+| Summary Card: Key Insights | `.summary-card:nth-child(1)` | article | 551.00 x 129.47 | x 57.00, y 1128.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.46); Border: 1px rgba(171, 35, 40, 0.12) | 0px 0px 0px 0px | article / No | Manual override or auto-generated narrative. |
+| Summary Card: Watch Area | `.summary-card:nth-child(2)` | article | 551.00 x 129.47 | x 630.00, y 1128.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.46); Border: 1px rgba(171, 35, 40, 0.12) | 0px 0px 0px 0px | article / No | Manual override or auto-generated watch area. |
+| Summary Card: Recommendation | `.summary-card.full` | article | 1124.00 x 122.00 | x 57.00, y 1279.47 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 255, 255, 0.46); Border: 1px rgba(171, 35, 40, 0.12) | 0px 0px 0px 0px | article / No | Manual override or auto-generated recommendation. Full-width card. |
+| Footer Mark | `.footer-mark` | div | 1124.00 x 93.61 | x 57.00, y 1415.47 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 14px 0px 0px 0px | generic / No | Footer logo wrapper. |
+| Footer Logo | `.footer-mark img` | img | 320.00 x 93.61 | x 861.00, y 1415.47 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 0px 0px | img / No | Embedded Operational Excellence logo. |
+
+# Section 6 - Control Panel / Dashboard Controls
+| Element | Selector | Tag | Size | Position | Font | Color / Background / Border | Margin | Role / Keyboard Focus | Notes |
+|---|---|---:|---:|---:|---|---|---|---|---|
+| Section 6: Control Panel | `.control-panel` | aside | 420.00 x 1164.00 | x 1238.00, y 22.00 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(255, 253, 247, 0.94); Border: 1px rgba(171, 35, 40, 0.14) | 0px 0px 0px 0px | generic / No | Sticky right-side editor/control panel. |
+| Control Panel Title | `.control-panel h2` | h2 | 378.00 x 29.00 | x 1259.00, y 43.00 | 24px / normal, weight 700, GillSans-Bold, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 0px 0px 4px 0px | heading / No | Control panel heading. |
+| Control Panel Help Text | `.control-panel .help-text` | p | 378.00 x 33.78 | x 1259.00, y 76.00 | 13px / 16.9px, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgba(79, 44, 29, 0.72); Background: rgba(0, 0, 0, 0); Border: 0px rgba(79, 44, 29, 0.72) | 0px 0px 14px 0px | generic / No | Instructional copy. |
+| Brand Palette | `.brand-palette` | div | 378.00 x 20.00 | x 1259.00, y 123.78 | 16px / normal, weight 400, GillSans-Regular, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif | Color: rgb(79, 44, 29); Background: rgba(0, 0, 0, 0); Border: 0px rgb(79, 44, 29) | 10px 0px 0px 0px | generic / No | Seven-color brand swatch row. |
+
+## Control Panel Form Sections - Exact Computed Blocks
+| # | Heading | Size | Position | Field Count | Primary Fields |
+|---:|---|---:|---:|---:|---|
+| 1 | REPORT DETAILS | 378.00 x 556.00 | x 1259.00, y 157.78 | 6 | `formLocation` (combobox), `formRegion` (textbox), `formPeriod` (textbox), `keyInsightsOverride` (textbox), `watchAreaOverride` (textbox), `summaryOverride` (textbox) |
+| 2 | MAIN KPI MEASUREMENTS | 378.00 x 359.00 | x 1259.00, y 727.78 | 12 | `input` (number), `input` (number), `input` (number), `input` (number), `input` (number), `input` (number) |
+| 3 | RETAIL NPS DRIVERS | 378.00 x 577.00 | x 1259.00, y 1100.78 | 20 | `input` (number), `input` (number), `input` (number), `input` (number), `input` (number), `input` (number) |
+| 4 | TOP PERFORMING STORES | 378.00 x 661.41 | x 1259.00, y 1691.78 | 16 | `topStoresOverride` (checkbox), `input` (textbox), `select` (combobox), `input` (number), `input` (textbox), `select` (combobox) |
+| 5 | ACTIONS | 378.00 x 166.66 | x 1259.00, y 2367.19 | 4 | `printBtn` (button), `downloadBtn` (button), `importFile` (file), `resetBtn` (button) |
+
+## KPI Card Data Structure
+| # | Title | Card Class | Card Size | Gauge Size | Meta Rows |
+|---:|---|---|---:|---:|---|
+| 1 | RETAIL NPS | `kpi-card status-positive` | 360.00 x 232.00 | 112.00 x 112.00 | Goal 66.1; Delta to Goal -2.0; Delta Shift +4.9; YTD Average 61.6 |
+| 2 | OPWALK | `kpi-card ` | 360.00 x 232.00 | 112.00 x 112.00 | Goal 85.0; Delta to Goal +5.5; Delta Shift +3.9; YTD Average 80.5 |
+| 3 | CHOCTAW LANGUAGE UTILIZATION | `kpi-card ` | 360.00 x 232.00 | 112.00 x 112.00 | Goal 75.0; Delta to Goal Enter data; Delta Shift Enter data; YTD Average Enter data |
+
+## JavaScript Function Map
+| Function | Purpose |
+|---|---|
+| `seededNumber()` | Creates repeatable demo numbers. |
+| `buildDemoData()` | Creates the starting data object for all locations. |
+| `loadData()` | Loads localStorage data if present. |
+| `mergeWithDefaults()` | Combines saved/imported data with template defaults. |
+| `saveData()` | Writes current data to browser localStorage. |
+| `numberOrNull()` | Converts blank or invalid values into null. |
+| `fmt()` | Formats numeric display values. |
+| `fmtDelta()` | Formats signed delta values. |
+| `deltaClass()` | Returns positive/mid/negative styling classes. |
+| `safePercent()` | Clamps metric values into a 0 to 100 range. |
+| `currentRecord()` | Returns data for the currently selected location. |
+| `getRegion()` | Finds the region tied to a location. |
+| `populateLocationSelects()` | Fills the location dropdowns. |
+| `createField()` | Builds numeric form fields. |
+| `renderEditors()` | Builds the right-side data editors. |
+| `getAutoTopStores()` | Auto-ranks stores by Retail NPS. |
+| `ensureManualTopStores()` | Ensures five editable top-store rows exist. |
+| `renderTopStoresEditor()` | Builds the manual Top Performing Stores editor. |
+| `escapeHtml()` | Escapes user text before inserting into HTML. |
+| `setByPath()` | Writes nested data values from form inputs. |
+| `renderSnapshot()` | Builds the three KPI cards. |
+| `getDriverStats()` | Calculates driver movement, goal deltas, and watch area inputs. |
+| `renderDriverChart()` | Builds the SVG bar chart. |
+| `renderTopStores()` | Builds the top store list. |
+| `renderInsights()` | Builds Key Insights, Watch Area, and Recommendation. |
+| `renderReport()` | Master refresh function for the report canvas. |
+| `syncLocation()` | Updates selected location and re-renders. |
+| `wireEvents()` | Connects all form controls/buttons to behavior. |
+
+## Key Interaction Flows
+### Location dropdown flow
+1. User changes `#locationSelect` or `#formLocation`.
+2. `syncLocation()` updates the active location.
+3. `renderEditors()` rebuilds the control panel fields.
+4. `renderReport()` redraws the report canvas.
+5. `getRegion()` updates the visible Region value.
+### KPI editing flow
+1. User edits a Month, Last Month, YTD, or Goal field.
+2. `setByPath()` writes the value into the current location record.
+3. `saveData()` stores the change in localStorage.
+4. `renderReport()` updates cards, deltas, chart, top stores, and summary.
+### Summary override flow
+1. User types into Optional Manual Key Insights, Watch Area, or Recommendation.
+2. That override is saved in the current location record.
+3. `renderInsights()` uses the manual text instead of auto-generated text.
+### Top Performing Stores flow
+1. Auto mode uses `getAutoTopStores()` and ranks by Retail NPS.
+2. Manual mode uses `record.topStores` from the control panel.
+3. `renderTopStores()` chooses manual or auto based on `topStoresOverrideEnabled`.
+
+## Accessibility and Keyboard Behavior
+- Keyboard-focusable elements include selects, inputs, textareas, buttons, checkbox, and file input.
+- Image elements use `alt` text. The Travel Plaza logo has name `Choctaw Travel Plaza logo`; the footer logo is an image as well.
+- Non-interactive layout wrappers such as `.topbar`, `.snapshot-grid`, `.middle-grid`, `.drivers-panel`, and `.summary-grid` are not keyboard-focusable, which is expected.
+- The driver chart container has `role="img"` and `aria-label="Retail NPS driver chart"`.
+- The document could be improved later by adding more descriptive aria text for individual KPI card statuses and chart values.
+
+## Print Behavior
+- `@page` sets landscape print with `0.35in` margin.
+- `@media print` hides `.control-panel`, body background decoration, and pseudo-elements.
+- Printed output is intended to show only the report canvas, not the editing controls.
+
+## Practical Mental Model
+Think of the file as a self-contained mini application. HTML creates the containers, CSS gives it the branded report design, and JavaScript fills the empty dynamic sections. The left side is the executive-facing report. The right side is the editor that writes data into the JavaScript data model, saves it locally, and triggers re-rendering.

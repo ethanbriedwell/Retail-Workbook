@@ -1,0 +1,1130 @@
+{
+  "reportPeriod": "May FY26",
+  "selectedLocation": "Durant East",
+  "data": {
+    "Durant East": {
+      "retailNps": {
+        "month": 64.1,
+        "lastMonth": 59.2,
+        "ytd": 61.6,
+        "goal": 66.1,
+        "fy25": 66.7
+      },
+      "opwalk": {
+        "month": 90.5,
+        "lastMonth": 86.6,
+        "ytd": 80.5,
+        "goal": 85,
+        "fy25": 81.5
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 84.4,
+          "lastMonth": 86.9,
+          "ytd": 86.3,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 74.4,
+          "lastMonth": 70.9,
+          "ytd": 72.6,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 79.3,
+          "lastMonth": 81.2,
+          "ytd": 79.5,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 82.7,
+          "lastMonth": 78.5,
+          "ytd": 80.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 68.2,
+          "lastMonth": 64.8,
+          "ytd": 66.2,
+          "goal": 80
+        }
+      },
+      "surveys": 59,
+      "topStoresOverrideEnabled": false,
+      "topStores": [
+        {
+          "location": "Durant West",
+          "region": "Central",
+          "score": 74.5
+        },
+        {
+          "location": "Grant",
+          "region": "South",
+          "score": 73.5
+        },
+        {
+          "location": "Stringtown",
+          "region": "Central",
+          "score": 73.5
+        },
+        {
+          "location": "Hugo",
+          "region": "South",
+          "score": 72.4
+        },
+        {
+          "location": "Idabel",
+          "region": "South",
+          "score": 72
+        }
+      ],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Durant West": {
+      "retailNps": {
+        "month": 74.5,
+        "lastMonth": 75.2,
+        "ytd": 74.8,
+        "goal": 66.1,
+        "fy25": 55.9
+      },
+      "opwalk": {
+        "month": 82,
+        "lastMonth": 79.9,
+        "ytd": 83.5,
+        "goal": 85,
+        "fy25": 74.9
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 82.7,
+          "lastMonth": 79.7,
+          "ytd": 81.1,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 79.5,
+          "lastMonth": 82.4,
+          "ytd": 80,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 73.9,
+          "lastMonth": 72.1,
+          "ytd": 72.6,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 74.9,
+          "lastMonth": 74.3,
+          "ytd": 73.8,
+          "goal": 75
+        },
+        "quality": {
+          "month": 70.8,
+          "lastMonth": 66.6,
+          "ytd": 68.7,
+          "goal": 80
+        }
+      },
+      "surveys": 59,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Grant": {
+      "retailNps": {
+        "month": 73.5,
+        "lastMonth": 74.6,
+        "ytd": 74,
+        "goal": 66.1,
+        "fy25": 59
+      },
+      "opwalk": {
+        "month": 76.9,
+        "lastMonth": 77,
+        "ytd": 76.9,
+        "goal": 85,
+        "fy25": 84.9
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 80.2,
+          "lastMonth": 83.1,
+          "ytd": 80.7,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 74.9,
+          "lastMonth": 71.5,
+          "ytd": 73.1,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 83.1,
+          "lastMonth": 81.8,
+          "ytd": 81.8,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 78.4,
+          "lastMonth": 75.3,
+          "ytd": 76.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 71.5,
+          "lastMonth": 69.1,
+          "ytd": 71,
+          "goal": 80
+        }
+      },
+      "surveys": 18,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Garvin": {
+      "retailNps": {
+        "month": 64.6,
+        "lastMonth": 62.6,
+        "ytd": 63.6,
+        "goal": 66.1,
+        "fy25": 62.9
+      },
+      "opwalk": {
+        "month": 78.4,
+        "lastMonth": 73.6,
+        "ytd": 86.9,
+        "goal": 85,
+        "fy25": 77.3
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 74.9,
+          "lastMonth": 73.1,
+          "ytd": 73.6,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 69.6,
+          "lastMonth": 68.3,
+          "ytd": 68.3,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 84.1,
+          "lastMonth": 81.1,
+          "ytd": 82.4,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 69.2,
+          "lastMonth": 67.8,
+          "ytd": 69,
+          "goal": 75
+        },
+        "quality": {
+          "month": 82.6,
+          "lastMonth": 81.4,
+          "ytd": 82,
+          "goal": 80
+        }
+      },
+      "surveys": 35,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Broken Bow": {
+      "retailNps": {
+        "month": 69,
+        "lastMonth": 72.2,
+        "ytd": 70.6,
+        "goal": 66.1,
+        "fy25": 54.2
+      },
+      "opwalk": {
+        "month": 89.4,
+        "lastMonth": 92.1,
+        "ytd": 79.3,
+        "goal": 85,
+        "fy25": 78
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 83.1,
+          "lastMonth": 82.5,
+          "ytd": 82,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 84.1,
+          "lastMonth": 81,
+          "ytd": 82.3,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 70.6,
+          "lastMonth": 69.2,
+          "ytd": 70.4,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 85.3,
+          "lastMonth": 83.8,
+          "ytd": 84.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 73.4,
+          "lastMonth": 73.3,
+          "ytd": 74.3,
+          "goal": 80
+        }
+      },
+      "surveys": 22,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Idabel": {
+      "retailNps": {
+        "month": 72,
+        "lastMonth": 70.5,
+        "ytd": 71.3,
+        "goal": 66.1,
+        "fy25": 67.5
+      },
+      "opwalk": {
+        "month": 77.2,
+        "lastMonth": 74.2,
+        "ytd": 80,
+        "goal": 85,
+        "fy25": 76.9
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 78.4,
+          "lastMonth": 74.2,
+          "ytd": 76.3,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 69.2,
+          "lastMonth": 66.8,
+          "ytd": 68.7,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 85.3,
+          "lastMonth": 84.1,
+          "ytd": 84.7,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 69.6,
+          "lastMonth": 69.5,
+          "ytd": 70.5,
+          "goal": 75
+        },
+        "quality": {
+          "month": 74.7,
+          "lastMonth": 77.9,
+          "ytd": 77,
+          "goal": 80
+        }
+      },
+      "surveys": 32,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Heavener": {
+      "retailNps": {
+        "month": 58.9,
+        "lastMonth": 54.5,
+        "ytd": 56.7,
+        "goal": 66.1,
+        "fy25": 57.4
+      },
+      "opwalk": {
+        "month": 80.8,
+        "lastMonth": 78.3,
+        "ytd": 78.9,
+        "goal": 85,
+        "fy25": 75.9
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 71.5,
+          "lastMonth": 74.5,
+          "ytd": 72.8,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 82.6,
+          "lastMonth": 81.4,
+          "ytd": 82,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 73.4,
+          "lastMonth": 69.3,
+          "ytd": 72.9,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 74.7,
+          "lastMonth": 74.1,
+          "ytd": 75.7,
+          "goal": 75
+        },
+        "quality": {
+          "month": 70.4,
+          "lastMonth": 72.8,
+          "ytd": 72.4,
+          "goal": 80
+        }
+      },
+      "surveys": 23,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Poteau": {
+      "retailNps": {
+        "month": 69.1,
+        "lastMonth": 65.5,
+        "ytd": 67.3,
+        "goal": 66.1,
+        "fy25": 58.3
+      },
+      "opwalk": {
+        "month": 85.2,
+        "lastMonth": 81.9,
+        "ytd": 77.9,
+        "goal": 85,
+        "fy25": 76.8
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 69.2,
+          "lastMonth": 67.4,
+          "ytd": 68.4,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 67.4,
+          "lastMonth": 63.9,
+          "ytd": 67.1,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 76.5,
+          "lastMonth": 75,
+          "ytd": 77.2,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 70.2,
+          "lastMonth": 65.6,
+          "ytd": 69.9,
+          "goal": 75
+        },
+        "quality": {
+          "month": 74.4,
+          "lastMonth": 75.1,
+          "ytd": 75.8,
+          "goal": 80
+        }
+      },
+      "surveys": 47,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Pocola": {
+      "retailNps": {
+        "month": 69.8,
+        "lastMonth": 72.4,
+        "ytd": 71.1,
+        "goal": 66.1,
+        "fy25": 56.9
+      },
+      "opwalk": {
+        "month": 75.4,
+        "lastMonth": 71.3,
+        "ytd": 78.8,
+        "goal": 85,
+        "fy25": 81.2
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 74.5,
+          "lastMonth": 73.3,
+          "ytd": 75,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 69.6,
+          "lastMonth": 69.5,
+          "ytd": 70.8,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 67.4,
+          "lastMonth": 64.9,
+          "ytd": 67.8,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 71.9,
+          "lastMonth": 73.5,
+          "ytd": 73.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 75.1,
+          "lastMonth": 77.1,
+          "ytd": 74.6,
+          "goal": 80
+        }
+      },
+      "surveys": 16,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "McAlester": {
+      "retailNps": {
+        "month": 64.1,
+        "lastMonth": 59.9,
+        "ytd": 62,
+        "goal": 66.1,
+        "fy25": 55.6
+      },
+      "opwalk": {
+        "month": 90.3,
+        "lastMonth": 86.9,
+        "ytd": 83.2,
+        "goal": 85,
+        "fy25": 79.1
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 85.3,
+          "lastMonth": 83.1,
+          "ytd": 85.8,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 76.5,
+          "lastMonth": 76.9,
+          "ytd": 77.9,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 85.5,
+          "lastMonth": 81.8,
+          "ytd": 85.5,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 75,
+          "lastMonth": 71,
+          "ytd": 72.5,
+          "goal": 75
+        },
+        "quality": {
+          "month": 67.6,
+          "lastMonth": 70.2,
+          "ytd": 68.3,
+          "goal": 80
+        }
+      },
+      "surveys": 27,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Stringtown": {
+      "retailNps": {
+        "month": 73.5,
+        "lastMonth": 71.3,
+        "ytd": 72.4,
+        "goal": 66.1,
+        "fy25": 56.7
+      },
+      "opwalk": {
+        "month": 78.9,
+        "lastMonth": 78.8,
+        "ytd": 81.1,
+        "goal": 85,
+        "fy25": 84
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 74.6,
+          "lastMonth": 70.5,
+          "ytd": 74.5,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 75,
+          "lastMonth": 72.5,
+          "ytd": 75.4,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 73.6,
+          "lastMonth": 69,
+          "ytd": 70.9,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 69.2,
+          "lastMonth": 71.6,
+          "ytd": 69.8,
+          "goal": 75
+        },
+        "quality": {
+          "month": 74.2,
+          "lastMonth": 74.1,
+          "ytd": 73.3,
+          "goal": 80
+        }
+      },
+      "surveys": 39,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Atoka": {
+      "retailNps": {
+        "month": 65,
+        "lastMonth": 65.2,
+        "ytd": 65.1,
+        "goal": 66.1,
+        "fy25": 62.7
+      },
+      "opwalk": {
+        "month": 80,
+        "lastMonth": 78.3,
+        "ytd": 86,
+        "goal": 85,
+        "fy25": 85.6
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 69.6,
+          "lastMonth": 71,
+          "ytd": 71.3,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 70.2,
+          "lastMonth": 72.6,
+          "ytd": 69.9,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 75,
+          "lastMonth": 72.1,
+          "ytd": 73.8,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 77.7,
+          "lastMonth": 77.8,
+          "ytd": 76.8,
+          "goal": 75
+        },
+        "quality": {
+          "month": 71.8,
+          "lastMonth": 67.3,
+          "ytd": 70,
+          "goal": 80
+        }
+      },
+      "surveys": 56,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Wilburton": {
+      "retailNps": {
+        "month": 59.9,
+        "lastMonth": 54.7,
+        "ytd": 57.3,
+        "goal": 66.1,
+        "fy25": 59.8
+      },
+      "opwalk": {
+        "month": 78.4,
+        "lastMonth": 80.4,
+        "ytd": 87.6,
+        "goal": 85,
+        "fy25": 85.6
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 71.4,
+          "lastMonth": 70.8,
+          "ytd": 70.1,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 83.9,
+          "lastMonth": 85.5,
+          "ytd": 84.2,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 72.5,
+          "lastMonth": 74.9,
+          "ytd": 72.4,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 78.9,
+          "lastMonth": 75.1,
+          "ytd": 77.3,
+          "goal": 75
+        },
+        "quality": {
+          "month": 68.6,
+          "lastMonth": 68.5,
+          "ytd": 67.7,
+          "goal": 80
+        }
+      },
+      "surveys": 35,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Antlers": {
+      "retailNps": {
+        "month": 61.4,
+        "lastMonth": 64.5,
+        "ytd": 63,
+        "goal": 66.1,
+        "fy25": 66.3
+      },
+      "opwalk": {
+        "month": 76.9,
+        "lastMonth": 80.1,
+        "ytd": 87.6,
+        "goal": 85,
+        "fy25": 85.5
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 74.7,
+          "lastMonth": 75.2,
+          "ytd": 74.7,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 74.4,
+          "lastMonth": 77.4,
+          "ytd": 74.5,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 67.6,
+          "lastMonth": 63.2,
+          "ytd": 65.8,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 71.8,
+          "lastMonth": 74.8,
+          "ytd": 71.9,
+          "goal": 75
+        },
+        "quality": {
+          "month": 66.5,
+          "lastMonth": 68.9,
+          "ytd": 67.8,
+          "goal": 80
+        }
+      },
+      "surveys": 27,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Hugo": {
+      "retailNps": {
+        "month": 72.4,
+        "lastMonth": 69.1,
+        "ytd": 70.8,
+        "goal": 66.1,
+        "fy25": 68.5
+      },
+      "opwalk": {
+        "month": 78.2,
+        "lastMonth": 81.4,
+        "ytd": 87.5,
+        "goal": 85,
+        "fy25": 74.8
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 67.4,
+          "lastMonth": 69.8,
+          "ytd": 67.3,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 75,
+          "lastMonth": 77,
+          "ytd": 75.3,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 81.5,
+          "lastMonth": 81.4,
+          "ytd": 80.6,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 83.9,
+          "lastMonth": 83.8,
+          "ytd": 84.4,
+          "goal": 75
+        },
+        "quality": {
+          "month": 70.6,
+          "lastMonth": 68.8,
+          "ytd": 68.7,
+          "goal": 80
+        }
+      },
+      "surveys": 36,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Stigler": {
+      "retailNps": {
+        "month": 60.2,
+        "lastMonth": 57.5,
+        "ytd": 58.9,
+        "goal": 66.1,
+        "fy25": 68.4
+      },
+      "opwalk": {
+        "month": 84.9,
+        "lastMonth": 88,
+        "ytd": 76.8,
+        "goal": 85,
+        "fy25": 79.2
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 70.2,
+          "lastMonth": 69.8,
+          "ytd": 69.7,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 74.3,
+          "lastMonth": 70.2,
+          "ytd": 72.1,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 76.6,
+          "lastMonth": 76.1,
+          "ytd": 77,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 82,
+          "lastMonth": 78.7,
+          "ytd": 79.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 84.1,
+          "lastMonth": 83.5,
+          "ytd": 83.3,
+          "goal": 80
+        }
+      },
+      "surveys": 18,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Talihina": {
+      "retailNps": {
+        "month": 63.8,
+        "lastMonth": 60.3,
+        "ytd": 62,
+        "goal": 66.1,
+        "fy25": 68.3
+      },
+      "opwalk": {
+        "month": 81.6,
+        "lastMonth": 76.7,
+        "ytd": 81.2,
+        "goal": 85,
+        "fy25": 75.9
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 76.4,
+          "lastMonth": 78.4,
+          "ytd": 76.2,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 75.6,
+          "lastMonth": 75.7,
+          "ytd": 76.2,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 79.3,
+          "lastMonth": 75.9,
+          "ytd": 76.9,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 85.6,
+          "lastMonth": 83.7,
+          "ytd": 84.4,
+          "goal": 75
+        },
+        "quality": {
+          "month": 66.9,
+          "lastMonth": 69.7,
+          "ytd": 67.9,
+          "goal": 80
+        }
+      },
+      "surveys": 24,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    },
+    "Mercantile": {
+      "retailNps": {
+        "month": 68.2,
+        "lastMonth": 63.8,
+        "ytd": 66,
+        "goal": 66.1,
+        "fy25": 54.1
+      },
+      "opwalk": {
+        "month": 89,
+        "lastMonth": 87.4,
+        "ytd": 77.9,
+        "goal": 85,
+        "fy25": 78.4
+      },
+      "clo": {
+        "month": "",
+        "lastMonth": "",
+        "ytd": "",
+        "goal": 75,
+        "fy25": ""
+      },
+      "drivers": {
+        "friendly": {
+          "month": 71.9,
+          "lastMonth": 69,
+          "ytd": 71.5,
+          "goal": 80
+        },
+        "efficient": {
+          "month": 77.7,
+          "lastMonth": 77.6,
+          "ytd": 76.4,
+          "goal": 80
+        },
+        "cleanliness": {
+          "month": 83.9,
+          "lastMonth": 79.7,
+          "ytd": 81.9,
+          "goal": 80
+        },
+        "restroom": {
+          "month": 82.9,
+          "lastMonth": 78.8,
+          "ytd": 81.6,
+          "goal": 75
+        },
+        "quality": {
+          "month": 77.6,
+          "lastMonth": 76.8,
+          "ytd": 78.4,
+          "goal": 80
+        }
+      },
+      "surveys": 56,
+      "topStoresOverrideEnabled": false,
+      "topStores": [],
+      "keyInsightsOverride": "",
+      "watchAreaOverride": "",
+      "recommendationOverride": ""
+    }
+  }
+}
