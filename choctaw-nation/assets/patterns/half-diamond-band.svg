@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20">
+  <!-- Half-Diamond band: a progressive journey. Tile horizontally. Transparent center so it works as a CSS mask. -->
+  <path d="M0 20 L20 2 L40 20 Z M10 20 L30 20 L20 11 Z" fill="#000" fill-rule="evenodd"/>
+</svg>

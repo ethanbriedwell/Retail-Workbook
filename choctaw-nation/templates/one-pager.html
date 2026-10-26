@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNO One-Pager Template</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<style>
+  /*
+   * US Letter handout, modeled on the 2026–2030 Strategic Alignment one-pager.
+   * Switch brand with <body data-brand="nation|oe|retail">.
+   * Export: Print → Save as PDF (Letter, margins none, background graphics on).
+   */
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #E9E7EC; color: var(--cn-text); font-family: var(--cn-font-body); padding: 24px 16px; }
+  .page {
+    width: 100%; max-width: 8.5in; aspect-ratio: 8.5 / 11; margin: 0 auto; background: var(--cn-surface);
+    display: flex; flex-direction: column; box-shadow: 0 2px 12px rgb(0 0 0 / .12); container-type: inline-size;
+  }
+  .cn-band-diamond { height: 2.6cqw; -webkit-mask-size: auto 100%; mask-size: auto 100%; }
+  header { padding: 6cqw 7cqw 3cqw; }
+  .eyebrow { font-family: var(--cn-font-display); font-weight: 700; font-size: 1.6cqw; letter-spacing: .18em; text-transform: uppercase; color: var(--cn-text-muted); }
+  h1 { font-family: var(--cn-font-display); font-weight: 800; font-size: 5.4cqw; line-height: 1.1; color: var(--cn-primary); margin-top: 1.2cqw; }
+  .lede { font-size: 2.3cqw; line-height: 1.5; margin-top: 2cqw; max-width: 90%; }
+  .cn-rule-rope { width: 22cqw; height: 1.4cqw; margin-top: 2.4cqw; -webkit-mask-size: auto 100%; mask-size: auto 100%; }
+  main { padding: 0 7cqw; display: grid; grid-template-columns: 1fr 1fr; gap: 4cqw 6cqw; flex: 1; align-content: start; }
+  h2 { font-family: var(--cn-font-display); font-weight: 700; font-size: 2.3cqw; color: var(--cn-primary); text-transform: uppercase; letter-spacing: .02em; }
+  p, li { font-size: 1.95cqw; line-height: 1.5; }
+  section p { margin-top: .8cqw; }
+  ul { margin-top: 1cqw; padding-left: 1.3em; }
+  li::marker { color: var(--cn-accent); }
+  .callout { grid-column: 1 / -1; background: var(--cn-surface-alt); border-left: .8cqw solid var(--cn-accent); padding: 3cqw 3.6cqw; }
+  footer { margin-top: 4cqw; background: var(--cn-primary-deep); color: var(--cn-on-primary); padding: 3.4cqw 7cqw; display: flex; justify-content: space-between; align-items: center; font-family: var(--cn-font-display); font-weight: 700; font-size: 1.9cqw; letter-spacing: .1em; }
+  footer img { height: 5.6cqw; background: #fff; padding: .8cqw 1.2cqw; border-radius: var(--cn-radius-md); }
+  .mark { display: none; }
+  [data-brand="nation"] .mark-nation, body:not([data-brand]) .mark-nation,
+  [data-brand="oe"] .mark-oe, [data-brand="retail"] .mark-retail { display: block; }
+  @media print {
+    @page { size: letter; margin: 0; }
+    body { background: none; padding: 0; }
+    .page { max-width: none; width: 8.5in; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body data-brand="nation">
+<article class="page">
+  <span class="cn-band-diamond"></span>
+  <header>
+    <p class="eyebrow">Best in Class · Service Excellence</p>
+    <h1>One-Pager Headline Goes Here</h1>
+    <p class="lede">A two-line summary of what this is, who it's for, and the outcome it supports.</p>
+    <span class="cn-rule-rope"></span>
+  </header>
+  <main>
+    <section>
+      <h2>The Situation</h2>
+      <p>What's happening today and why it matters to guests, team members or the Nation.</p>
+    </section>
+    <section>
+      <h2>What We're Doing</h2>
+      <ul>
+        <li>First action or initiative</li>
+        <li>Second action or initiative</li>
+        <li>Third action or initiative</li>
+      </ul>
+    </section>
+    <section>
+      <h2>How We'll Measure It</h2>
+      <ul>
+        <li>KPI and target</li>
+        <li>KPI and target</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Who to Contact</h2>
+      <p>Name, title<br>Department<br>email@choctawnation.com</p>
+    </section>
+    <div class="callout">
+      <h2>Key Takeaway</h2>
+      <p>The single sentence a reader should remember.</p>
+    </div>
+  </main>
+  <footer>
+    <span class="mark mark-nation">CHOCTAW NATION OF OKLAHOMA</span>
+    <img class="mark mark-oe" src="../assets/logos/oe-lockup-seal.png" alt="Choctaw Nation Operational Excellence">
+    <img class="mark mark-retail" src="../assets/logos/travel-plaza-wordmark.png" alt="Choctaw Travel Plaza">
+    <span>CHOCTAWNATION.COM</span>
+  </footer>
+</article>
+</body>
+</html>

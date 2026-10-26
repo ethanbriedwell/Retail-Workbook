@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNO Slide Template</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<style>
+  /*
+   * 16:9 slide template. Sizes use container units so slides scale to any width:
+   * 1cqw = 1/100 of the slide width (19.2px at 1920x1080).
+   * Switch brand with <body data-brand="nation|oe|retail">.
+   * Export: browser Print → Save as PDF (landscape, margins none, background graphics on).
+   */
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #E9E7EC; color: var(--cn-text); font-family: var(--cn-font-body); padding: 24px 16px; }
+  .deck { max-width: 1280px; margin: 0 auto; display: grid; gap: 24px; }
+  .slide {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+    container-type: inline-size; background: var(--cn-surface);
+    box-shadow: 0 2px 12px rgb(0 0 0 / .12);
+  }
+  .inner { position: absolute; inset: 0; padding: 5.5cqw 6cqw; display: flex; flex-direction: column; }
+
+  h1, h2, h3 { font-family: var(--cn-font-display); line-height: 1.1; }
+  .hero  { font-size: 4.2cqw; font-weight: 800; }
+  .title { font-size: 2.7cqw; font-weight: 700; color: var(--cn-primary); }
+  .section { font-size: 1.75cqw; font-weight: 700; color: var(--cn-primary); }
+  p, li { font-size: 1.45cqw; line-height: 1.45; }
+  .eyebrow { font-family: var(--cn-font-display); font-weight: 700; font-size: 1cqw; letter-spacing: .18em; text-transform: uppercase; }
+
+  /* Brand marks: only the one for the active brand shows. */
+  .mark { display: none; }
+  [data-brand="nation"] .mark-nation, body:not([data-brand]) .mark-nation,
+  [data-brand="oe"] .mark-oe, [data-brand="retail"] .mark-retail { display: block; }
+  .wordmark-text { font-family: var(--cn-font-display); font-weight: 700; font-size: 1.15cqw; letter-spacing: .04em; }
+
+  /* Title / divider / closing: solid primary */
+  .slide.is-primary { background: var(--cn-primary); color: var(--cn-on-primary); }
+  .slide.is-primary .title, .slide.is-primary .section { color: var(--cn-on-primary); }
+  .slide.is-primary .cn-band-diamond { background-color: var(--cn-ornament-on-primary); position: absolute; left: 0; right: 0; height: 1.6cqw; -webkit-mask-size: auto 100%; mask-size: auto 100%; }
+  .band-top { top: 2.4cqw; } .band-bottom { bottom: 2.4cqw; }
+  .is-primary .inner { justify-content: center; }
+  .is-primary .eyebrow { color: var(--cn-ornament-on-primary); margin-bottom: 1.5cqw; }
+  .subtitle { font-size: 1.8cqw; margin-top: 1.6cqw; opacity: .9; max-width: 70%; }
+  .title-foot { position: absolute; left: 6cqw; right: 6cqw; bottom: 6cqw; display: flex; justify-content: space-between; align-items: flex-end; font-size: 1.1cqw; }
+  .title-foot img { height: 4.4cqw; width: auto; }
+  .lockup-on-dark { background: #fff; padding: .6cqw 1cqw; border-radius: var(--cn-radius-md); }
+
+  /* Content slide */
+  .head { margin-bottom: 2.4cqw; }
+  .head .cn-rule-rope { width: 14cqw; height: .8cqw; margin-top: 1cqw; -webkit-mask-size: auto 100%; mask-size: auto 100%; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4cqw; flex: 1; }
+  .cols ul { padding-left: 1.4em; display: grid; gap: .8cqw; align-content: start; }
+  .cols li::marker { color: var(--cn-accent); }
+  .panel { align-self: start; background: var(--cn-surface-alt); border-left: .45cqw solid var(--cn-accent); padding: 2cqw 2.4cqw; }
+  .panel .section { margin-bottom: 1cqw; }
+  .foot { position: absolute; left: 6cqw; right: 6cqw; bottom: 2.4cqw; display: flex; justify-content: space-between; align-items: center; font-size: .95cqw; color: var(--cn-text-muted); }
+  .foot img { height: 2.4cqw; width: auto; }
+  .pillar-tag { display: inline-block; font-family: var(--cn-font-display); font-weight: 700; font-size: .85cqw; letter-spacing: .1em; text-transform: uppercase; padding: .35cqw .8cqw; border: 1px solid var(--cn-primary); color: var(--cn-primary); border-radius: var(--cn-radius-sm); }
+
+  /* KPI slide */
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqw; margin-top: 1cqw; }
+  .kpi { background: var(--cn-surface-alt); padding: 2.2cqw; border-top: .45cqw solid var(--cn-primary); }
+  .kpi .value { font-family: var(--cn-font-display); font-weight: 800; font-size: 4cqw; color: var(--cn-primary); }
+  .kpi .label { font-size: 1.2cqw; color: var(--cn-text-muted); margin-top: .4cqw; }
+  .kpi.focus { border-top-color: var(--cn-alert); }
+  .kpi.focus .value { color: var(--cn-alert); }
+
+  /* Closing */
+  .motto { font-family: var(--cn-font-display); font-weight: 800; font-size: 3.4cqw; }
+  .links { margin-top: 2cqw; font-size: 1.5cqw; opacity: .9; }
+  .review-note { position: absolute; right: 6cqw; top: 5cqw; font-size: .85cqw; opacity: .75; }
+
+  @media print {
+    @page { size: 13.333in 7.5in; margin: 0; }
+    body { background: none; padding: 0; }
+    .deck { max-width: none; gap: 0; }
+    .slide { width: 13.333in; box-shadow: none; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none; }
+  }
+  .toolbar { max-width: 1280px; margin: 0 auto 16px; display: flex; gap: 8px; flex-wrap: wrap; font-size: 14px; }
+  .toolbar button { font: inherit; padding: 6px 12px; border: 1px solid #999; background: #fff; border-radius: 4px; cursor: pointer; }
+  .toolbar button[aria-pressed="true"] { background: #222; color: #fff; border-color: #222; }
+</style>
+</head>
+<body data-brand="nation">
+
+<div class="toolbar no-print" role="group" aria-label="Brand">
+  <span style="align-self:center">Brand:</span>
+  <button data-set="nation" aria-pressed="true">Choctaw Nation</button>
+  <button data-set="oe" aria-pressed="false">Operational Excellence</button>
+  <button data-set="retail" aria-pressed="false">Travel Plaza / Retail</button>
+</div>
+
+<main class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide is-primary">
+    <span class="cn-band-diamond band-top"></span>
+    <div class="inner">
+      <p class="eyebrow">Department · Month 2026</p>
+      <h1 class="hero">Presentation Title Goes Here</h1>
+      <p class="subtitle">One-line subtitle that frames the decision or update.</p>
+    </div>
+    <div class="title-foot">
+      <span>Presenter Name · Title</span>
+      <span class="mark mark-nation wordmark-text">CHOCTAW NATION OF OKLAHOMA</span>
+      <img class="mark mark-oe lockup-on-dark" src="../assets/logos/oe-lockup-seal.png" alt="Choctaw Nation Operational Excellence">
+      <img class="mark mark-retail lockup-on-dark" src="../assets/logos/travel-plaza-wordmark.png" alt="Choctaw Travel Plaza">
+    </div>
+    <span class="cn-band-diamond band-bottom"></span>
+  </section>
+
+  <!-- 2. Section divider -->
+  <section class="slide is-primary">
+    <div class="inner">
+      <p class="eyebrow">Section 01</p>
+      <h2 class="hero">Where We Are Today</h2>
+    </div>
+    <span class="cn-band-diamond band-bottom" style="-webkit-mask-image:var(--cn-pattern-half-diamond);mask-image:var(--cn-pattern-half-diamond)"></span>
+  </section>
+
+  <!-- 3. Content: two columns -->
+  <section class="slide">
+    <div class="inner">
+      <div class="head">
+        <span class="pillar-tag">Best in Class · Service Excellence</span>
+        <h2 class="title" style="margin-top:1cqw">Slide Title at 24pt Bold</h2>
+        <span class="cn-rule-rope"></span>
+      </div>
+      <div class="cols">
+        <ul>
+          <li>Body copy at 12–14pt regular, charcoal on white.</li>
+          <li>Keep to three to five points per slide.</li>
+          <li>Tag each slide to a 2026–2030 strategic pillar and objective.</li>
+          <li>Use the accent color for data and links; reserve red for the one focal number.</li>
+        </ul>
+        <div class="panel">
+          <h3 class="section">Section Header 16pt</h3>
+          <p>Use a panel for a key takeaway, quote, or the "so what" of the slide.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>Choctaw Nation of Oklahoma · Internal</span>
+      <img class="mark mark-oe" src="../assets/logos/oe-lockup-seal.png" alt="Choctaw Nation Operational Excellence">
+      <img class="mark mark-retail" src="../assets/logos/travel-plaza-wordmark.png" alt="Choctaw Travel Plaza">
+      <span>3</span>
+    </div>
+  </section>
+
+  <!-- 4. KPI -->
+  <section class="slide">
+    <div class="inner">
+      <div class="head">
+        <span class="pillar-tag">Financial Stewardship · Revenue Growth</span>
+        <h2 class="title" style="margin-top:1cqw">Results at a Glance</h2>
+        <span class="cn-rule-rope"></span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="value">94%</div><div class="label">Guest satisfaction (target 90%)</div></div>
+        <div class="kpi"><div class="value">+6.2%</div><div class="label">Year-over-year in-store sales</div></div>
+        <div class="kpi focus"><div class="value">3.4 min</div><div class="label">Average checkout wait (target 2.0)</div></div>
+      </div>
+      <p style="margin-top:2.4cqw;color:var(--cn-text-muted)">Placeholder figures — replace with real data before use.</p>
+    </div>
+    <div class="foot"><span>Source: data system, period</span><span>4</span></div>
+  </section>
+
+  <!-- 5. Closing -->
+  <section class="slide is-primary">
+    <span class="cn-band-diamond band-top"></span>
+    <p class="review-note">Outward-facing use requires Marketing &amp; Communications approval</p>
+    <div class="inner">
+      <p class="eyebrow">Thank you · Yakoke</p>
+      <h2 class="motto">Together We're More</h2>
+      <p class="links">choctawnation.com</p>
+    </div>
+    <span class="cn-band-diamond band-bottom"></span>
+  </section>
+
+</main>
+
+<script>
+  const buttons = document.querySelectorAll('[data-set]');
+  buttons.forEach(b => b.addEventListener('click', () => {
+    document.body.dataset.brand = b.dataset.set;
+    buttons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 48 24">
+  <!-- Full Diamond band: protection and natural balance. Tile horizontally. -->
+  <path d="M24 1 L46 12 L24 23 L2 12 Z" fill="none" stroke="#000" stroke-width="2.5"/>
+  <path d="M24 7 L36 12 L24 17 L12 12 Z" fill="#000"/>
+</svg>
