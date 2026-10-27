@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="12" viewBox="0 0 24 12">
+  <!-- Stylized rope braid rule for under section headers. Tile horizontally. -->
+  <path d="M0 10 C6 10 6 2 12 2" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M12 10 C18 10 18 2 24 2" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M0 2 C2 2 3 3 4.5 4.5 M7.5 7.5 C9 9 10 10 12 10 C14 10 15 9 16.5 7.5 M19.5 4.5 C21 3 22 2 24 2" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" opacity=".55"/>
+</svg>

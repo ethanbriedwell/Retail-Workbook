@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNO Design Workspace</title>
+<link rel="stylesheet" href="tokens/tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #FAFAFB; color: #222; font-family: var(--cn-font-body); line-height: 1.5; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  .top { background: #3E0286; color: #fff; padding: 48px 0 40px; }
+  .top .cn-band-diamond { margin-bottom: 32px; height: 18px; -webkit-mask-size: auto 100%; mask-size: auto 100%; }
+  h1, h2, h3 { font-family: var(--cn-font-display); line-height: 1.15; }
+  h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; }
+  .top p { opacity: .9; max-width: 640px; margin-top: 8px; }
+  section { padding: 40px 0 8px; }
+  h2 { font-size: 22px; color: #3E0286; }
+  h2 + .cn-rule-rope { width: 120px; margin: 8px 0 20px; }
+  .note { color: #5A5560; font-size: 14px; margin-bottom: 16px; }
+  .palettes { display: grid; gap: 24px; }
+  .palette h3 { font-size: 16px; margin-bottom: 8px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+  .sw { border: 1px solid #E3E0E6; border-radius: 6px; overflow: hidden; background: #fff; font-size: 13px; }
+  .sw i { display: block; height: 64px; }
+  .sw div { padding: 6px 8px; }
+  .sw code { color: #5A5560; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid #E3E0E6; border-radius: 6px; padding: 12px; font-size: 13px; }
+  .card .img { height: 130px; display: grid; place-items: center; background: #F4F2F7; border-radius: 4px; margin-bottom: 8px; overflow: hidden; }
+  .card img { max-width: 100%; max-height: 130px; object-fit: contain; }
+  .card.photo img { width: 100%; height: 130px; max-height: none; object-fit: cover; }
+  .warn { color: #C81F06; font-weight: 600; }
+  .motifs { display: grid; gap: 16px; }
+  .motif { display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: center; background: #fff; border: 1px solid #E3E0E6; border-radius: 6px; padding: 16px; }
+  .motif span[class^="cn-"] { background-color: #3E0286; }
+  @media (max-width: 560px) { .motif { grid-template-columns: 1fr; } }
+  .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .links a { display: block; background: #fff; border: 1px solid #E3E0E6; border-left: 4px solid #76BEE4; border-radius: 6px; padding: 12px 14px; color: #3E0286; font-weight: 600; text-decoration: none; }
+  .links a span { display: block; color: #5A5560; font-weight: 400; font-size: 13px; }
+  footer { margin-top: 48px; padding: 24px 0 40px; border-top: 1px solid #E3E0E6; font-size: 13px; color: #5A5560; }
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="cn-band-diamond"></span>
+  <div class="wrap">
+    <h1>Choctaw Nation Design Workspace</h1>
+    <p>Brand tokens, assets, motifs and templates for Choctaw Nation of Oklahoma work — Nation, Operational Excellence and Travel Plaza / Retail.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Start here</h2><span class="cn-rule-rope"></span>
+    <div class="links">
+      <a href="dashboards/retail-guest-experience.html">Retail GX dashboard<span>Monthly performance summary · 18 locations</span></a>
+      <a href="templates/slides.html">Slide template<span>16:9 deck · title, divider, content, KPI, closing</span></a>
+      <a href="templates/one-pager.html">One-pager template<span>Letter handout modeled on the Strategic Plan</span></a>
+      <a href="brand/BRAND_GUIDE.md">Brand guide<span>Color, type, motifs, legal safeguards</span></a>
+      <a href="brand/strategic-plan-2026-2030.md">2026–2030 Strategic Alignment<span>Pillars and objectives for tagging work</span></a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Color</h2><span class="cn-rule-rope"></span>
+    <p class="note">Travel Plaza / Retail uses the approved Division of Commerce–Retail palette with Gill Sans.</p>
+    <div class="palettes" id="palettes"></div>
+  </section>
+
+  <section>
+    <h2>Motifs</h2><span class="cn-rule-rope"></span>
+    <div class="motifs">
+      <div class="motif"><span class="cn-band-diamond"></span><div><strong>Full Diamond band</strong> — borders; protection and natural balance. <code>.cn-band-diamond</code></div></div>
+      <div class="motif"><span class="cn-band-half-diamond"></span><div><strong>Half-Diamond band</strong> — progressive journey; dividers and timelines. <code>.cn-band-half-diamond</code></div></div>
+      <div class="motif"><span class="cn-rule-rope"></span><div><strong>Rope braid rule</strong> — under major section headers. <code>.cn-rule-rope</code></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Logos and marks</h2><span class="cn-rule-rope"></span>
+    <div class="grid">
+      <div class="card"><div class="img"><img src="assets/logos/oe-lockup-seal.png" alt=""></div><strong>OE lockup</strong><br>Operational Excellence work.</div>
+      <div class="card"><div class="img"><img src="assets/logos/travel-plaza-wordmark.png" alt=""></div><strong>Travel Plaza wordmark</strong><br>Retail / Travel Plaza.</div>
+      <div class="card"><div class="img"><img src="assets/logos/great-seal.jpg" alt=""></div><strong>Great Seal</strong><br><span class="warn">Never decorative.</span> Official use and approved lockups only.</div>
+      <div class="card"><div class="img"><img src="assets/logos/chahta-spirit-tagline.png" alt=""></div><strong>Living out the Chahta Spirit</strong><br>Faith · Family · Culture.</div>
+      <div class="card"><div class="img"><img src="assets/logos/ikbi-emblem.png" alt=""></div><strong>ikbi emblem</strong><br>Program mark — that program only.</div>
+      <div class="card"><div class="img"><img src="assets/marks/feathers.png" alt=""></div><strong>Feathers</strong><br>Retail accent mark.</div>
+      <div class="card"><div class="img"><img src="assets/marks/diamond.png" alt=""></div><strong>Diamond</strong><br>Retail accent mark.</div>
+      <div class="card"><div class="img"><img src="assets/patterns/southeastern-wave-borders.jpg" alt=""></div><strong>Southeastern borders</strong><br>Wave and spiral border artwork.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Photography</h2><span class="cn-rule-rope"></span>
+    <p class="note">Confirm rights and permission before any public use.</p>
+    <div class="grid">
+      <div class="card photo"><div class="img"><img src="assets/photography/headquarters-durant.jpg" alt="Choctaw Nation headquarters in Durant"></div>Headquarters, Durant</div>
+      <div class="card photo"><div class="img"><img src="assets/photography/casino-resort-tower.webp" alt="Choctaw Casino resort tower rendering at night"></div>Casino &amp; Resort tower</div>
+      <div class="card photo"><div class="img"><img src="assets/photography/kindred-spirits-gathering.webp" alt="Gathering at the Kindred Spirits sculpture"></div>Kindred Spirits gathering</div>
+      <div class="card photo"><div class="img"><img src="assets/photography/cultural-basketry.jpg" alt="Traditional basket and cultural items"></div>Cultural basketry</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Working reference only — does not replace official guidelines from the Choctaw Nation Division of Marketing &amp; Communications. Outward-facing materials require their written approval.</div>
+</footer>
+
+<script>
+  // Swatches mirror tokens/tokens.json (kept inline so this page works from file://).
+  const palettes = {
+    'Choctaw Nation': [['Flag Purple','#3E0286'],['Heritage Purple','#4D2F66'],['Sky Blue','#76BEE4'],['Crimson Red','#C81F06'],['Lakna (Gold)','#FDD802'],['Mist','#F4F2F7'],['Charcoal','#222222']],
+    'Operational Excellence': [['Dark Green','#2E4B40'],['Deep Green','#1F332B'],['Gold','#C6A45D'],['Light Gray','#F2F2F2'],['Medium Gray','#B7B7B7'],['Black','#000000']],
+    'Travel Plaza / Retail': [['Brand Brown','#4F2C1D'],['Choctaw Red','#AB2328'],['Gold','#EBB000'],['Green','#548235'],['Blue','#1F4E79'],['Light Blue','#3C88CF']],
+  };
+  const root = document.getElementById('palettes');
+  for (const [name, colors] of Object.entries(palettes)) {
+    const el = document.createElement('div');
+    el.className = 'palette';
+    el.innerHTML = `<h3>${name}</h3><div class="swatches">${colors.map(([n, hex]) =>
+      `<div class="sw"><i style="background:${hex}"></i><div>${n}<br><code>${hex}</code></div></div>`).join('')}</div>`;
+    root.appendChild(el);
+  }
+</script>
+</body>
+</html>

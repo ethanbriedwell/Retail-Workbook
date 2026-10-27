@@ -1,0 +1,45 @@
+// Tailwind preset for Choctaw Nation work.
+// tailwind.config.js:  module.exports = { presets: [require('./choctaw-nation/tokens/tailwind-preset')], ... }
+// Classes: bg-cn-nation-primary, text-cn-oe-accent, border-cn-retail-alert, font-cn-display, ...
+
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        cn: {
+          nation: {
+            primary: '#3E0286',
+            'primary-deep': '#4D2F66',
+            accent: '#76BEE4',
+            alert: '#C81F06',
+            ornament: '#FDD802',
+            'surface-alt': '#F4F2F7',
+          },
+          oe: {
+            primary: '#2E4B40',
+            'primary-deep': '#1F332B',
+            accent: '#C6A45D',
+            'surface-alt': '#F2F2F2',
+            neutral: '#B7B7B7',
+          },
+          retail: {
+            primary: '#4F2C1D',
+            'primary-deep': '#2B1D17',
+            accent: '#AB2328',
+            alert: '#AB2328',
+            ornament: '#EBB000',
+            success: '#548235',
+            data: '#1F4E79',
+            'data-light': '#3C88CF',
+            'surface-alt': '#FAF8F6',
+          },
+          text: '#222222',
+        },
+      },
+      fontFamily: {
+        'cn-display': ['Montserrat', '"Arial Black"', 'Arial', 'sans-serif'],
+        'cn-body': ['"Source Sans 3"', 'Arial', 'Helvetica', 'sans-serif'],
+      },
+    },
+  },
+};

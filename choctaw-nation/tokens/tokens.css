@@ -1,0 +1,98 @@
+/*
+ * Choctaw Nation of Oklahoma — design tokens as CSS custom properties.
+ * Source of truth: tokens.json. Keep the two in sync.
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="../tokens/tokens.css">
+ *   <body data-brand="nation">   nation | oe | retail   (nation is the default)
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap");
+
+:root,
+[data-brand="nation"] {
+  --cn-primary: #3E0286;       /* Flag Purple */
+  --cn-primary-deep: #4D2F66;  /* Heritage Purple */
+  --cn-accent: #76BEE4;        /* Sky Blue */
+  --cn-alert: #C81F06;         /* Crimson Red — sparingly */
+  --cn-ornament: #FDD802;      /* Lakna (Gold) — borders only */
+  --cn-ornament-on-primary: #FDD802;
+  --cn-surface: #FFFFFF;
+  --cn-surface-alt: #F4F2F7;
+  --cn-neutral: #B7B7B7;
+  --cn-text: #222222;
+  --cn-text-muted: #5A5560;
+  --cn-on-primary: #FFFFFF;
+}
+
+[data-brand="oe"] {
+  --cn-primary: #2E4B40;       /* Dark Green */
+  --cn-primary-deep: #1F332B;
+  --cn-accent: #C6A45D;        /* Gold */
+  --cn-alert: #C81F06;
+  --cn-ornament: #C6A45D;
+  --cn-ornament-on-primary: #C6A45D;
+  --cn-surface: #FFFFFF;
+  --cn-surface-alt: #F2F2F2;   /* Light Gray */
+  --cn-neutral: #B7B7B7;       /* Medium Gray */
+  --cn-text: #222222;
+  --cn-text-muted: #55605B;
+  --cn-on-primary: #FFFFFF;
+}
+
+[data-brand="retail"] {
+  /* Approved Commerce–Retail palette */
+  --cn-primary: #4F2C1D;       /* Brand Brown */
+  --cn-primary-deep: #2B1D17;
+  --cn-accent: #AB2328;        /* Choctaw Red */
+  --cn-alert: #AB2328;
+  --cn-ornament: #EBB000;      /* Gold */
+  --cn-ornament-on-primary: #EBB000;
+  --cn-success: #548235;       /* Green */
+  --cn-data: #1F4E79;          /* Blue */
+  --cn-surface: #FFFFFF;
+  --cn-surface-alt: #FAF8F6;
+  --cn-neutral: #C9B6A9;
+  --cn-text: #2B1D17;
+  --cn-text-muted: #6A5A52;
+  --cn-on-primary: #FFFFFF;
+  --cn-font-display: GillSans, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif;
+  --cn-font-body: GillSans, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif;
+}
+
+:root {
+  --cn-font-display: "Montserrat", "Arial Black", Arial, sans-serif;
+  --cn-font-body: "Source Sans 3", Arial, Helvetica, sans-serif;
+
+  --cn-space-xs: 4px;
+  --cn-space-sm: 8px;
+  --cn-space-md: 16px;
+  --cn-space-lg: 24px;
+  --cn-space-xl: 40px;
+  --cn-space-2xl: 64px;
+
+  --cn-radius-sm: 2px;
+  --cn-radius-md: 6px;
+
+  --cn-pattern-diamond: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2224%22 viewBox=%220 0 48 24%22%3E %3Cpath d=%22M24 1 L46 12 L24 23 L2 12 Z%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.5%22/%3E %3Cpath d=%22M24 7 L36 12 L24 17 L12 12 Z%22 fill=%22%23000%22/%3E %3C/svg%3E");
+  --cn-pattern-half-diamond: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2220%22 viewBox=%220 0 40 20%22%3E %3Cpath d=%22M0 20 L20 2 L40 20 Z M10 20 L30 20 L20 11 Z%22 fill=%22%23000%22 fill-rule=%22evenodd%22/%3E %3C/svg%3E");
+  --cn-pattern-rope: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2212%22 viewBox=%220 0 24 12%22%3E %3Cpath d=%22M0 10 C6 10 6 2 12 2%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M12 10 C18 10 18 2 24 2%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M0 2 C2 2 3 3 4.5 4.5 M7.5 7.5 C9 9 10 10 12 10 C14 10 15 9 16.5 7.5 M19.5 4.5 C21 3 22 2 24 2%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 opacity=%22.55%22/%3E %3C/svg%3E");
+}
+
+/* ---- Motif utilities ----
+ * Pattern tiles are inlined (from assets/patterns/*.svg) because mask images load with CORS
+ * and would fail when opening files locally. They are masks, so they take the brand color. */
+
+.cn-band-diamond,
+.cn-band-half-diamond,
+.cn-rule-rope {
+  display: block;
+  background-color: var(--cn-ornament);
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+  -webkit-mask-position: center;
+          mask-position: center;
+}
+.cn-band-diamond      { height: 24px; -webkit-mask-image: var(--cn-pattern-diamond);      mask-image: var(--cn-pattern-diamond); }
+.cn-band-half-diamond { height: 20px; -webkit-mask-image: var(--cn-pattern-half-diamond); mask-image: var(--cn-pattern-half-diamond); }
+.cn-rule-rope         { height: 12px; -webkit-mask-image: var(--cn-pattern-rope);         mask-image: var(--cn-pattern-rope); }
