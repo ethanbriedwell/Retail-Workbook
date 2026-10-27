@@ -4,6 +4,8 @@ A home base for designing Choctaw Nation of Oklahoma (CNO) materials: decks, han
 
 **Monthly Retail Guest Experience report:** open [`dashboards/retail-guest-experience.html`](dashboards/retail-guest-experience.html) — guide in [`dashboards/retail-guest-experience.md`](dashboards/retail-guest-experience.md).
 
+**Gaming Voice of the Guest summary (front & back):** open [`dashboards/gaming-voice-of-guest.html`](dashboards/gaming-voice-of-guest.html) — guide in [`dashboards/gaming-voice-of-guest.md`](dashboards/gaming-voice-of-guest.md).
+
 Open **[`index.html`](index.html)** in a browser for a visual overview of palettes, motifs, logos and photography.
 
 ## What's here
@@ -23,7 +25,9 @@ choctaw-nation/
 │   └── tailwind-preset.js      Tailwind colors and fonts
 ├── dashboards/
 │   ├── retail-guest-experience.html   Monthly Retail GX Performance Summary (self-contained)
-│   └── retail-guest-experience.md     How to use it + KPI calculation standards
+│   ├── retail-guest-experience.md     How to use it + KPI calculation standards
+│   ├── gaming-voice-of-guest.html     Gaming VoG one-page summary, front & back (self-contained)
+│   └── gaming-voice-of-guest.md       How to use it + calculation rules
 ├── templates/
 │   ├── slides.html             16:9 deck (title, divider, content, KPI, closing)
 │   └── one-pager.html          US Letter handout

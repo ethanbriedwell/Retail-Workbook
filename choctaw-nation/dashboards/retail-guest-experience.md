@@ -13,7 +13,7 @@ Choctaw Nation of Oklahoma | Division of Commerce–Retail | Guest Experience
    - OpWalk: earned and eligible points, or a manual %.
    - Choctaw Language Utilization: language-used and eligible interactions, or a manual %.
    - Five driver scores (−100 to 100).
-4. **Goals**: set per fiscal year. Location goals override the division defaults; blanks fall back to the default. The Retail brand OpWalk goal is 95.0%.
+4. **Goals**: set per fiscal year for Retail NPS, OpWalk and Choctaw Language Utilization. Location goals override the division defaults; blanks fall back to the default. The Retail brand OpWalk goal is 95.0%. The five drivers don't have goals.
 5. **Top Performing Stores**: auto-ranked. Tick *Set the ranking manually* to override for that period.
 6. **Summary text**: Key Insights, Watch Area and Recommendation are automated. Type in a box to replace the text for that location and period, and clear it to go back to automated.
 7. **Print / Save PDF**: the report scales itself to one landscape Letter page and the data panel is hidden.
@@ -29,7 +29,7 @@ The sample data set (FY25–FY26, all 18 stores) is marked **Sample data** on th
 | OpWalk Score | Earned points ÷ Eligible points × 100 (or manual %) | % |
 | Choctaw Language Utilization | Interactions with language used ÷ Eligible observed interactions × 100 (or manual %) | % |
 | Delta Shift | Current month − Previous month | points |
-| Delta to Goal | Current month − Goal | points |
+| Delta to Goal | Current month − Goal (core KPIs only) | points |
 | FYTD | Recalculated from cumulative underlying records, Oct 1 through the reporting month | NPS points or % |
 
 **Example:** 70 promoters, 20 passives and 10 detractors give a Retail NPS of +60.0. With May at 64.1, April at 59.2 and a goal of 66.1, the Delta Shift is +4.9 (an increase of 4.9 NPS points, not 4.9%) and the Delta to Goal is −2.0.
@@ -38,9 +38,11 @@ The sample data set (FY25–FY26, all 18 stores) is marked **Sample data** on th
 
 - **Retail NPS:** (ΣPromoters − ΣDetractors) ÷ ΣValid responses × 100.
 - **OpWalk and CLO:** Σearned ÷ Σeligible × 100. If any month in range was entered as a manual %, there are no points to pool, so the value is a simple average of the monthly scores. It's marked **FYTD\*** with a footnote.
-- **Drivers** (scores only, no counts): weighted by that location-month's Retail NPS responses, since they come from the same survey.
+- **Drivers** (scores only, no counts): weighted by that location-month's Retail NPS responses, since they come from the same survey. Drivers are compared month vs. last month and FYTD; they have no goals.
 
 ## Status colors
+
+Applies to the three core KPI cards. Drivers have no goals, so they carry no status color.
 
 | Condition | Card |
 |---|---|
@@ -58,13 +60,13 @@ Every status also carries a text label, so it doesn't rely on color alone.
 | Insight | Rule |
 |---|---|
 | Strongest Driver | Highest current-month driver score |
-| Watch Area | Lowest (Month − Goal): the driver furthest below goal, or least above it |
+| Watch Area | Lowest current-month driver score; if two tie, the one with the larger decline vs. last month |
 | Biggest Gain | Largest (Month − Last Month). Shows "No driver improved" if none rose. |
 | Biggest Decline | Smallest (Month − Last Month). Shows "No driver declined" if none fell. |
 | Top Performing Stores | Five highest current-month Retail NPS of the 18 locations. Can be overridden manually. |
-| Recommendation | Driver-specific action plan for the Watch Area |
+| Recommendation | 30-day action plan for the Watch Area driver: three actions plus how to measure them. Labeled **Priority** when that driver also fell vs. last month, otherwise **Focus**. Roll-ups also list the three lowest-scoring locations on that driver. |
 
-**Change from the earlier logic:** the Watch Area now also checks whether *every* driver is meeting goal. When all five are at or above goal, the tile turns green. The text then says all drivers are meeting goal and names the one with the smallest margin, and the recommendation switches to "sustain."
+**Change from the original spec:** the drivers have no goals, so the Watch Area uses the lowest current-month score instead of the lowest (Month − Goal), and there is no driver "vs. goal" column or goal marker.
 
 **Low sample:** a Retail NPS with fewer than 30 responses is flagged "low sample" on the card.
 
