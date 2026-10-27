@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice of the Guest Summary – Gaming</title>
+<style>
+  /*
+   * Choctaw Nation of Oklahoma | Gaming (Casino / Hospitality) | Voice of the Guest One-Page Summary
+   * Two-sided US Letter template: front = performance summary, back = operations, outlook and associate recognition.
+   * Self-contained: the feathers mark is embedded at the bottom of the file. Guide: gaming-voice-of-guest.md.
+   */
+  :root {
+    --red: #BF2E1A;        /* Feather Red */
+    --umber: #541800;      /* Feather Umber */
+    --gold: #C6A45D;
+    --ink: #24170F;
+    --muted: #6B5D55;
+    --line: #E6DDD6;
+    --paper: #FFFFFF;
+    --wash: #FAF6F2;
+    --canvas: #ECE6E0;
+
+    --above: #3D7A3A; --above-text: #2E5F2B; --above-tint: #EDF4EB;
+    --at: #D4A017;    --at-text: #6B5000;    --at-tint: #FBF3DC;
+    --below: #B3261E; --below-text: #8E1D17; --below-tint: #F8E8E6;
+    --neutral-text: #6B5D55;
+
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--canvas); color: var(--ink); font-family: var(--sans); font-size: 12px; line-height: 1.4; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  h1, h2, h3, p, ul, ol { margin: 0; }
+
+  /* ---------------- Toolbar (screen only) ---------------- */
+  .toolbar { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+  .toolbar .title { font-family: var(--serif); font-size: 17px; color: var(--umber); margin-right: auto; }
+  .seg { display: inline-flex; border: 1px solid #CFC4BB; border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; background: #fff; padding: 6px 12px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--umber); color: #fff; }
+  .btn { border: 1px solid var(--umber); background: var(--umber); color: #fff; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+  .btn.secondary { background: #fff; color: var(--umber); }
+  .btn.danger { background: #fff; color: var(--below-text); border-color: var(--below); }
+  .btn.small { padding: 3px 8px; font-size: 12px; }
+  .file-btn { position: relative; overflow: hidden; }
+  .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .fit { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--above-tint); color: var(--above-text); }
+  .fit.over { background: var(--below-tint); color: var(--below-text); }
+  :focus-visible { outline: 2px solid #1F4E79; outline-offset: 1px; }
+
+  /* ---------------- Layout ---------------- */
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 20px 16px 40px; }
+  body.editing .stage { grid-template-columns: minmax(0, 1fr) 420px; align-items: start; }
+  .sheets { display: grid; gap: 24px; justify-items: center; min-width: 0; }
+  .sheet-label { font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: -16px; justify-self: center; }
+  .sheet-frame { width: 816px; }
+  .sheet {
+    width: 816px; height: 1056px; background: var(--paper); position: relative; overflow: hidden;
+    box-shadow: 0 6px 24px rgb(36 23 15 / .14); padding: 30px 38px 24px; display: flex; flex-direction: column; gap: 9px;
+  }
+  body.editing .sheet.overflowing { outline: 3px solid var(--below); }
+
+  /* ---------------- Sheet components ---------------- */
+  .band { position: absolute; left: 0; right: 0; top: 0; height: 8px; background: linear-gradient(90deg, var(--red) 0 62%, var(--umber) 62%); }
+  .head { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding-top: 4px; }
+  .head img { width: 44px; height: auto; display: block; }
+  .eyebrow { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+  .head h1 { font-family: var(--serif); font-weight: 400; font-size: 25px; line-height: 1.1; color: var(--umber); margin-top: 2px; }
+  .head .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .head .sub b { color: var(--ink); font-weight: 600; }
+  .meta { text-align: right; font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .sample { display: inline-block; padding: 1px 7px; border-radius: 999px; background: var(--at-tint); color: var(--at-text); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+  .rule { height: 1px; background: var(--line); }
+
+  .sec h2 { font-family: var(--serif); font-weight: 400; font-size: 15px; color: var(--umber); display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+  .sec h2 .num { font-family: var(--sans); font-size: 9.5px; font-weight: 700; color: #fff; background: var(--red); border-radius: 3px; padding: 1px 5px; letter-spacing: .04em; }
+  .sec h2 .hint { margin-left: auto; font-family: var(--sans); font-size: 9.5px; color: var(--muted); }
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cols-73 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; }
+
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .kpi { border: 1px solid var(--line); border-top: 4px solid var(--line); border-radius: 6px; padding: 9px 11px 8px; display: grid; gap: 4px; }
+  .kpi.above { border-top-color: var(--above); } .kpi.at { border-top-color: var(--at); } .kpi.below { border-top-color: var(--below); }
+  .kpi-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+  .kpi-name { font-weight: 600; font-size: 11.5px; }
+  .pill { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 2px 7px; background: #F1ECE8; color: var(--neutral-text); white-space: nowrap; }
+  .pill.above { background: var(--above-tint); color: var(--above-text); } .pill.at { background: var(--at-tint); color: var(--at-text); } .pill.below { background: var(--below-tint); color: var(--below-text); }
+  .kpi-val { font-family: var(--serif); font-size: 30px; line-height: 1; }
+  .kpi-val small { font-family: var(--sans); font-size: 11px; color: var(--muted); margin-left: 2px; }
+  .kpi-val.empty { font-size: 16px; color: var(--muted); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; border-top: 1px solid var(--line); padding-top: 5px; }
+  .kpi-grid span { display: block; font-size: 8.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .kpi-grid b { font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .kpi-note { font-size: 9.5px; color: var(--muted); }
+  .pos { color: var(--above-text); } .neg { color: var(--below-text); } .zero { color: var(--neutral-text); }
+
+  .bullets { padding-left: 16px; display: grid; gap: 3px; }
+  .bullets li { font-size: 11.5px; }
+  .insights { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .insight { display: flex; gap: 10px; align-items: center; border-radius: 6px; padding: 7px 11px; background: var(--wash); border-left: 4px solid var(--above); }
+  .insight.watch { border-left-color: var(--below); background: var(--below-tint); }
+  .insight span { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .insight b { display: block; font-size: 13px; }
+  .insight em { font-style: normal; font-size: 10.5px; color: var(--muted); }
+
+  .quarters { display: grid; grid-template-columns: repeat(4, 1fr) 1.1fr; gap: 6px; margin-bottom: 8px; }
+  .q { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+  .q.future { opacity: .55; }
+  .q .ql { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+  .q .qv { font-family: var(--serif); font-size: 18px; line-height: 1.15; }
+  .q .qs { font-size: 9.5px; color: var(--muted); }
+  .q.ytd { background: var(--wash); border-color: transparent; }
+  .chart-card { border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px 6px; }
+  .chart-card h3 { font-size: 10.5px; font-weight: 600; color: var(--ink); display: flex; justify-content: space-between; }
+  .chart-card h3 span { font-weight: 400; color: var(--muted); }
+  .chart-card svg { display: block; width: 100%; height: auto; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 9.5px; color: var(--muted); }
+  .legend i { display: inline-block; width: 10px; height: 3px; vertical-align: 2px; margin-right: 4px; }
+  .legend i.box { height: 8px; vertical-align: 0; border-radius: 1px; }
+
+  .items { display: grid; gap: 5px; }
+  .item { border-left: 3px solid var(--above); padding: 2px 0 2px 8px; }
+  .item.opp { border-left-color: var(--red); }
+  .item b { font-size: 11.5px; font-weight: 600; }
+  .item p { font-size: 10.5px; color: #4A3C33; }
+  .impact { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; margin-left: 4px; vertical-align: 1px; }
+  .impact.High { background: var(--below-tint); color: var(--below-text); }
+  .impact.Medium { background: var(--at-tint); color: var(--at-text); }
+  .impact.Low { background: #EEF2F6; color: #1F4E79; }
+  .quote { font-family: var(--serif); font-style: italic; font-size: 11px; color: #4A3C33; border-left: 2px solid var(--gold); padding-left: 8px; margin-top: 4px; }
+
+  table.t { width: 100%; border-collapse: collapse; font-size: 10.5px; font-variant-numeric: tabular-nums; }
+  table.t th { text-align: right; font-weight: 600; font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--line); padding: 3px 5px; }
+  table.t td { text-align: right; padding: 4px 5px; border-bottom: 1px solid #F1ECE8; }
+  table.t th:first-child, table.t td:first-child { text-align: left; }
+  table.t tr.watch td:first-child { color: var(--below-text); font-weight: 600; }
+  table.t tr.strong td:first-child { color: var(--above-text); font-weight: 600; }
+  .tag { font-size: 8px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 5px; border-radius: 3px; margin-left: 5px; }
+  .tag.watch { background: var(--below-tint); color: var(--below-text); }
+  .tag.strong { background: var(--above-tint); color: var(--above-text); }
+  .note { font-size: 9.5px; color: var(--muted); margin-top: 4px; }
+  .callout { background: var(--wash); border-radius: 6px; padding: 7px 10px; font-size: 10.5px; margin-top: 6px; }
+  .callout b { color: var(--umber); }
+
+  .risk-list { display: grid; gap: 5px; }
+  .risk { display: grid; grid-template-columns: 96px 1fr; gap: 8px; align-items: start; font-size: 10.5px; }
+  .cat { font-size: 8.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--umber); background: #F3EAE4; border-radius: 3px; padding: 2px 6px; text-align: center; }
+  .risk p span { color: var(--muted); }
+  ol.actions { padding-left: 18px; display: grid; gap: 4px; }
+  ol.actions li { font-size: 11px; }
+  ol.actions .who { color: var(--muted); font-size: 10px; }
+
+  .recog-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .recog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .person { border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; position: relative; }
+  .person .nm { font-family: var(--serif); font-size: 14px; color: var(--umber); }
+  .person .dp { font-size: 9.5px; color: var(--muted); }
+  .person .ct { position: absolute; right: 8px; top: 7px; font-size: 9px; font-weight: 700; color: var(--red); }
+  .person p { font-size: 10px; margin-top: 3px; color: #4A3C33; }
+  .sheet-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-top: 1px solid var(--line); padding-top: 6px; font-size: 9px; color: var(--muted); }
+  .sheet-foot .notes { white-space: pre-line; max-width: 75%; }
+
+  /* ---------------- Editor ---------------- */
+  .editor { display: none; position: sticky; top: 64px; max-height: calc(100vh - 84px); overflow: auto; background: #fff; border-radius: 10px; box-shadow: 0 6px 24px rgb(36 23 15 / .12); padding: 14px; font-size: 13px; }
+  body.editing .editor { display: block; }
+  .editor h2 { font-family: var(--serif); font-weight: 400; font-size: 18px; color: var(--umber); }
+  .editor .help { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+  .editor details { border-top: 1px solid var(--line); padding: 8px 0; }
+  .editor summary { cursor: pointer; font-weight: 600; color: var(--umber); }
+  .editor .body { display: grid; gap: 8px; margin-top: 8px; }
+  .f { display: grid; gap: 3px; }
+  .f label, .lbl { font-size: 11.5px; color: var(--muted); }
+  .r2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .r3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .editor input, .editor select, .editor textarea { width: 100%; min-width: 0; border: 1px solid #D5CAC1; border-radius: 6px; padding: 5px 7px; background: #fff; }
+  .editor textarea { min-height: 54px; resize: vertical; }
+  .row-card { border: 1px solid var(--line); border-radius: 8px; padding: 8px; display: grid; gap: 6px; background: var(--wash); }
+  .row-card .rc-head { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); }
+  table.g { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.g th { font-weight: 400; color: var(--muted); font-size: 11px; text-align: left; padding: 2px 3px; }
+  table.g td { padding: 2px 3px; }
+  table.g input { padding: 3px 5px; }
+  .warnline { color: var(--below-text); font-size: 12px; }
+
+  @media screen and (max-width: 1320px) {
+    body.editing .stage { grid-template-columns: minmax(0, 1fr); }
+    .editor { position: static; max-height: none; }
+  }
+
+  @media print {
+    @page { size: letter portrait; margin: 0; }
+    body { background: #fff; }
+    .toolbar, .editor, .sheet-label { display: none !important; }
+    .stage { display: block; padding: 0; }
+    .sheets { display: block; }
+    .sheet-frame { width: auto; height: auto !important; }
+    .sheet { zoom: 1 !important; box-shadow: none; outline: none !important; break-after: page; page-break-after: always; }
+    .sheet-frame:last-child .sheet { break-after: auto; page-break-after: auto; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="toolbar" aria-label="Template controls">
+  <span class="title">Voice of the Guest · Gaming</span>
+  <div class="seg" role="group" aria-label="Mode">
+    <button type="button" id="modeView" aria-pressed="true">Dashboard view</button>
+    <button type="button" id="modeEdit" aria-pressed="false">Edit data</button>
+  </div>
+  <span class="fit" id="fitFront">Front fits</span>
+  <span class="fit" id="fitBack">Back fits</span>
+  <button type="button" class="btn" id="printBtn">Print / Save PDF</button>
+</div>
+
+<div class="stage">
+  <div class="sheets">
+    <div class="sheet-label">Front</div>
+    <div class="sheet-frame"><article class="sheet" id="front" aria-label="Front page"></article></div>
+    <div class="sheet-label">Back</div>
+    <div class="sheet-frame"><article class="sheet" id="back" aria-label="Back page"></article></div>
+  </div>
+  <aside class="editor" id="editor" aria-label="Edit data"></aside>
+</div>
+
+<script>
+/* =========================================================================
+ * Configuration
+ * ========================================================================= */
+const STORAGE_KEY = "cno-gaming-vog-summary-v1";
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const FISCAL_ORDER = [10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// Core KPI cards. OSAT and NPS can carry monthly response counts so quarters and YTD are response-weighted.
+const KPIS = [
+  { key: "osat", label: "OSAT", long: "Overall Satisfaction", unit: "%", counts: true, desc: "Medallia OSAT, % top-box" },
+  { key: "nps", label: "NPS", long: "Net Promoter Score", unit: "pts", counts: true, desc: "% promoters − % detractors" },
+  { key: "clo", label: "Choctaw Language Observation Utilization", long: "Choctaw Language Observation Utilization", unit: "%", counts: false, desc: "Observed interactions using Choctaw language" }
+];
+const RISK_CATEGORIES = ["Events", "Cleanliness", "Wait times", "Service quality", "Communication", "Facility conditions", "Other"];
+const IMPACTS = ["High", "Medium", "Low"];
+const COMPARE_MODES = {
+  month: "Month vs. prior month",
+  quarter: "Quarter vs. prior quarter",
+  fy: "FYTD vs. prior FYTD"
+};
+
+/* =========================================================================
+ * Period helpers — "YYYY-MM"; fiscal year N runs Oct (N-1) – Sep N; Q1 = Oct–Dec
+ * ========================================================================= */
+const keyOf = (y, m) => `${y}-${String(m).padStart(2, "0")}`;
+const parseKey = k => { const [y, m] = k.split("-").map(Number); return { y, m }; };
+const fyOf = k => { const { y, m } = parseKey(k); return m >= 10 ? y + 1 : y; };
+const fyLabel = fy => "FY" + String(fy % 100).padStart(2, "0");
+const monthName = k => MONTH_NAMES[parseKey(k).m - 1];
+const addMonths = (k, n) => { const { y, m } = parseKey(k); const t = y * 12 + m - 1 + n; return keyOf(Math.floor(t / 12), t % 12 + 1); };
+const fyMonths = fy => FISCAL_ORDER.map(m => keyOf(m >= 10 ? fy - 1 : fy, m));
+const fiscalIndex = k => FISCAL_ORDER.indexOf(parseKey(k).m);            // 0..11
+const quarterOf = k => Math.floor(fiscalIndex(k) / 3) + 1;               // 1..4
+const quarterKeys = (fy, q) => fyMonths(fy).slice((q - 1) * 3, q * 3);
+const fytdKeys = k => fyMonths(fyOf(k)).slice(0, fiscalIndex(k) + 1);
+const sameMonthsPriorYear = keys => keys.map(k => addMonths(k, -12));
+// Latest fully completed fiscal quarter as of month k.
+function lastCompleteQuarter(k) {
+  const fy = fyOf(k), q = quarterOf(k);
+  if (fiscalIndex(k) % 3 === 2) return { fy, q };
+  return q === 1 ? { fy: fy - 1, q: 4 } : { fy, q: q - 1 };
+}
+const prevQuarter = ({ fy, q }) => q === 1 ? { fy: fy - 1, q: 4 } : { fy, q: q - 1 };
+const qLabel = ({ fy, q }) => `Q${q} ${fyLabel(fy)}`;
+
+/* =========================================================================
+ * Number helpers
+ * ========================================================================= */
+const num = v => (v === "" || v === null || v === undefined || !Number.isFinite(Number(v))) ? null : Number(v);
+const r1 = v => Math.round(v * 10) / 10;
+const MINUS = "−";
+const fmt = (v, unit) => v === null ? "—" : (v < 0 ? MINUS : "") + Math.abs(r1(v)).toFixed(1) + (unit === "%" ? "%" : "");
+function fmtDelta(v) { if (v === null) return "—"; const x = r1(v); return x === 0 ? "0.0" : (x > 0 ? "+" : MINUS) + Math.abs(x).toFixed(1); }
+const deltaClass = v => v === null ? "" : r1(v) > 0 ? "pos" : r1(v) < 0 ? "neg" : "zero";
+function statusOf(v, goal) {
+  if (v === null || goal === null) return null;
+  const d = Math.round(v * 10) - Math.round(goal * 10);
+  return d > 0 ? "above" : d === 0 ? "at" : "below";
+}
+const STATUS = { above: "Above goal", at: "At goal", below: "Below goal" };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = id => document.getElementById(id);
+
+/* =========================================================================
+ * State
+ * =========================================================================
+ * kpis[key] = { goals: { [FY]: number }, months: { "YYYY-MM": { v, n } } }
+ * drivers = [{ name, month, prior, ytd, pyYtd }]     — Medallia driver scores (% top-box)
+ * lists: positives, opportunities, risks, actions, recognition, opexMetrics
+ */
+let state = load();
+
+function emptyState() {
+  const now = new Date();
+  return {
+    version: 1, sample: false,
+    report: { property: "", department: "", preparedBy: "", month: keyOf(now.getFullYear(), now.getMonth() + 1), trendMetric: "osat", compare: "month", footer: "" },
+    kpis: Object.fromEntries(KPIS.map(k => [k.key, { goals: {}, months: {} }])),
+    summaryOverride: "",
+    drivers: [], positives: [], opportunities: [], quotes: { positive: "", negative: "" },
+    opexMetrics: [], opexConnection: "",
+    risks: [], actions: [], recognition: [], recognitionThemes: ""
+  };
+}
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return normalize(JSON.parse(raw));
+  } catch (e) { console.warn("Saved data could not be read", e); }
+  return sampleState();
+}
+function normalize(s) {
+  const base = emptyState();
+  const out = { ...base, ...s, report: { ...base.report, ...(s.report || {}) }, quotes: { ...base.quotes, ...(s.quotes || {}) } };
+  out.kpis = Object.fromEntries(KPIS.map(k => [k.key, { goals: {}, months: {}, ...(s.kpis?.[k.key] || {}) }]));
+  for (const key of ["drivers", "positives", "opportunities", "opexMetrics", "risks", "actions", "recognition"]) if (!Array.isArray(out[key])) out[key] = [];
+  return out;
+}
+function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ } }
+
+/* =========================================================================
+ * Calculations
+ * ========================================================================= */
+// Aggregates a KPI over months: response-weighted when every month has a count, otherwise a simple mean (flagged).
+function agg(key, keys) {
+  const list = keys.map(k => state.kpis[key].months[k]).filter(e => e && num(e.v) !== null).map(e => ({ v: num(e.v), n: num(e.n) }));
+  if (!list.length) return null;
+  const weighted = KPIS.find(k => k.key === key).counts && list.every(e => e.n && e.n > 0);
+  if (weighted) {
+    const N = list.reduce((s, e) => s + e.n, 0);
+    return { v: list.reduce((s, e) => s + e.v * e.n, 0) / N, n: N, months: list.length, approx: false };
+  }
+  const countable = KPIS.find(k => k.key === key).counts;
+  return { v: list.reduce((s, e) => s + e.v, 0) / list.length, n: null, months: list.length, approx: countable && list.length > 1 };
+}
+const val = x => x ? x.v : null;
+function goalFor(key, fy) {
+  const g = state.kpis[key].goals;
+  if (num(g[fy]) !== null) return num(g[fy]);
+  const earlier = Object.keys(g).map(Number).filter(y => y < fy && num(g[y]) !== null).sort((a, b) => b - a);
+  return earlier.length ? num(g[earlier[0]]) : null;
+}
+
+function buildModel() {
+  const M = state.report.month, fy = fyOf(M), P = addMonths(M, -1);
+  const kpis = KPIS.map(k => {
+    const cur = agg(k.key, [M]), prior = agg(k.key, [P]);
+    const ytd = agg(k.key, fytdKeys(M)), pyYtd = agg(k.key, sameMonthsPriorYear(fytdKeys(M)));
+    const goal = goalFor(k.key, fy);
+    const month = val(cur);
+    return {
+      ...k, cur, month, prior: val(prior), goal, ytd: val(ytd), ytdApprox: !!ytd?.approx, pyYtd: val(pyYtd),
+      mom: month !== null && val(prior) !== null ? month - val(prior) : null,
+      yoy: val(ytd) !== null && val(pyYtd) !== null ? val(ytd) - val(pyYtd) : null,
+      status: statusOf(month, goal)
+    };
+  });
+  const drivers = state.drivers.filter(d => (d.name || "").trim()).map(d => {
+    const month = num(d.month), prior = num(d.prior), ytd = num(d.ytd), pyYtd = num(d.pyYtd);
+    return { name: d.name.trim(), month, prior, ytd, pyYtd,
+      mom: month !== null && prior !== null ? month - prior : null,
+      yoy: ytd !== null && pyYtd !== null ? ytd - pyYtd : null };
+  });
+  // Automated insights (per template spec): Watch Area = lowest YTD score, Strongest Driver = highest YTD score.
+  const withYtd = drivers.filter(d => d.ytd !== null);
+  const watch = withYtd.length ? withYtd.reduce((a, b) => b.ytd < a.ytd ? b : a) : null;
+  const strongest = withYtd.length ? withYtd.reduce((a, b) => b.ytd > a.ytd ? b : a) : null;
+  return { M, P, fy, kpis, drivers, watch, strongest: strongest && watch && strongest.name === watch.name && withYtd.length < 2 ? null : strongest };
+}
+
+/* =========================================================================
+ * Narrative
+ * ========================================================================= */
+function autoSummary(m) {
+  const out = [];
+  for (const k of m.kpis.slice(0, 2)) {
+    if (k.month === null) continue;
+    let s = `${k.label} ${fmt(k.month, k.unit)}`;
+    const parts = [];
+    if (k.status) parts.push(`${STATUS[k.status].toLowerCase()} (${fmt(k.goal, k.unit)})`);
+    if (k.mom !== null) parts.push(`${fmtDelta(k.mom)} pts vs. ${monthName(m.P)}`);
+    if (k.ytd !== null) parts.push(`FYTD ${fmt(k.ytd, k.unit)}${k.yoy !== null ? ` (${fmtDelta(k.yoy)} pts YoY)` : ""}`);
+    out.push(s + (parts.length ? " — " + parts.join(", ") + "." : "."));
+  }
+  if (m.strongest && m.watch && m.strongest !== m.watch) out.push(`Strongest driver YTD: ${m.strongest.name} (${fmt(m.strongest.ytd, "%")}); watch area: ${m.watch.name} (${fmt(m.watch.ytd, "%")}).`);
+  const clo = m.kpis[2];
+  if (clo.month !== null) out.push(`Choctaw Language Observation Utilization ${fmt(clo.month, "%")}${clo.status ? `, ${STATUS[clo.status].toLowerCase()}` : ""}.`);
+  const high = state.opportunities.find(o => o.impact === "High" && (o.title || "").trim());
+  if (high && out.length < 5) out.push(`Top opportunity: ${high.title.trim()}.`);
+  return out.length ? out.slice(0, 5) : ["Enter this month's results in Edit data to generate the executive summary."];
+}
+const lines = t => String(t || "").split("\n").map(s => s.trim()).filter(Boolean);
+
+/* =========================================================================
+ * Charts (inline SVG)
+ * ========================================================================= */
+const FONT = "font-family:Segoe UI, system-ui, -apple-system, Helvetica Neue, Arial, sans-serif";
+function trendChart(m) {
+  const key = state.report.trendMetric, k = KPIS.find(x => x.key === key);
+  const cyKeys = fyMonths(m.fy), pyKeys = fyMonths(m.fy - 1);
+  const cy = cyKeys.map(c => c <= m.M ? val(agg(key, [c])) : null), py = pyKeys.map(c => val(agg(key, [c])));
+  const goal = goalFor(key, m.fy);
+  const W = 420, H = 150, L = 30, R = 8, T = 10, B = 22;
+  const all = [...cy, ...py, goal].filter(v => v !== null);
+  if (!all.length) return `<svg viewBox="0 0 ${W} ${H}"><text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-size="11" fill="#6B5D55" style="${FONT}">No monthly ${k.label} data</text></svg>`;
+  let lo = Math.floor((Math.min(...all) - 2) / 5) * 5, hi = Math.ceil((Math.max(...all) + 2) / 5) * 5;
+  if (hi - lo < 10) hi = lo + 10;
+  const x = i => L + i * (W - L - R) / 11, y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  let s = "";
+  const step = (hi - lo) / 4;
+  for (let i = 0; i <= 4; i++) { const v = lo + i * step; s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EFE8E2"/><text x="${L - 4}" y="${y(v) + 3}" text-anchor="end" font-size="8.5" fill="#6B5D55">${r1(v)}</text>`; }
+  cyKeys.forEach((c, i) => { s += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="8.5" fill="#6B5D55">${monthName(c)}</text>`; });
+  if (goal !== null) s += `<line x1="${L}" x2="${W - R}" y1="${y(goal)}" y2="${y(goal)}" stroke="#C6A45D" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+  const path = arr => { let d = "", open = false; arr.forEach((v, i) => { if (v === null) { open = false; return; } d += (open ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1) + " "; open = true; }); return d; };
+  s += `<path d="${path(py)}" fill="none" stroke="#B9A79B" stroke-width="2" stroke-dasharray="1 0"/>`;
+  s += `<path d="${path(cy)}" fill="none" stroke="#BF2E1A" stroke-width="2.4" stroke-linejoin="round"/>`;
+  cy.forEach((v, i) => { if (v !== null) s += `<circle cx="${x(i)}" cy="${y(v)}" r="2.6" fill="#BF2E1A"/>`; });
+  const lastI = cy.map((v, i) => v !== null ? i : -1).filter(i => i >= 0).pop();
+  if (lastI !== undefined) s += `<text x="${Math.min(x(lastI), W - R - 2)}" y="${y(cy[lastI]) - 6}" text-anchor="${lastI > 9 ? "end" : "middle"}" font-size="9" font-weight="700" fill="#541800">${fmt(cy[lastI], k.unit)}</text>`;
+  const desc = `${k.label} by month, ${fyLabel(m.fy)} vs ${fyLabel(m.fy - 1)}`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(desc)}" style="${FONT}">${s}</svg>`;
+}
+
+function comparison(m) {
+  const mode = state.report.compare;
+  let a, b, aLabel, bLabel;
+  if (mode === "quarter") {
+    const q1 = lastCompleteQuarter(m.M), q0 = prevQuarter(q1);
+    a = quarterKeys(q0.fy, q0.q); b = quarterKeys(q1.fy, q1.q); aLabel = qLabel(q0); bLabel = qLabel(q1);
+  } else if (mode === "fy") {
+    b = fytdKeys(m.M); a = sameMonthsPriorYear(b); bLabel = `${fyLabel(m.fy)} YTD`; aLabel = `${fyLabel(m.fy - 1)} YTD`;
+  } else {
+    a = [m.P]; b = [m.M]; aLabel = `${monthName(m.P)} ${parseKey(m.P).y}`; bLabel = `${monthName(m.M)} ${parseKey(m.M).y}`;
+  }
+  return { mode, aLabel, bLabel, rows: KPIS.map(k => ({ k, a: val(agg(k.key, a)), b: val(agg(k.key, b)) })) };
+}
+function compareChart(m) {
+  const c = comparison(m);
+  const W = 300, H = 150, L = 6, R = 6, T = 16, B = 30;
+  const vals = c.rows.flatMap(r => [r.a, r.b]).filter(v => v !== null);
+  const lo = Math.min(0, ...vals), hi = Math.max(100, ...vals);
+  const y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  const gw = (W - L - R) / 3, bw = 30;
+  let s = `<line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="#CDBFB5"/>`;
+  c.rows.forEach((r, i) => {
+    const cx = L + gw * i + gw / 2;
+    [[r.a, "#C9B6A9", cx - bw - 4], [r.b, "#541800", cx + 4]].forEach(([v, color, x0]) => {
+      if (v === null) return;
+      const top = Math.min(y(v), y(0)), h = Math.max(1.5, Math.abs(y(v) - y(0)));
+      s += `<rect x="${x0}" y="${top}" width="${bw}" height="${h}" rx="2" fill="${color}"/><text x="${x0 + bw / 2}" y="${(v >= 0 ? top : top + h + 9) - 3}" text-anchor="middle" font-size="9" font-weight="600" fill="#24170F">${fmt(v)}</text>`;
+    });
+    const d = r.a !== null && r.b !== null ? r.b - r.a : null;
+    s += `<text x="${cx}" y="${H - 17}" text-anchor="middle" font-size="9.5" font-weight="600" fill="#24170F">${r.k.key === "clo" ? "Choctaw Lang." : r.k.label}</text>`;
+    s += `<text x="${cx}" y="${H - 5}" text-anchor="middle" font-size="9" font-weight="700" fill="${d === null ? "#6B5D55" : r1(d) > 0 ? "#2E5F2B" : r1(d) < 0 ? "#8E1D17" : "#6B5D55"}">${fmtDelta(d)}</text>`;
+  });
+  return { c, svg: `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(COMPARE_MODES[c.mode])}" style="${FONT}">${s}</svg>` };
+}
+
+/* =========================================================================
+ * Rendering — front
+ * ========================================================================= */
+function header(m, side) {
+  const r = state.report;
+  return `<div class="band"></div>
+  <header class="head">
+    <img src="${LOGO}" alt="">
+    <div>
+      <p class="eyebrow">Choctaw Nation of Oklahoma · Gaming · Voice of the Guest${side === "back" ? " · continued" : ""}</p>
+      <h1>${esc(r.property.trim() || "Property / Location")}</h1>
+      <p class="sub">${r.department.trim() ? `<b>${esc(r.department)}</b> · ` : ""}One-Page Summary · ${monthName(m.M)} ${parseKey(m.M).y} · ${fyLabel(m.fy)} Q${quarterOf(m.M)}</p>
+    </div>
+    <div class="meta">${state.sample ? `<span class="sample">Sample data</span><br>` : ""}${side === "front" ? "Front" : "Back"} · Reporting month <b>${monthName(m.M)} ${parseKey(m.M).y}</b>${r.preparedBy.trim() ? `<br>Prepared by <b>${esc(r.preparedBy)}</b>` : ""}</div>
+  </header>`;
+}
+function kpiCards(m) {
+  return `<div class="kpis">${m.kpis.map(k => `
+    <div class="kpi ${k.status || ""}">
+      <div class="kpi-top"><span class="kpi-name">${k.key === "clo" ? "Choctaw Language Utilization" : `${k.label} <span style="font-weight:400;color:var(--muted)">· ${k.long}</span>`}</span><span class="pill ${k.status || ""}">${k.status ? STATUS[k.status] : "No status"}</span></div>
+      ${k.month === null ? `<div class="kpi-val empty">No data</div>` : `<div class="kpi-val">${fmt(k.month)}<small>${k.unit}</small></div>`}
+      <div class="kpi-grid">
+        <div><span>Goal</span><b>${fmt(k.goal, k.unit)}</b></div>
+        <div><span>vs. ${monthName(m.P)}</span><b class="${deltaClass(k.mom)}">${fmtDelta(k.mom)}</b></div>
+        <div><span>FYTD${k.ytdApprox ? "*" : ""}</span><b>${fmt(k.ytd, k.unit)}</b></div>
+        <div><span>YoY YTD</span><b class="${deltaClass(k.yoy)}">${fmtDelta(k.yoy)}</b></div>
+      </div>
+      <div class="kpi-note">${k.cur?.n ? `${k.cur.n.toLocaleString()} responses` : k.desc}</div>
+    </div>`).join("")}</div>`;
+}
+function quarterTiles(m) {
+  const key = "osat", k = KPIS[0], cur = lastCompleteQuarter(m.M);
+  const tiles = [1, 2, 3, 4].map(q => {
+    const keys = quarterKeys(m.fy, q).filter(c => c <= m.M);
+    const started = keys.length > 0, partial = keys.length > 0 && keys.length < 3;
+    const v = started ? val(agg(key, keys)) : null, py = val(agg(key, quarterKeys(m.fy - 1, q)));
+    const goal = goalFor(key, m.fy), st = statusOf(v, goal);
+    return `<div class="q ${started ? "" : "future"}">
+      <div class="ql"><span>Q${q}${partial ? " · QTD" : ""}</span><span class="${st === "above" ? "pos" : st === "below" ? "neg" : ""}">${st ? STATUS[st] : ""}</span></div>
+      <div class="qv">${fmt(v, k.unit)}</div>
+      <div class="qs">vs goal <b class="${deltaClass(v !== null && goal !== null ? v - goal : null)}">${fmtDelta(v !== null && goal !== null ? v - goal : null)}</b> · PY ${fmt(py, k.unit)}</div>
+    </div>`;
+  }).join("");
+  const o = m.kpis[0];
+  return `<div class="quarters">${tiles}<div class="q ytd"><div class="ql"><span>${fyLabel(m.fy)} YTD</span></div><div class="qv">${fmt(o.ytd, "%")}</div><div class="qs">Goal ${fmt(o.goal, "%")} · YoY <b class="${deltaClass(o.yoy)}">${fmtDelta(o.yoy)}</b></div></div></div>`;
+}
+function renderFront(m) {
+  const sum = lines(state.summaryOverride).length ? lines(state.summaryOverride) : autoSummary(m);
+  const tk = KPIS.find(k => k.key === state.report.trendMetric);
+  const cmp = compareChart(m);
+  const pos = state.positives.filter(p => (p.title || "").trim()).slice(0, 5);
+  const opp = state.opportunities.filter(p => (p.title || "").trim()).slice(0, 5);
+  $("front").innerHTML = `${header(m, "front")}
+    ${kpiCards(m)}
+    <section class="sec"><h2><span class="num">1</span>Executive Summary<span class="hint">${lines(state.summaryOverride).length ? "Edited" : "Auto-generated"}</span></h2>
+      <ul class="bullets">${sum.slice(0, 5).map(s => `<li>${esc(s)}</li>`).join("")}</ul></section>
+    <div class="insights">
+      <div class="insight"><div><span>Strongest driver · YTD</span><b>${m.strongest ? esc(m.strongest.name) : "—"}</b><em>${m.strongest ? `${fmt(m.strongest.ytd, "%")} YTD${m.strongest.yoy !== null ? ` · ${fmtDelta(m.strongest.yoy)} pts YoY` : ""}` : "Enter driver YTD scores"}</em></div></div>
+      <div class="insight watch"><div><span>Watch area · lowest YTD</span><b>${m.watch ? esc(m.watch.name) : "—"}</b><em>${m.watch ? `${fmt(m.watch.ytd, "%")} YTD${m.watch.mom !== null ? ` · ${fmtDelta(m.watch.mom)} pts vs. ${monthName(m.P)}` : ""}` : "Enter driver YTD scores"}</em></div></div>
+    </div>
+    <section class="sec"><h2><span class="num">4</span>OSAT Performance Review<span class="hint">Quarters ${fyLabel(m.fy)} · goal ${fmt(m.kpis[0].goal, "%")}</span></h2>
+      ${quarterTiles(m)}
+      <div class="cols-73">
+        <div class="chart-card"><h3>${esc(tk.label)} by month <span>${fyLabel(m.fy)} vs. ${fyLabel(m.fy - 1)}</span></h3>${trendChart(m)}
+          <div class="legend"><span><i style="background:#BF2E1A"></i>${fyLabel(m.fy)}</span><span><i style="background:#B9A79B"></i>${fyLabel(m.fy - 1)}</span><span><i style="background:#C6A45D"></i>Goal</span></div></div>
+        <div class="chart-card"><h3>${COMPARE_MODES[cmp.c.mode]}</h3>${cmp.svg}
+          <div class="legend"><span><i class="box" style="background:#C9B6A9"></i>${esc(cmp.c.aLabel)}</span><span><i class="box" style="background:#541800"></i>${esc(cmp.c.bLabel)}</span><span>Change below bars</span></div></div>
+      </div>
+    </section>
+    <div class="cols2">
+      <section class="sec"><h2><span class="num">2</span>Key Positive Trends</h2>
+        <div class="items">${pos.length ? pos.map(p => `<div class="item"><b>${esc(p.title)}</b>${(p.detail || "").trim() ? `<p>${esc(p.detail)}</p>` : ""}</div>`).join("") : `<p class="note">Add up to five strengths in Edit data.</p>`}</div>
+        ${state.quotes.positive.trim() ? `<p class="quote">“${esc(state.quotes.positive.trim())}”</p>` : ""}
+      </section>
+      <section class="sec"><h2><span class="num">3</span>Key Improvement Opportunities</h2>
+        <div class="items">${opp.length ? opp.map(p => `<div class="item opp"><b>${esc(p.title)}</b><span class="impact ${esc(p.impact)}">${esc(p.impact)}</span>${(p.detail || "").trim() ? `<p>${esc(p.detail)}</p>` : ""}</div>`).join("") : `<p class="note">Add up to five opportunities in Edit data.</p>`}</div>
+        ${state.quotes.negative.trim() ? `<p class="quote">“${esc(state.quotes.negative.trim())}”</p>` : ""}
+      </section>
+    </div>
+    ${footer(m, "front")}`;
+}
+
+/* =========================================================================
+ * Rendering — back
+ * ========================================================================= */
+function footer(m, side) {
+  const notes = state.report.footer.trim();
+  const fine = [];
+  if (m.kpis.some(k => k.ytdApprox)) fine.push("*FYTD averaged from monthly values (response counts missing).");
+  fine.push(`FY runs Oct–Sep. OSAT and NPS quarters and YTD are response-weighted; Choctaw Language YTD averages monthly results. Status compares the month with the ${fyLabel(m.fy)} goal.`);
+  return `<footer class="sheet-foot"><div class="notes">${side === "front" && notes ? esc(notes) + "\n" : ""}${esc(fine.join(" "))}</div><div>${side === "front" ? "Continued on back →" : "Choctaw Nation of Oklahoma · Gaming"}</div></footer>`;
+}
+function renderBack(m) {
+  const clo = m.kpis[2];
+  const metrics = state.opexMetrics.filter(x => (x.name || "").trim());
+  const risks = state.risks.filter(x => (x.detail || "").trim());
+  const rank = { High: 0, Medium: 1, Low: 2 };
+  const actions = state.actions.filter(x => (x.action || "").trim()).map((x, i) => ({ ...x, i })).sort((a, b) => (rank[a.impact] ?? 3) - (rank[b.impact] ?? 3) || a.i - b.i).slice(0, 5);
+  const people = state.recognition.filter(x => (x.name || "").trim()).map((x, i) => ({ ...x, i, c: num(x.mentions) ?? 0 })).sort((a, b) => b.c - a.c || a.i - b.i);
+  const totalMentions = people.reduce((s, p) => s + p.c, 0);
+
+  $("back").innerHTML = `${header(m, "back")}
+    <section class="sec"><h2><span class="num">4</span>Guest Experience Drivers<span class="hint">Medallia · % top-box · Watch = lowest YTD, Strongest = highest YTD</span></h2>
+      ${m.drivers.length ? `<table class="t"><thead><tr><th>Driver</th><th>${monthName(m.M)}</th><th>${monthName(m.P)}</th><th>MoM</th><th>${fyLabel(m.fy)} YTD</th><th>${fyLabel(m.fy - 1)} YTD</th><th>YoY</th></tr></thead><tbody>
+        ${m.drivers.map(d => {
+          const w = m.watch && d.name === m.watch.name, s = m.strongest && d.name === m.strongest.name;
+          return `<tr class="${w ? "watch" : s ? "strong" : ""}"><td>${esc(d.name)}${w ? `<span class="tag watch">Watch</span>` : s ? `<span class="tag strong">Strongest</span>` : ""}</td><td>${fmt(d.month, "%")}</td><td>${fmt(d.prior, "%")}</td><td class="${deltaClass(d.mom)}">${fmtDelta(d.mom)}</td><td><b>${fmt(d.ytd, "%")}</b></td><td>${fmt(d.pyYtd, "%")}</td><td class="${deltaClass(d.yoy)}">${fmtDelta(d.yoy)}</td></tr>`;
+        }).join("")}</tbody></table>` : `<p class="note">Add guest experience drivers in Edit data.</p>`}
+    </section>
+
+    <section class="sec"><h2><span class="num">5</span>Operational Excellence Insights</h2>
+      <div class="cols-73">
+        <div>
+          <table class="t"><thead><tr><th>Metric</th><th>${monthName(m.M)}</th><th>Goal</th><th>vs. goal</th><th>YTD</th><th>Status</th></tr></thead><tbody>
+            <tr><td>Choctaw Language Observation Utilization</td><td>${fmt(clo.month, "%")}</td><td>${fmt(clo.goal, "%")}</td><td class="${deltaClass(clo.month !== null && clo.goal !== null ? clo.month - clo.goal : null)}">${fmtDelta(clo.month !== null && clo.goal !== null ? clo.month - clo.goal : null)}</td><td>${fmt(clo.ytd, "%")}</td><td>${clo.status ? `<span class="pill ${clo.status}">${STATUS[clo.status]}</span>` : "—"}</td></tr>
+            ${metrics.map(x => {
+              const v = num(x.month), g = num(x.goal), st = statusOf(v, g), u = x.unit || "";
+              return `<tr><td>${esc(x.name)}</td><td>${fmt(v, u)}</td><td>${fmt(g, u)}</td><td class="${deltaClass(v !== null && g !== null ? v - g : null)}">${fmtDelta(v !== null && g !== null ? v - g : null)}</td><td>${fmt(num(x.ytd), u)}</td><td>${st ? `<span class="pill ${st}">${STATUS[st]}</span>` : "—"}</td></tr>`;
+            }).join("")}
+          </tbody></table>
+        </div>
+        <div class="callout"><b>Connection to guest feedback.</b> ${esc(state.opexConnection.trim() || "Describe how operational results relate to what guests are saying.")}</div>
+      </div>
+    </section>
+
+    <div class="cols2">
+      <section class="sec"><h2><span class="num">6</span>Looking Ahead</h2>
+        <div class="risk-list">${risks.length ? risks.slice(0, 5).map(x => `<div class="risk"><span class="cat">${esc(x.category || "Other")}</span><p>${esc(x.detail)}${(x.action || "").trim() ? ` <span>→ ${esc(x.action)}</span>` : ""}</p></div>`).join("") : `<p class="note">Add upcoming risks and proactive actions in Edit data.</p>`}</div>
+      </section>
+      <section class="sec"><h2><span class="num">7</span>Recommended Actions<span class="hint">By expected guest impact</span></h2>
+        ${actions.length ? `<ol class="actions">${actions.map(a => `<li>${esc(a.action)}<span class="impact ${esc(a.impact)}">${esc(a.impact)}</span>${(a.owner || "").trim() || (a.due || "").trim() ? `<div class="who">${esc([a.owner, a.due && "Due " + a.due].filter(x => (x || "").trim()).join(" · "))}</div>` : ""}</li>`).join("")}</ol>` : `<p class="note">Add three to five actions in Edit data.</p>`}
+      </section>
+    </div>
+
+    <section class="sec">
+      <h2><span class="num">★</span>Associate Recognition<span class="hint">${people.length ? `${people.length} associates · ${totalMentions} guest mention${totalMentions === 1 ? "" : "s"}` : ""}</span></h2>
+      ${people.length ? `<div class="recog">${people.slice(0, 9).map(p => `<div class="person"><div class="nm">${esc(p.name)}</div><div class="dp">${esc(p.department || "")}</div>${p.c ? `<span class="ct">${p.c}×</span>` : ""}${(p.praise || "").trim() ? `<p>${esc(p.praise)}</p>` : ""}</div>`).join("")}</div>
+        ${people.length > 9 ? `<p class="note">Also mentioned: ${people.slice(9).map(p => esc(p.name) + (p.c ? ` (${p.c})` : "")).join(", ")}.</p>` : ""}` : `<p class="note">List associates named in guest feedback in Edit data.</p>`}
+      ${state.recognitionThemes.trim() ? `<div class="callout"><b>Recognition themes to reinforce.</b> ${esc(state.recognitionThemes.trim())}</div>` : ""}
+    </section>
+    ${footer(m, "back")}`;
+}
+
+/* =========================================================================
+ * Fit check, scaling, render
+ * ========================================================================= */
+function checkFit() {
+  for (const [id, badge, name] of [["front", "fitFront", "Front"], ["back", "fitBack", "Back"]]) {
+    const el = $(id);
+    const foot = el.querySelector(".sheet-foot");
+    // Overflow when the last block before the footer pushes the footer past the sheet's padding box.
+    const over = foot ? Math.max(0, Math.ceil(foot.offsetTop + foot.offsetHeight - (el.clientHeight - 24))) : 0;
+    el.classList.toggle("overflowing", over > 0);
+    $(badge).textContent = over > 0 ? `${name} over by ${over}px — shorten text` : `${name} fits`;
+    $(badge).classList.toggle("over", over > 0);
+  }
+}
+function scaleSheets() {
+  const wrap = document.querySelector(".sheets");
+  const avail = wrap.clientWidth;
+  const z = Math.min(1, avail / 816);
+  document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = z < 1 ? String(z) : ""; });
+  document.querySelectorAll(".sheet-frame").forEach(f => { f.style.width = 816 * z + "px"; });
+}
+function render() {
+  const m = buildModel();
+  // Measure at full size so the fit check isn't affected by screen zoom.
+  document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = ""; });
+  renderFront(m);
+  renderBack(m);
+  checkFit();
+  scaleSheets();
+  document.title = `VoG Summary – ${state.report.property || "Gaming"} – ${monthName(m.M)} ${fyLabel(m.fy)}`;
+}
+
+/* =========================================================================
+ * Editor
+ * ========================================================================= */
+const getPath = (o, p) => p.split(".").reduce((a, k) => a?.[k], o);
+function setPath(o, p, v) { const parts = p.split("."); let c = o; for (const k of parts.slice(0, -1)) c = c[k] ??= {}; c[parts.at(-1)] = v; }
+const inp = (path, type = "text", attrs = "") => {
+  const v = getPath(state, path);
+  return type === "textarea"
+    ? `<textarea data-path="${path}" ${attrs}>${esc(v ?? "")}</textarea>`
+    : `<input type="${type}" data-path="${path}" ${type === "number" ? `data-num="1" step="any"` : ""} value="${esc(v ?? "")}" ${attrs}>`;
+};
+const sel = (path, options, attrs = "") => `<select data-path="${path}" ${attrs}>${options.map(o => { const [v, t] = Array.isArray(o) ? o : [o, o]; return `<option value="${esc(v)}" ${String(getPath(state, path) ?? "") === String(v) ? "selected" : ""}>${esc(t)}</option>`; }).join("")}</select>`;
+
+// List editor: fields = [[key, label, type, options]]
+function listEditor(listKey, fields, max, addLabel) {
+  const list = state[listKey];
+  return `${list.map((row, i) => `<div class="row-card"><div class="rc-head"><span>${i + 1}</span><button type="button" class="btn danger small" data-remove="${listKey}|${i}" aria-label="Remove item ${i + 1}">Remove</button></div>
+      ${fields.map(([k, label, type, opts]) => `<div class="f"><label>${label}</label>${type === "select" ? sel(`${listKey}.${i}.${k}`, opts) : inp(`${listKey}.${i}.${k}`, type)}</div>`).join("")}
+    </div>`).join("")}
+    ${list.length < max ? `<button type="button" class="btn secondary small" data-add="${listKey}">+ ${addLabel}</button>` : `<p class="note">Maximum of ${max} shown on the page.</p>`}`;
+}
+
+let editorMetric = "osat";
+function renderEditor() {
+  const r = state.report, fy = fyOf(r.month);
+  const { m } = parseKey(r.month);
+  const years = []; for (let y = fy + 1; y >= fy - 3; y--) years.push(y);
+  const k = KPIS.find(x => x.key === editorMetric);
+  const monthRows = FISCAL_ORDER.map((mo, i) => {
+    const cy = fyMonths(fy)[i], py = fyMonths(fy - 1)[i];
+    return `<tr><td>${MONTH_NAMES[mo - 1]}</td>
+      <td><input type="number" step="any" data-path="kpis.${k.key}.months.${cy}.v" data-num="1" value="${esc(state.kpis[k.key].months[cy]?.v ?? "")}" aria-label="${k.label} ${MONTH_NAMES[mo - 1]} ${fyLabel(fy)}"></td>
+      ${k.counts ? `<td><input type="number" step="1" data-path="kpis.${k.key}.months.${cy}.n" data-num="1" value="${esc(state.kpis[k.key].months[cy]?.n ?? "")}" aria-label="${k.label} responses ${MONTH_NAMES[mo - 1]} ${fyLabel(fy)}"></td>` : ""}
+      <td><input type="number" step="any" data-path="kpis.${k.key}.months.${py}.v" data-num="1" value="${esc(state.kpis[k.key].months[py]?.v ?? "")}" aria-label="${k.label} ${MONTH_NAMES[mo - 1]} ${fyLabel(fy - 1)}"></td>
+      ${k.counts ? `<td><input type="number" step="1" data-path="kpis.${k.key}.months.${py}.n" data-num="1" value="${esc(state.kpis[k.key].months[py]?.n ?? "")}" aria-label="${k.label} responses ${MONTH_NAMES[mo - 1]} ${fyLabel(fy - 1)}"></td>` : ""}</tr>`;
+  }).join("");
+
+  // Keep the sections the user had open, and their scroll position, across rebuilds.
+  const ed = $("editor");
+  const openSections = new Set([...ed.querySelectorAll("details[open] > summary")].map(x => x.textContent));
+  const hadContent = ed.childElementCount > 0, scroll = ed.scrollTop;
+  ed.innerHTML = `
+    <h2>Edit data</h2>
+    <p class="help">Changes update both pages instantly and are saved in this browser. Use <b>Export</b> to keep or share a copy.</p>
+
+    <details open><summary>Report details</summary><div class="body">
+      <div class="f"><label>Property / location</label>${inp("report.property", "text", 'placeholder="e.g. Casino resort name"')}</div>
+      <div class="r2"><div class="f"><label>Department</label>${inp("report.department", "text", 'placeholder="e.g. Casino Floor, Hotel, F&B"')}</div><div class="f"><label>Prepared by</label>${inp("report.preparedBy")}</div></div>
+      <div class="r2">
+        <div class="f"><label>Reporting month</label><select id="eMonth">${FISCAL_ORDER.map(mo => `<option value="${mo}" ${mo === m ? "selected" : ""}>${MONTH_NAMES[mo - 1]}</option>`).join("")}</select></div>
+        <div class="f"><label>Fiscal year</label><select id="eYear">${years.map(y => `<option value="${y}" ${y === fy ? "selected" : ""}>${fyLabel(y)} · Oct ’${String((y - 1) % 100).padStart(2, "0")}–Sep ’${String(y % 100).padStart(2, "0")}</option>`).join("")}</select></div>
+      </div>
+      <div class="r2">
+        <div class="f"><label>Trend chart metric</label>${sel("report.trendMetric", [["osat", "OSAT"], ["nps", "NPS"], ["clo", "Choctaw Language"]])}</div>
+        <div class="f"><label>Comparison chart</label>${sel("report.compare", Object.entries(COMPARE_MODES))}</div>
+      </div>
+      <div class="f"><label>Footer notes (front page)</label>${inp("report.footer", "textarea", 'placeholder="Sources, context, reporting notes"')}</div>
+    </div></details>
+
+    <details open><summary>Core KPIs — OSAT, NPS, Choctaw Language</summary><div class="body">
+      <div class="r3">${KPIS.map(x => `<div class="f"><label>${x.key === "clo" ? "Choctaw Lang." : x.label} goal ${fyLabel(fy)}</label><input type="number" step="any" data-path="kpis.${x.key}.goals.${fy}" data-num="1" value="${esc(state.kpis[x.key].goals[fy] ?? "")}" placeholder="${esc(goalFor(x.key, fy) ?? "")}"></div>`).join("")}</div>
+      <div class="f"><label>Monthly results for</label><select id="eMetric">${KPIS.map(x => `<option value="${x.key}" ${x.key === editorMetric ? "selected" : ""}>${x.long}</option>`).join("")}</select></div>
+      <table class="g"><thead><tr><th>Month</th><th>${fyLabel(fy)} ${k.unit}</th>${k.counts ? "<th>Responses</th>" : ""}<th>${fyLabel(fy - 1)} ${k.unit}</th>${k.counts ? "<th>Responses</th>" : ""}</tr></thead><tbody>${monthRows}</tbody></table>
+      <p class="note">Enter Medallia monthly results. Response counts let quarters and YTD be weighted correctly; without them, values are averaged.</p>
+    </div></details>
+
+    <details><summary>Executive summary</summary><div class="body">
+      <p class="note">Leave blank to use the automated summary (shown as placeholder). One line = one bullet, 3–5 bullets.</p>
+      <textarea data-path="summaryOverride" rows="6" placeholder="${esc(autoSummary(buildModel()).join("\n"))}">${esc(state.summaryOverride)}</textarea>
+    </div></details>
+
+    <details><summary>Guest experience drivers (Medallia)</summary><div class="body">
+      <p class="note">% top-box. Watch Area = lowest YTD; Strongest Driver = highest YTD.</p>
+      ${listEditor("drivers", [["name", "Driver", "text"], ["month", "This month %", "number"], ["prior", "Prior month %", "number"], ["ytd", "FYTD %", "number"], ["pyYtd", "Prior FYTD %", "number"]], 10, "Add driver")}
+    </div></details>
+
+    <details><summary>2 · Key positive trends</summary><div class="body">
+      ${listEditor("positives", [["title", "Strength", "text"], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add strength")}
+      <div class="f"><label>Representative positive guest comment</label>${inp("quotes.positive", "textarea")}</div>
+    </div></details>
+
+    <details><summary>3 · Improvement opportunities</summary><div class="body">
+      ${listEditor("opportunities", [["title", "Opportunity", "text"], ["impact", "Impact", "select", IMPACTS], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add opportunity")}
+      <div class="f"><label>Representative guest comment</label>${inp("quotes.negative", "textarea")}</div>
+    </div></details>
+
+    <details><summary>5 · Operational excellence</summary><div class="body">
+      <p class="note">Choctaw Language Observation Utilization comes from Core KPIs. Add other metrics here.</p>
+      ${listEditor("opexMetrics", [["name", "Metric", "text"], ["unit", "Unit", "select", [["%", "%"], ["", "Points / number"]]], ["month", "This month", "number"], ["goal", "Goal", "number"], ["ytd", "FYTD", "number"]], 5, "Add metric")}
+      <div class="f"><label>Connection to guest feedback</label>${inp("opexConnection", "textarea")}</div>
+    </div></details>
+
+    <details><summary>6 · Looking ahead</summary><div class="body">
+      ${listEditor("risks", [["category", "Category", "select", RISK_CATEGORIES], ["detail", "Risk / emerging concern", "textarea"], ["action", "Proactive action", "text"]], 5, "Add risk")}
+    </div></details>
+
+    <details><summary>7 · Recommended actions</summary><div class="body">
+      <p class="note">Sorted on the page by impact (High first).</p>
+      ${listEditor("actions", [["action", "Action", "textarea"], ["impact", "Expected guest impact", "select", IMPACTS], ["owner", "Owner", "text"], ["due", "Due", "text"]], 5, "Add action")}
+    </div></details>
+
+    <details><summary>Back page · Associate recognition</summary><div class="body">
+      <p class="note">Sorted by mentions. Nine cards fit; the rest are listed by name.</p>
+      ${listEditor("recognition", [["name", "Associate name", "text"], ["department", "Department", "text"], ["mentions", "Guest mentions", "number"], ["praise", "Behaviors guests praised", "textarea"]], 20, "Add associate")}
+      <div class="f"><label>Recognition themes to reinforce</label>${inp("recognitionThemes", "textarea")}</div>
+    </div></details>
+
+    <details open><summary>Data</summary><div class="body">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn secondary" id="exportBtn">Export data</button>
+        <label class="btn secondary file-btn">Import data<input type="file" id="importFile" accept=".json,application/json"></label>
+        <button type="button" class="btn secondary" id="sampleBtn">Load sample data</button>
+        <button type="button" class="btn danger" id="clearBtn">Clear all data</button>
+      </div>
+    </div></details>`;
+  if (hadContent) {
+    ed.querySelectorAll("details").forEach(d => { d.open = openSections.has(d.querySelector("summary").textContent); });
+    ed.scrollTop = scroll;
+  }
+}
+
+function wire() {
+  const setMode = editing => {
+    document.body.classList.toggle("editing", editing);
+    $("modeView").setAttribute("aria-pressed", String(!editing));
+    $("modeEdit").setAttribute("aria-pressed", String(editing));
+    if (editing) renderEditor();
+    scaleSheets();
+  };
+  $("modeView").addEventListener("click", () => setMode(false));
+  $("modeEdit").addEventListener("click", () => setMode(true));
+  $("printBtn").addEventListener("click", () => window.print());
+  window.addEventListener("beforeprint", () => document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = ""; }));
+  window.addEventListener("afterprint", scaleSheets);
+  window.addEventListener("resize", scaleSheets);
+
+  const ed = $("editor");
+  ed.addEventListener("input", e => {
+    const t = e.target;
+    if (!t.dataset.path) return;
+    setPath(state, t.dataset.path, t.dataset.num ? num(t.value) : t.value);
+    save(); render();
+  });
+  ed.addEventListener("change", e => {
+    const t = e.target;
+    if (t.id === "eMonth" || t.id === "eYear") {
+      const mo = Number($("eMonth").value), fy = Number($("eYear").value);
+      state.report.month = keyOf(mo >= 10 ? fy - 1 : fy, mo);
+      save(); render(); renderEditor();
+    } else if (t.id === "eMetric") {
+      editorMetric = t.value; renderEditor();
+    } else if (t.tagName === "SELECT" && t.dataset.path) {
+      setPath(state, t.dataset.path, t.value); save(); render();
+    } else if (t.id === "importFile" && t.files[0]) {
+      t.files[0].text().then(txt => { state = normalize(JSON.parse(txt)); save(); render(); renderEditor(); })
+        .catch(() => alert("That file couldn't be imported. Choose a JSON file exported from this template."));
+    }
+  });
+  ed.addEventListener("click", e => {
+    const t = e.target.closest("button");
+    if (!t) return;
+    if (t.dataset.add) {
+      const blank = { drivers: { name: "" }, positives: { title: "", detail: "" }, opportunities: { title: "", impact: "Medium", detail: "" },
+        opexMetrics: { name: "", unit: "%" }, risks: { category: "Events", detail: "", action: "" }, actions: { action: "", impact: "High", owner: "", due: "" },
+        recognition: { name: "", department: "", mentions: "", praise: "" } }[t.dataset.add];
+      state[t.dataset.add].push(blank); save(); render(); renderEditor();
+    } else if (t.dataset.remove) {
+      const [key, i] = t.dataset.remove.split("|");
+      state[key].splice(Number(i), 1); save(); render(); renderEditor();
+    } else if (t.id === "exportBtn") {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const slug = (state.report.property || "gaming").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `vog-${slug}-${state.report.month}.json` });
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    } else if (t.id === "sampleBtn") {
+      if (confirm("Replace all data with the sample data? Export first to keep your current data.")) { state = sampleState(); save(); render(); renderEditor(); }
+    } else if (t.id === "clearBtn") {
+      if (confirm("Clear all data? This can't be undone unless you've exported it.")) { const keep = state.report.month; state = emptyState(); state.report.month = keep; save(); render(); renderEditor(); }
+    }
+  });
+}
+
+/* =========================================================================
+ * Sample data (fictional) — FY25 and FY26 monthly results
+ * ========================================================================= */
+function sampleState() {
+  const s = emptyState();
+  s.sample = true;
+  s.report = { property: "Sample Casino Resort", department: "Casino Operations", preparedBy: "Guest Experience Team", month: "2026-09", trendMetric: "osat", compare: "quarter",
+    footer: "Sources: Medallia OSAT/NPS and VoG comments; OpEx observation logs. Sample data for illustration only." };
+  let seed = 7;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  for (const fy of [2025, 2026]) {
+    fyMonths(fy).forEach((k, i) => {
+      const season = Math.sin((i / 12) * Math.PI * 2) * 1.5, lift = fy === 2026 ? 1.6 + i * 0.12 : 0;
+      const n = Math.round(180 + rnd() * 220);
+      s.kpis.osat.months[k] = { v: r1(84.5 + season + lift + (rnd() - 0.5) * 2.4), n };
+      s.kpis.nps.months[k] = { v: r1(47 + season * 1.8 + lift * 1.6 + (rnd() - 0.5) * 5), n };
+      s.kpis.clo.months[k] = { v: r1((fy === 2026 ? 66 + i * 1.3 : 58 + i * 0.6) + (rnd() - 0.5) * 4) };
+    });
+  }
+  s.kpis.osat.goals = { 2025: 86.0, 2026: 87.0 };
+  s.kpis.nps.goals = { 2025: 50.0, 2026: 52.0 };
+  s.kpis.clo.goals = { 2025: 70.0, 2026: 75.0 };
+  s.drivers = [
+    { name: "Friendliness of team members", month: 91.2, prior: 90.4, ytd: 90.6, pyYtd: 88.9 },
+    { name: "Cleanliness of casino floor", month: 86.8, prior: 88.1, ytd: 87.4, pyYtd: 86.0 },
+    { name: "Restroom cleanliness", month: 82.5, prior: 84.0, ytd: 83.1, pyYtd: 82.7 },
+    { name: "Wait time at cage / Players Club", month: 74.9, prior: 77.2, ytd: 76.3, pyYtd: 77.8 },
+    { name: "Food & beverage quality", month: 81.7, prior: 80.2, ytd: 80.9, pyYtd: 79.4 },
+    { name: "Slot availability & variety", month: 79.4, prior: 78.8, ytd: 79.0, pyYtd: 78.1 },
+    { name: "Hotel check-in experience", month: 85.9, prior: 84.6, ytd: 85.2, pyYtd: 83.5 }
+  ];
+  s.positives = [
+    { title: "Team member friendliness leads all drivers", detail: "90.6% YTD (+1.7 pts YoY); 'friendly' and 'welcoming' are the most frequent positive comment themes." },
+    { title: "Hotel check-in faster and more personal", detail: "Up 1.3 pts vs. August; guests credit the new mobile key option and greetings by name." },
+    { title: "Food & beverage quality trending up", detail: "Three consecutive monthly gains; buffet freshness mentioned in 24 positive comments." }
+  ];
+  s.opportunities = [
+    { title: "Wait times at the cage and Players Club", impact: "High", detail: "Lowest driver at 76.3% YTD and down 1.5 pts YoY; weekend evening lines cited in 31 negative comments." },
+    { title: "Restroom upkeep during peak hours", impact: "Medium", detail: "Down 1.5 pts vs. August; comments concentrate on Friday and Saturday nights near the high-limit area." },
+    { title: "Slot availability on event nights", impact: "Low", detail: "Guests report popular titles fully occupied during concert weekends." }
+  ];
+  s.quotes = { positive: "Everyone from valet to the dealers made us feel like regulars on our first visit.", negative: "Waited almost 25 minutes at the Players Club desk on Saturday night." };
+  s.opexMetrics = [
+    { name: "OpWalk score", unit: "%", month: 93.4, goal: 95, ytd: 92.1 },
+    { name: "Mystery shop score", unit: "%", month: 89.0, goal: 88, ytd: 87.6 },
+    { name: "Guest comments answered within 48 hrs", unit: "%", month: 96.0, goal: 95, ytd: 94.2 }
+  ];
+  s.opexConnection = "Language use and OpWalk gains track with the rise in friendliness scores. The cage staffing gap on OpWalk weekend audits matches the wait-time complaints.";
+  s.risks = [
+    { category: "Events", detail: "Two concert weekends in October will raise floor and valet traffic.", action: "Add cage and valet coverage 6 pm–1 am." },
+    { category: "Wait times", detail: "Players Club lines growing on weekends as membership promotion launches.", action: "Open the kiosk enrollment line." },
+    { category: "Facility conditions", detail: "Parking garage elevator repairs scheduled mid-month.", action: "Post signage and add shuttle runs." },
+    { category: "Cleanliness", detail: "Restroom comments rising during late-night peaks.", action: "30-minute checks Fri–Sat 8 pm–2 am." }
+  ];
+  s.actions = [
+    { action: "Staff cage and Players Club to weekend peak demand; add a floating host for line management.", impact: "High", owner: "Casino Operations Manager", due: "Oct 15" },
+    { action: "Set 30-minute restroom checks with sign-off logs on peak nights.", impact: "Medium", owner: "Facilities Supervisor", due: "Oct 8" },
+    { action: "Share friendliness best practices from hotel front desk in casino huddles.", impact: "Medium", owner: "Guest Experience Lead", due: "Oct 31" },
+    { action: "Review slot floor mix for concert weekends with Slot Operations.", impact: "Low", owner: "Slot Director", due: "Nov 15" }
+  ];
+  s.recognition = [
+    { name: "Maria T.", department: "Players Club", mentions: 9, praise: "Remembers guests by name; explains rewards clearly." },
+    { name: "James W.", department: "Table Games", mentions: 7, praise: "Patient with new players; keeps the table fun." },
+    { name: "Ashley R.", department: "Hotel Front Desk", mentions: 6, praise: "Fast check-in; went out of her way to arrange a late checkout." },
+    { name: "Daniel K.", department: "Valet", mentions: 5, praise: "Quick retrieval and a warm welcome back." },
+    { name: "Grace L.", department: "Buffet", mentions: 4, praise: "Attentive, kept tables cleared during the rush." },
+    { name: "Robert H.", department: "Security", mentions: 3, praise: "Helped a guest find a lost wallet within minutes." }
+  ];
+  s.recognitionThemes = "Greeting guests by name, explaining rewards and offers clearly, and following through on small requests.";
+  return s;
+}
+
+/* =========================================================================
+ * Start
+ * ========================================================================= */
+document.addEventListener("DOMContentLoaded", () => { wire(); render(); });
+</script>
+<script>
+// Embedded feathers mark so the file works on its own.
+const LOGO = "data:image/png;base64,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";
+</script>
+</body>
+</html>
