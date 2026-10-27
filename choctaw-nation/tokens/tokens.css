@@ -41,18 +41,23 @@
 }
 
 [data-brand="retail"] {
-  --cn-primary: #572D2D;       /* Plaza Brown */
-  --cn-primary-deep: #541800;  /* Feather Umber */
-  --cn-accent: #BF2E1A;        /* Feather Red */
-  --cn-alert: #B11E29;         /* Diamond Red */
-  --cn-ornament: #8A7171;      /* Rule Taupe */
-  --cn-ornament-on-primary: #D7CFCF; /* light taupe from wordmark */
+  /* Approved Commerce–Retail palette */
+  --cn-primary: #4F2C1D;       /* Brand Brown */
+  --cn-primary-deep: #2B1D17;
+  --cn-accent: #AB2328;        /* Choctaw Red */
+  --cn-alert: #AB2328;
+  --cn-ornament: #EBB000;      /* Gold */
+  --cn-ornament-on-primary: #EBB000;
+  --cn-success: #548235;       /* Green */
+  --cn-data: #1F4E79;          /* Blue */
   --cn-surface: #FFFFFF;
-  --cn-surface-alt: #F7F3F2;
-  --cn-neutral: #CBBFBF;
-  --cn-text: #222222;
-  --cn-text-muted: #6B5B5B;
+  --cn-surface-alt: #FAF8F6;
+  --cn-neutral: #C9B6A9;
+  --cn-text: #2B1D17;
+  --cn-text-muted: #6A5A52;
   --cn-on-primary: #FFFFFF;
+  --cn-font-display: GillSans, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif;
+  --cn-font-body: GillSans, "Gill Sans", "Gill Sans MT", Calibri, Arial, sans-serif;
 }
 
 :root {

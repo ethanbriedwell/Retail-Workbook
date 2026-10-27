@@ -13,6 +13,6 @@ Apply these whenever you create or edit anything for Choctaw Nation of Oklahoma 
 9. **Outward-facing work** (public, commercial, external) needs written approval from the Division of Marketing & Communications. Flag this to the user and keep the review note on drafts.
 10. **Tie work to the 2026–2030 Strategic Alignment**: tag slides/KPIs with a pillar and objective from `brand/strategic-plan-2026-2030.md`.
 11. Don't invent cultural facts, Choctaw-language words or meanings. Use only what's in the source files or what the user provides, and ask when unsure. ("Yakoke" = thank you, "Chahta" = Choctaw are used in supplied materials.)
-12. Retail palette values are sampled from logo files — mention that they need confirming before anything goes to print.
+12. Commerce–Retail work uses the approved retail palette (`#4F2C1D`, `#AB2328`, `#EBB000`, `#548235`, `#1F4E79`, `#3C88CF`) and Gill Sans. The Retail Guest Experience dashboard is `dashboards/retail-guest-experience.html`; its KPI rules are in `dashboards/retail-guest-experience.md` — keep the two in sync.
 
 Full reference: `brand/BRAND_GUIDE.md`.

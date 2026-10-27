@@ -10,7 +10,7 @@ Communications. When this guide and an official guideline disagree, the official
 |---|---|---|---|---|
 | **Nation** (`nation`) | Tribal-wide, strategic plan, cross-division work | Flag Purple `#3E0286` | Sky Blue `#76BEE4` | Text wordmark "Choctaw Nation of Oklahoma" |
 | **Operational Excellence** (`oe`) | OE department decks, reports, process docs | Dark Green `#2E4B40` | Gold `#C6A45D` | `assets/logos/oe-lockup-seal.png` |
-| **Travel Plaza / Retail** (`retail`) | Retail guest experience, Travel Plaza materials | Plaza Brown `#572D2D` | Feather Red `#BF2E1A` | `assets/logos/travel-plaza-wordmark.png` |
+| **Travel Plaza / Retail** (`retail`) | Division of Commerce–Retail, guest experience, Travel Plaza materials | Brand Brown `#4F2C1D` | Choctaw Red `#AB2328` | `assets/logos/travel-plaza-icon.jpg` or `travel-plaza-wordmark.png` |
 
 Pick one context per piece. Don't mix palettes on the same page.
 
@@ -39,15 +39,21 @@ Pick one context per piece. Don't mix palettes on the same page.
 | text | Black | `#000000` (use `#222222` for long reading) |
 | surface | White | `#FFFFFF` |
 
-### Travel Plaza / Retail (sampled from logo files — confirm with Marketing)
+### Travel Plaza / Retail — Division of Commerce–Retail (approved palette)
 
-| Role | Name | Hex | Source |
+From the approved brand variables in the Retail Guest Experience workbook. Typography for Commerce–Retail reports is **Gill Sans**.
+
+| Role | Name | Hex | Use |
 |---|---|---|---|
-| primary | Plaza Brown | `#572D2D` | Travel Plaza wordmark |
-| primary-deep | Feather Umber | `#541800` | Feather mark (back feather) |
-| accent | Feather Red | `#BF2E1A` | Feather mark (front feather) |
-| alert | Diamond Red | `#B11E29` | Diamond mark center |
-| ornament | Rule Taupe | `#8A7171` | Rule under wordmark |
+| primary | Brand Brown | `#4F2C1D` | Headers, primary backgrounds, primary data series |
+| accent / alert | Choctaw Red | `#AB2328` | Travel Plaza mark, below-goal status, watch area |
+| ornament | Gold | `#EBB000` | At-goal status, goal markers, rules — not text on white |
+| success | Green | `#548235` | Above-goal status |
+| data | Blue | `#1F4E79` | Secondary data series (e.g. FYTD) |
+| data-light | Light Blue | `#3C88CF` | Tertiary data series |
+| — | Black | `#000000` | Approved; prefer deep brown `#2B1D17` for body text |
+
+The feather and diamond marks in `assets/marks/` sample close to these (`#BF2E1A`, `#541800`, `#B11E29`). Use the approved values above, not the sampled ones.
 
 ### Reference only (never recolor or re-create)
 
@@ -60,6 +66,7 @@ All values live in [`../tokens/tokens.json`](../tokens/tokens.json).
 
 - **Display / headings:** Montserrat Bold–ExtraBold (fallback Arial Black). Geometric sans per the Job Aide.
 - **Body:** Source Sans 3 Regular/Semibold (fallback Arial).
+- **Commerce–Retail reports:** Gill Sans throughout (fallback Gill Sans MT, Calibri, Arial).
 - **Slide scale (Job Aide):** hero 36–40pt · slide title 24pt bold · section header 16pt bold · body 12–14pt regular.
 - Title/divider slides: white type on the primary color. Content slides: charcoal on white or an ultra-light panel.
 
@@ -96,6 +103,6 @@ Prefer real people and places of the Nation over stock imagery. Don't crop throu
 
 ## 7. Accessibility
 
-- Body text ≥ 4.5:1 contrast. Charcoal on white and white on Flag Purple / Dark Green / Plaza Brown all pass.
+- Body text ≥ 4.5:1 contrast. Charcoal on white and white on Flag Purple / Dark Green / Brand Brown all pass.
 - **Don't** set text in Lakna Gold, Sky Blue or OE Gold on white — they fail contrast. Use them for shapes, rules and chart marks.
 - Never rely on red alone to signal a problem; pair it with a label or icon.

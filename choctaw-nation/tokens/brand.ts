@@ -42,15 +42,15 @@ export const palettes: Record<BrandKey, BrandPalette> = {
     onPrimary: '#FFFFFF',
   },
   retail: {
-    primary: '#572D2D',
-    primaryDeep: '#541800',
-    accent: '#BF2E1A',
-    alert: '#B11E29',
-    ornament: '#8A7171',
+    primary: '#4F2C1D',
+    primaryDeep: '#2B1D17',
+    accent: '#AB2328',
+    alert: '#AB2328',
+    ornament: '#EBB000',
     surface: '#FFFFFF',
-    surfaceAlt: '#F7F3F2',
-    neutral: '#CBBFBF',
-    text: '#222222',
+    surfaceAlt: '#FAF8F6',
+    neutral: '#C9B6A9',
+    text: '#2B1D17',
     onPrimary: '#FFFFFF',
   },
 };
@@ -59,7 +59,7 @@ export const palettes: Record<BrandKey, BrandPalette> = {
 export const chartSeries: Record<BrandKey, string[]> = {
   nation: ['#3E0286', '#76BEE4', '#4D2F66', '#B7B7B7'],
   oe: ['#2E4B40', '#C6A45D', '#7A9187', '#B7B7B7'],
-  retail: ['#572D2D', '#BF2E1A', '#8A7171', '#CBBFBF'],
+  retail: ['#4F2C1D', '#C9B6A9', '#1F4E79', '#3C88CF'],
 };
 
 export const fonts = {
