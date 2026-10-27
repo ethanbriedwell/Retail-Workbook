@@ -62,7 +62,7 @@ Every status also carries a text label, so it doesn't rely on color alone.
 | Biggest Gain | Largest (Month − Last Month). Shows "No driver improved" if none rose. |
 | Biggest Decline | Smallest (Month − Last Month). Shows "No driver declined" if none fell. |
 | Top Performing Stores | Five highest current-month Retail NPS of the 18 locations. Can be overridden manually. |
-| Recommendation | Driver-specific action plan for the Watch Area |
+| Recommendation | 30-day action plan for the Watch Area driver: three actions plus how to measure them. Labeled **Priority** at 5+ pts below goal, otherwise **Focus**, with the month-over-month direction. Roll-ups also list the three locations furthest below goal on that driver. When all drivers meet goal it switches to **Sustain**. |
 
 **Change from the earlier logic:** the Watch Area now also checks whether *every* driver is meeting goal. When all five are at or above goal, the tile turns green. The text then says all drivers are meeting goal and names the one with the smallest margin, and the recommendation switches to "sustain."
 

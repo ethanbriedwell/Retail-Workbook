@@ -130,6 +130,8 @@
   .summary h3 .src { font-size: 10.5px; font-family: var(--font); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); align-self: center; }
   .summary p, .summary li { font-size: 14px; line-height: 1.45; }
   .summary ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+  .summary p + ul { margin-top: 6px; }
+  .rec-card #rec > p:first-child { font-family: var(--font-semibold); font-weight: 600; }
 
   .report-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 11.5px; color: var(--ink-muted); }
   .report-foot img { height: 40px; width: auto; flex: none; }
@@ -326,7 +328,7 @@
     <details>
       <summary>Summary text</summary>
       <div class="body">
-        <p class="note">Leave blank to use the automated text. One line = one bullet for Key Insights.</p>
+        <p class="note">Leave blank to use the automated text. One line = one bullet; for Recommendation the first line is the headline.</p>
         <div class="field"><label for="oInsights">Key Insights</label><textarea id="oInsights" data-override="insights"></textarea></div>
         <div class="field"><label for="oWatch">Watch Area</label><textarea id="oWatch" data-override="watch"></textarea></div>
         <div class="field"><label for="oRec">Recommendation</label><textarea id="oRec" data-override="rec"></textarea></div>
@@ -385,13 +387,50 @@ const DRIVERS = [
 // Defaults used when no goal is set for a fiscal year. OpWalk 95.0 is the Retail brand goal.
 const BRAND_GOALS = { nps: 66.1, opwalk: 95.0, clo: 75.0, friendly: 80, efficient: 80, cleanliness: 80, restroom: 75, quality: 80 };
 
+// 30-day action plans for the Watch Area driver: what to do, and what to watch to confirm it worked.
 const RECOMMENDATIONS = {
-  friendly:    "Reinforce the greeting and farewell standard in every shift huddle, recognize associates named in positive guest comments, and have leaders model engagement on the floor during peak hours.",
-  efficient:   "Match register coverage to hourly traffic, open an additional register when lines reach three guests, and time food-service pickup during peak periods.",
-  cleanliness: "Assign zone ownership with a posted cleaning cadence, add a leader walk-through at each shift change, and verify completion against the OpWalk checklist.",
-  restroom:    "Move to documented 30-minute restroom checks during peak hours, confirm supply par levels every shift, and escalate maintenance issues the same day.",
-  quality:     "Audit food holding times and temperatures, tighten rotation and discard standards, and taste-check hot items at each shift change."
+  friendly: {
+    actions: [
+      "Restate the greet, engage and thank standard at every shift huddle, and have leaders model it on the floor during peak hours.",
+      "Coach in the moment when the standard is missed, and recognize associates named in positive guest comments.",
+      "Add greeting and engagement to weekly OpWalk observations."
+    ],
+    measure: "Friendly score and the share of guest comments that mention staff positively."
+  },
+  efficient: {
+    actions: [
+      "Schedule register and food-service coverage to last month's peak hours.",
+      "Call for backup when a line reaches three guests, and keep a backup cashier assigned each shift.",
+      "Check registers, card readers and pumps before each peak so equipment doesn't slow the line."
+    ],
+    measure: "Efficient score and observed wait times during peak periods."
+  },
+  cleanliness: {
+    actions: [
+      "Assign zone ownership with a posted cleaning schedule for every shift.",
+      "Walk the entry, sales floor, beverage and food-service areas with the incoming leader at each shift change.",
+      "Close any OpWalk cleanliness item that fails before the end of the same shift."
+    ],
+    measure: "Cleanliness score and OpWalk cleanliness items passed."
+  },
+  restroom: {
+    actions: [
+      "Check restrooms every 30 minutes during peak hours and log each check.",
+      "Confirm paper, soap and other supplies are at par at the start of every shift.",
+      "Report maintenance issues the same day and track them until they're fixed."
+    ],
+    measure: "Restroom score and completed restroom check logs."
+  },
+  quality: {
+    actions: [
+      "Audit hot-food holding times and temperatures every shift, and discard product past its hold time.",
+      "Tighten rotation and date labeling on fresh and grab-and-go items.",
+      "Taste-check hot items at shift change and cook to demand during slower hours."
+    ],
+    measure: "Quality of Food score and waste logged against hold-time discards."
+  }
 };
+const PRIORITY_GAP = 5; // points below goal at which the Watch Area is called a priority
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const FISCAL_ORDER = [10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -664,12 +703,41 @@ function autoWatch(m) {
   if (m.watch.shift !== null) t += ` Month-over-month it moved ${fmtDelta(m.watch.shift)} pts.`;
   return t;
 }
+// Returns lines: the first is the headline, the rest render as bullets.
 function autoRecommendation(m) {
-  if (!m.watch) return "Enter this period's results, then focus the action plan on the driver furthest below goal.";
+  if (!m.watch) return ["Enter this period's results to generate a recommendation for the driver furthest below goal."];
   if (m.allMeeting) {
-    return `Sustain current standards. Share what is working in ${m.strongest ? m.strongest.label : "the strongest driver"} across shifts, and keep ${m.watch.label} on the huddle agenda since it has the least room above goal.`;
+    return [
+      `Sustain: all five drivers are at or above goal.`,
+      m.strongest && m.strongest.key !== m.watch.key
+        ? `Share what's working in ${m.strongest.label} across shifts and recognize the associates behind it.`
+        : "Share what's working across shifts and recognize the associates behind it.",
+      `Keep ${m.watch.label} on the huddle agenda. It has the smallest margin at ${fmtDelta(m.watch.toGoal)} pts to goal.`,
+      "Hold the current OpWalk cadence to protect the result."
+    ];
   }
-  return `Focus the next 30-day action plan on ${m.watch.label}. ${RECOMMENDATIONS[m.watch.key]} Confirm progress with a targeted OpWalk follow-up before the next report-out.`;
+  const w = m.watch, plan = RECOMMENDATIONS[w.key];
+  const level = w.toGoal <= -PRIORITY_GAP ? "Priority" : "Focus";
+  let headline = `${level}: ${w.label} is ${fmtDelta(w.toGoal)} pts to goal`;
+  if (w.shift !== null && r1(w.shift) < 0) headline += ` and down ${fmt(Math.abs(w.shift))} pts from last month`;
+  else if (w.shift !== null && r1(w.shift) > 0) headline += `, up ${fmt(w.shift)} pts from last month`;
+  headline += ". Over the next 30 days:";
+  const lines = [headline, ...plan.actions];
+  if (m.scope.startsWith("@")) {
+    const lowest = lowestLocations(m.scope, m.period, w.key, 3);
+    if (lowest.length) lines.push(`Start with the locations furthest below goal: ${lowest.map(l => `${l.location} (${fmtDelta(l.toGoal)})`).join(", ")}.`);
+  }
+  lines.push(`Measure: ${plan.measure} Confirm with a targeted OpWalk follow-up before the next report-out.`);
+  return lines;
+}
+
+// Locations in a roll-up with the lowest (Month − Goal) for one driver.
+function lowestLocations(scope, period, key, count) {
+  const fy = fyOf(period);
+  return scopeLocations(scope).map(loc => {
+    const v = num(recordOf(loc, period)?.drivers?.[key]), g = goalFor(loc, fy, key);
+    return v === null || g === null ? null : { location: loc, toGoal: v - g };
+  }).filter(x => x && Math.round(x.toGoal * 10) < 0).sort((a, b) => a.toGoal - b.toGoal).slice(0, count);
 }
 
 /* =========================================================================
@@ -824,7 +892,8 @@ function renderSummary(m) {
   const insights = manual(o.insights) ? o.insights.split("\n").map(s => s.trim()).filter(Boolean) : autoInsights(m);
   $("insights").innerHTML = "<ul>" + insights.map(s => `<li>${escapeHtml(s)}</li>`).join("") + "</ul>";
   $("watch").innerHTML = `<p>${escapeHtml(manual(o.watch) ? o.watch.trim() : autoWatch(m))}</p>`;
-  $("rec").innerHTML = `<p>${escapeHtml(manual(o.rec) ? o.rec.trim() : autoRecommendation(m))}</p>`;
+  const rec = manual(o.rec) ? o.rec.split("\n").map(s => s.trim()).filter(Boolean) : autoRecommendation(m);
+  $("rec").innerHTML = `<p>${escapeHtml(rec[0])}</p>` + (rec.length > 1 ? "<ul>" + rec.slice(1).map(s => `<li>${escapeHtml(s)}</li>`).join("") + "</ul>" : "");
   $("srcInsights").textContent = manual(o.insights) ? "Edited" : "Auto";
   $("srcWatch").textContent = manual(o.watch) ? "Edited" : "Auto";
   $("srcRec").textContent = manual(o.rec) ? "Edited" : "Auto";
@@ -994,7 +1063,7 @@ function renderOverrides() {
   const m = buildModel();
   $("oInsights").value = o.insights || ""; $("oInsights").placeholder = autoInsights(m).join("\n");
   $("oWatch").value = o.watch || "";       $("oWatch").placeholder = autoWatch(m);
-  $("oRec").value = o.rec || "";           $("oRec").placeholder = autoRecommendation(m);
+  $("oRec").value = o.rec || "";           $("oRec").placeholder = autoRecommendation(m).join("\n");
 }
 
 function renderPanel() {
@@ -1022,7 +1091,7 @@ function refreshAfterEdit() {
   // Keep automated placeholder text in step with the data.
   $("oInsights").placeholder = autoInsights(m).join("\n");
   $("oWatch").placeholder = autoWatch(m);
-  $("oRec").placeholder = autoRecommendation(m);
+  $("oRec").placeholder = autoRecommendation(m).join("\n");
 }
 
 function wire() {
