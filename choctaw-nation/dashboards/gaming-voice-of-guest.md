@@ -19,6 +19,8 @@ A two-sided US Letter summary of the Voice of the Guest for one casino or hospit
 6. The **Front fits / Back fits** badges turn red when text runs past the page. Shorten text until they're green again.
 7. **Export data** saves a JSON copy, and **Import data** loads one. Use this to keep a monthly archive or hand the file to someone else.
 
+**If the pages are blank or you see "Preview only":** the viewer isn't running the file's scripts. Phone file previews (iPhone Files / Quick Look) and some in-app viewers do this. Download the file and open it in Chrome, Edge or Safari on a computer. The file includes static sample pages so these viewers still show the layout, and if the scripts fail in a browser, a red message explains why instead of leaving the pages blank.
+
 The sample data is fictional ("Sample Casino Resort") and marked **Sample data** on both pages. Use **Clear all data** before entering real results.
 
 ## Page layout
@@ -55,3 +57,11 @@ The sample data is fictional ("Sample Casino Resort") and marked **Sample data**
 - **Status colors:** green `#3D7A3A`, yellow `#D4A017`, red `#B3261E`. Each status also carries a text label.
 
 If Choctaw Casinos & Resorts has its own approved palette, logo or typeface, send it over and it can replace these.
+
+## Maintenance
+
+The static preview pages inside the HTML are a rendered copy of the sample data. After changing the template, refresh them:
+
+```
+node choctaw-nation/dashboards/tools/refresh-static-preview.js choctaw-nation/dashboards/gaming-voice-of-guest.html
+```
