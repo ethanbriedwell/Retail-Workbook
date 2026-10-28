@@ -32,6 +32,7 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { background: var(--canvas); color: var(--ink); font-family: var(--sans); font-size: 12px; line-height: 1.4; }
   button, input, select, textarea { font: inherit; color: inherit; }
   h1, h2, h3, p, ul, ol { margin: 0; }
@@ -198,6 +199,13 @@
   table.g input { padding: 3px 5px; }
   .warnline { color: var(--below-text); font-size: 12px; }
 
+  /* Supersample mode (html.supersample): used when the browser enforces a minimum font size, e.g. Safari's "Never use
+   * font sizes smaller than". buildSupersampleStyles() doubles every sheet size so no text falls under the minimum, and
+   * the sheet is scaled back down with a transform, which the minimum doesn't apply to. */
+  .supersample .sheet-frame { overflow: hidden; }
+  .supersample .sheet { transform-origin: 0 0; }
+  .notice.font.show { display: block; }
+
   @media screen and (max-width: 1320px) {
     body.editing .stage { grid-template-columns: minmax(0, 1fr); }
     .editor { position: static; max-height: none; }
@@ -212,6 +220,9 @@
     .sheet-frame { width: auto; height: auto !important; }
     .sheet { zoom: 1 !important; box-shadow: none; outline: none !important; break-after: page; page-break-after: always; }
     .sheet-frame:last-child .sheet { break-after: auto; page-break-after: auto; }
+    .supersample .sheet { zoom: 1 !important; transform: scale(.5) !important; break-after: auto; page-break-after: auto; }
+    .supersample .sheet-frame { width: 816px; height: 1056px !important; overflow: hidden; break-after: page; page-break-after: always; }
+    .supersample .sheet-frame:last-child { break-after: auto; page-break-after: auto; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
@@ -230,6 +241,7 @@
 </div>
 <p class="notice nojs" role="status"><b>Preview only.</b> This viewer isn't running the template's scripts, so you're seeing the sample pages and can't edit. Download the file and open it in Chrome, Edge or Safari on a computer to use Edit data, live calculations and Print.</p>
 <p class="notice error" id="loadError" role="alert"></p>
+<p class="notice error font" id="fontNotice" role="status"><b>Your browser is enlarging small text, so the pages overflow.</b> Turn off its minimum font size and reload: in Safari, Settings → Advanced → clear “Never use font sizes smaller than”; in Chrome or Edge, Settings → Appearance → Customize fonts → set Minimum font size to the smallest.</p>
 
 <div class="stage">
   <div class="sheets">
@@ -771,23 +783,81 @@ function checkFit() {
     const el = $(id);
     const foot = el.querySelector(".sheet-foot");
     // Overflow when the last block before the footer pushes the footer past the sheet's padding box.
-    const over = foot ? Math.max(0, Math.ceil(foot.offsetTop + foot.offsetHeight - (el.clientHeight - 24))) : 0;
+    const pad = parseFloat(getComputedStyle(el).paddingBottom) || 0;
+    // Supersample mode lays sheets out at 2x, so report the overflow in page-size pixels.
+    const over = foot ? Math.max(0, Math.ceil((foot.offsetTop + foot.offsetHeight - (el.clientHeight - pad)) / (supersampled() ? 2 : 1))) : 0;
     el.classList.toggle("overflowing", over > 0);
     $(badge).textContent = over > 0 ? `${name} over by ${over}px — shorten text` : `${name} fits`;
     $(badge).classList.toggle("over", over > 0);
   }
 }
+const supersampled = () => document.documentElement.classList.contains("supersample");
+// Fits sheets to a screen scale z. Normally CSS zoom; in supersample mode a transform, since zoom would shrink text below the minimum again.
+function setSheetZoom(z) {
+  const ss = supersampled();
+  document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = !ss && z < 1 ? String(z) : ""; s.style.transform = ss ? `scale(${z / 2})` : ""; });
+  document.querySelectorAll(".sheet-frame").forEach(f => { f.style.width = 816 * z + "px"; f.style.height = ss ? 1056 * z + "px" : ""; });
+}
+// Copies every sheet style rule with pixel sizes doubled, scoped to html.supersample. Toolbar, editor and page-layout rules are left alone.
+function buildSupersampleStyles() {
+  const skip = /toolbar|editor|notice|\.stage|\.sheets|sheet-label|sheet-frame|\.seg|\.btn|\.fit|\.title|\.f\b|\.r2|\.r3|row-card|table\.g|\.warnline|\.lbl|focus-visible|no-js|supersample|^\s*(html|body|\*|:root)/;
+  const out = [".supersample .sheet { font-size: 24px; }"];
+  for (const sheet of document.styleSheets) {
+    let rules;
+    try { rules = sheet.cssRules; } catch (e) { continue; }
+    for (const r of rules) {
+      if (r.type !== CSSRule.STYLE_RULE || !/\d+(\.\d+)?px/.test(r.style.cssText)) continue;
+      const sels = r.selectorText.split(",").map(x => x.trim()).filter(x => !skip.test(x));
+      if (!sels.length) continue;
+      // Only size declarations are copied (border shorthands as widths), so colors from more specific rules still apply.
+      const decls = r.style.cssText.split(";").map(d => d.trim()).filter(d => /\d+(\.\d+)?px/.test(d)).map(d => {
+        const i = d.indexOf(":");
+        let prop = d.slice(0, i).trim(), value = d.slice(i + 1).trim().replace(/(-?\d*\.?\d+)px/g, (_, n) => parseFloat(n) * 2 + "px");
+        if (/^border(-(top|right|bottom|left))?$/.test(prop)) { prop += "-width"; value = (value.match(/-?\d*\.?\d+px/) || ["0px"])[0]; }
+        return `${prop}: ${value}`;
+      });
+      out.push(`${sels.map(x => ".supersample " + x).join(", ")} { ${decls.join("; ")} }`);
+    }
+  }
+  const el = document.createElement("style");
+  el.id = "supersampleStyles";
+  el.textContent = out.join("\n");
+  document.head.appendChild(el);
+}
 function scaleSheets() {
-  const wrap = document.querySelector(".sheets");
-  const avail = wrap.clientWidth;
-  const z = Math.min(1, avail / 816);
-  document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = z < 1 ? String(z) : ""; });
-  document.querySelectorAll(".sheet-frame").forEach(f => { f.style.width = 816 * z + "px"; });
+  const avail = document.querySelector(".sheets").clientWidth;
+  setSheetZoom(Math.min(1, avail / 816));
+}
+// True when the browser renders small text larger than specified (minimum font size setting).
+function textInflated(container, base = 8) {
+  const width = px => {
+    const e = document.createElement("span");
+    e.style.cssText = `position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:${px}px Arial,sans-serif`;
+    e.textContent = "MMMMMMMMMM";
+    container.appendChild(e);
+    const w = e.getBoundingClientRect().width;
+    e.remove();
+    return w;
+  };
+  return width(base) / width(base * 2) > 0.6;
+}
+// Runs once at startup: switch to supersample mode if needed, and keep it only if it actually fixes the text size.
+function adaptToMinimumFontSize() {
+  if (!textInflated(document.body)) return;
+  buildSupersampleStyles();
+  document.documentElement.classList.add("supersample");
+  render();
+  // The smallest sheet text is 8px, so 16px when doubled; if even that is enlarged, fall back to explaining the setting.
+  if (textInflated($("front"), 16)) {
+    document.documentElement.classList.remove("supersample");
+    render();
+    $("fontNotice").classList.add("show");
+  }
 }
 function render() {
   const m = buildModel();
   // Measure at full size so the fit check isn't affected by screen zoom.
-  document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = ""; });
+  setSheetZoom(1);
   renderFront(m);
   renderBack(m);
   checkFit();
@@ -927,7 +997,7 @@ function wire() {
   $("modeView").addEventListener("click", () => setMode(false));
   $("modeEdit").addEventListener("click", () => setMode(true));
   $("printBtn").addEventListener("click", () => window.print());
-  window.addEventListener("beforeprint", () => document.querySelectorAll(".sheet").forEach(s => { s.style.zoom = ""; }));
+  window.addEventListener("beforeprint", () => setSheetZoom(1));
   window.addEventListener("afterprint", scaleSheets);
   window.addEventListener("resize", scaleSheets);
 
@@ -1053,7 +1123,7 @@ function sampleState() {
  * Start
  * ========================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  try { wire(); render(); started = true; } catch (err) { console.error(err); showLoadError(err); }
+  try { wire(); render(); adaptToMinimumFontSize(); started = true; } catch (err) { console.error(err); showLoadError(err); }
 });
 </script>
 <script>

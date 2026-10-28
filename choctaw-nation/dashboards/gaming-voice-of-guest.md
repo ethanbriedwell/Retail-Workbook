@@ -21,6 +21,8 @@ A two-sided US Letter summary of the Voice of the Guest for one casino or hospit
 
 **If the pages are blank or you see "Preview only":** the viewer isn't running the file's scripts. Phone file previews (iPhone Files / Quick Look) and some in-app viewers do this. Download the file and open it in Chrome, Edge or Safari on a computer. The file includes static sample pages so these viewers still show the layout, and if the scripts fail in a browser, a red message explains why instead of leaving the pages blank.
 
+**If the text looks oversized and the fit badges say the pages are over:** the browser has a minimum font size setting turned on (Safari: Settings → Advanced → "Never use font sizes smaller than"; Chrome/Edge: Settings → Appearance → Customize fonts). The template detects this and automatically lays the pages out at double size and scales them down, so they look and print the same. If that still isn't enough (a very large minimum), a red note explains which setting to change.
+
 The sample data is fictional ("Sample Casino Resort") and marked **Sample data** on both pages. Use **Clear all data** before entering real results.
 
 ## Page layout
