@@ -766,7 +766,10 @@ let editorMetric = "osat";
 function renderEditor() {
   const r = state.report, fy = fyOf(r.month);
   const { m } = parseKey(r.month);
-  const years = []; for (let y = fy + 1; y >= fy - 3; y--) years.push(y);
+  // Fiscal years offered: 10 years past today's fiscal year down to 4 years before it. Anchored to today so the list
+  // doesn't shift as years are picked; a selected (e.g. imported) year outside that range is still included.
+  const now = new Date(), thisFy = fyOf(keyOf(now.getFullYear(), now.getMonth() + 1));
+  const years = []; for (let y = Math.max(thisFy + 10, fy); y >= Math.min(thisFy - 4, fy); y--) years.push(y);
   const k = KPIS.find(x => x.key === editorMetric);
   const monthRows = FISCAL_ORDER.map((mo, i) => {
     const cy = fyMonths(fy)[i], py = fyMonths(fy - 1)[i];
