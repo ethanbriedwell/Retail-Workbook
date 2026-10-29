@@ -26,13 +26,13 @@ choctaw-nation/
 ├── dashboards/
 │   ├── retail-guest-experience.html   Monthly Retail GX Performance Summary (self-contained)
 │   ├── retail-guest-experience.md     How to use it + KPI calculation standards
-│   ├── gaming-voice-of-guest.html     Gaming VoG one-page summary, front & back (self-contained)
+│   ├── gaming-voice-of-guest.html     Gaming VoG summary, front & back (self-contained)
 │   └── gaming-voice-of-guest.md       How to use it + calculation rules
 ├── templates/
 │   ├── slides.html             16:9 deck (title, divider, content, KPI, closing)
 │   └── one-pager.html          US Letter handout
 └── assets/
-    ├── logos/                  OE lockup, Travel Plaza wordmark, Great Seal, Chahta Spirit, ikbi
+    ├── logos/                  OE lockup, Choctaw C monogram, Travel Plaza wordmark, Great Seal, Chahta Spirit, ikbi
     ├── marks/                  Feathers, diamond
     ├── patterns/               Diamond / half-diamond / rope-braid SVG tiles, wave borders
     └── photography/            HQ, resort tower, Kindred Spirits, basketry
