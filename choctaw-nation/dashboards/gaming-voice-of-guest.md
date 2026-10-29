@@ -13,10 +13,11 @@ A two-sided US Letter summary of the Voice of the Guest for one casino or hospit
    - Which metric the trend chart shows (OSAT, NPS or Choctaw Language).
    - Footer notes for the front page.
 3. **Core KPIs:** enter fiscal-year goals for NPS, OSAT and Choctaw Language Observation Utilization, then monthly Medallia results for the current and prior fiscal year. Add OSAT and NPS response counts where you have them.
-4. **Narrative sections:** fill in drivers (used for the Strongest Driver and Watch Area tiles), positive trends, opportunities (with impact), Year-over-Year Forecasting items and associate recognition. Each list has **Add** and **Remove** buttons.
-5. **Print / Save PDF:** prints exactly two pages, front and back. Choose two-sided printing, flip on long edge.
-6. The **Front fits / Back fits** badges turn red when text runs past the page. Shorten text until they're green again.
-7. **Export data** saves a JSON copy, and **Import data** loads one. Use this to keep a monthly archive or hand the file to someone else.
+4. **Guest quotes:** sections 2 and 3 each show one optional guest quote underneath. Edit or clear them in Edit data (the "Guest quote shown under…" fields). Clear them if you don't want quotes on the page.
+5. **Narrative sections:** fill in drivers (used for the Strongest Driver and Watch Area tiles), positive trends, opportunities (with impact), Year-over-Year Forecasting items and associate recognition. Each list has **Add** and **Remove** buttons.
+6. **Print / Save PDF:** prints exactly two pages, front and back. Choose two-sided printing, flip on long edge.
+7. The **Front fits / Back fits** badges turn red when text runs past the page. Shorten text until they're green again.
+8. **Export data** saves a JSON copy, and **Import data** loads one. Use this to keep a monthly archive or hand the file to someone else.
 
 **If the pages are blank or you see "Preview only":** the viewer isn't running the file's scripts. Phone file previews (iPhone Files / Quick Look) and some in-app viewers do this. Download the file and open it in Chrome, Edge or Safari on a computer. The file includes static sample pages so these viewers still show the layout, and if the scripts fail in a browser, a red message explains why instead of leaving the pages blank.
 
@@ -29,7 +30,7 @@ The sample data is fictional ("Sample Casino Resort") and marked **Sample data**
 | Front | Back |
 |---|---|
 | Header: Choctaw C monogram; "Choctaw Nation of Oklahoma · Division of Commerce · Voice of the Guest"; property, department, month, fiscal quarter | Same header, marked "Back" |
-| KPI cards, left to right: NPS, OSAT, Choctaw Language Utilization | **4** Year-over-Year Forecasting: up to six items by category (Events, Cleanliness, Wait times, …), each with a proactive action, in two columns |
+| KPI cards, left to right: NPS, OSAT, Choctaw Language Utilization | **4** Year-over-Year Forecasting: up to six items by category (Events, Cleanliness, Wait times, Service quality, Team member demeanor, Communication, Facility conditions, or Other with your own label), each with a proactive action, in two columns |
 | Strongest Driver / Watch Area | **5** Associate Recognition, filling the rest of the page: mention totals by department, then a card per associate (name, department, mentions, praised behaviors) sorted by mentions, and themes to reinforce |
 | **1** OSAT Performance Review: Q1–Q4 vs. goal and prior year, FYTD and YoY, and a full-width monthly trend (current vs. prior FY) | |
 | **2** Key Positive Trends + a guest quote | |

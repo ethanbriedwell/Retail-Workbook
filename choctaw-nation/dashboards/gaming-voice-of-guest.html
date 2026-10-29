@@ -377,7 +377,9 @@ const KPIS = [
   { key: "osat", label: "OSAT", long: "Overall Satisfaction", unit: "%", counts: true, desc: "Medallia OSAT, % top-box" },
   { key: "clo", label: "Choctaw Language Observation Utilization", long: "Choctaw Language Observation Utilization", unit: "%", counts: false, desc: "Observed interactions using Choctaw language" }
 ];
-const RISK_CATEGORIES = ["Events", "Cleanliness", "Wait times", "Service quality", "Communication", "Facility conditions", "Other"];
+// Year-over-Year Forecasting categories. "Other" lets the user type their own label (risks[i].categoryOther).
+const RISK_CATEGORIES = ["Events", "Cleanliness", "Wait times", "Service quality", "Team member demeanor", "Communication", "Facility conditions", "Other"];
+const riskCategory = x => x.category === "Other" && (x.categoryOther || "").trim() ? x.categoryOther.trim() : (x.category || "Other");
 const IMPACTS = ["High", "Medium", "Low"];
 /* =========================================================================
  * Period helpers — "YYYY-MM"; fiscal year N runs Oct (N-1) – Sep N; Q1 = Oct–Dec
@@ -638,7 +640,7 @@ function renderBack(m) {
 
   $("back").innerHTML = `${header(m, "back")}
     <section class="sec"><h2><span class="num">4</span>Year-over-Year Forecasting</h2>
-      <div class="risk-list">${risks.length ? risks.map(x => `<div class="risk"><span class="cat">${esc(x.category || "Other")}</span><p>${esc(x.detail)}${(x.action || "").trim() ? ` <span>→ ${esc(x.action)}</span>` : ""}</p></div>`).join("") : `<p class="note">Add items in Edit data.</p>`}</div>
+      <div class="risk-list">${risks.length ? risks.map(x => `<div class="risk"><span class="cat">${esc(riskCategory(x))}</span><p>${esc(x.detail)}${(x.action || "").trim() ? ` <span>→ ${esc(x.action)}</span>` : ""}</p></div>`).join("") : `<p class="note">Add items in Edit data.</p>`}</div>
     </section>
 
     <section class="sec recognition">
@@ -753,11 +755,11 @@ const inp = (path, type = "text", attrs = "") => {
 };
 const sel = (path, options, attrs = "") => `<select data-path="${path}" ${attrs}>${options.map(o => { const [v, t] = Array.isArray(o) ? o : [o, o]; return `<option value="${esc(v)}" ${String(getPath(state, path) ?? "") === String(v) ? "selected" : ""}>${esc(t)}</option>`; }).join("")}</select>`;
 
-// List editor: fields = [[key, label, type, options]]
+// List editor: fields = [[key, label, type, options, showIf(row)]]; a field with showIf appears only when it returns true.
 function listEditor(listKey, fields, max, addLabel) {
   const list = state[listKey];
   return `${list.map((row, i) => `<div class="row-card"><div class="rc-head"><span>${i + 1}</span><button type="button" class="btn danger small" data-remove="${listKey}|${i}" aria-label="Remove item ${i + 1}">Remove</button></div>
-      ${fields.map(([k, label, type, opts]) => `<div class="f"><label>${label}</label>${type === "select" ? sel(`${listKey}.${i}.${k}`, opts) : inp(`${listKey}.${i}.${k}`, type)}</div>`).join("")}
+      ${fields.filter(f => !f[4] || f[4](row)).map(([k, label, type, opts]) => `<div class="f"><label>${label}</label>${type === "select" ? sel(`${listKey}.${i}.${k}`, opts) : inp(`${listKey}.${i}.${k}`, type, type === "text" && k === "categoryOther" ? 'placeholder="e.g. Parking, Promotions"' : "")}</div>`).join("")}
     </div>`).join("")}
     ${list.length < max ? `<button type="button" class="btn secondary small" data-add="${listKey}">+ ${addLabel}</button>` : `<p class="note">Maximum of ${max} shown on the page.</p>`}`;
 }
@@ -816,16 +818,16 @@ function renderEditor() {
 
     <details><summary>2 · Key positive trends</summary><div class="body">
       ${listEditor("positives", [["title", "Strength", "text"], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add strength")}
-      <div class="f"><label>Representative positive guest comment</label>${inp("quotes.positive", "textarea")}</div>
+      <div class="f"><label>Guest quote shown under Key Positive Trends (optional, leave blank to hide)</label>${inp("quotes.positive", "textarea")}</div>
     </div></details>
 
     <details><summary>3 · Improvement opportunities</summary><div class="body">
       ${listEditor("opportunities", [["title", "Opportunity", "text"], ["impact", "Impact", "select", IMPACTS], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add opportunity")}
-      <div class="f"><label>Representative guest comment</label>${inp("quotes.negative", "textarea")}</div>
+      <div class="f"><label>Guest quote shown under Key Improvement Opportunities (optional, leave blank to hide)</label>${inp("quotes.negative", "textarea")}</div>
     </div></details>
 
     <details><summary>4 · Year-over-Year Forecasting</summary><div class="body">
-      ${listEditor("risks", [["category", "Category", "select", RISK_CATEGORIES], ["detail", "Forecast / emerging concern", "textarea"], ["action", "Proactive action", "text"]], 6, "Add item")}
+      ${listEditor("risks", [["category", "Category", "select", RISK_CATEGORIES], ["categoryOther", "Other category name", "text", null, row => row.category === "Other"], ["detail", "Forecast / emerging concern", "textarea"], ["action", "Proactive action", "text"]], 6, "Add item")}
     </div></details>
 
     <details><summary>5 · Associate recognition</summary><div class="body">
@@ -880,6 +882,12 @@ function wire() {
       editorMetric = t.value; renderEditor();
     } else if (t.tagName === "SELECT" && t.dataset.path) {
       setPath(state, t.dataset.path, t.value); save(); render();
+      const cat = /^risks\.(\d+)\.category$/.exec(t.dataset.path);
+      if (cat) {
+        renderEditor();
+        const other = document.querySelector(`[data-path="risks.${cat[1]}.categoryOther"]`);
+        if (other) other.focus();
+      }
     } else if (t.id === "importFile" && t.files[0]) {
       t.files[0].text().then(txt => { state = normalize(JSON.parse(txt)); save(); render(); renderEditor(); })
         .catch(() => alert("That file couldn't be imported. Choose a JSON file exported from this template."));
