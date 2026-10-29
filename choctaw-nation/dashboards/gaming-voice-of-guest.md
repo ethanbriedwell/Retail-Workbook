@@ -2,7 +2,7 @@
 
 **File:** [`gaming-voice-of-guest.html`](gaming-voice-of-guest.html). It's a single self-contained file (logos and background embedded). Open it in Chrome or Edge.
 
-A two-sided US Letter summary of the Voice of the Guest for one casino or hospitality property or department. It's built from the *Guest Experience Performance Tracker* spec: the front covers performance, the back covers operations, the outlook and associate recognition.
+A two-sided US Letter summary of the Voice of the Guest for one casino or hospitality property or department. It's built from the *Guest Experience Performance Tracker* spec: the front covers performance, and the back covers Year-over-Year Forecasting and associate recognition.
 
 ## Using it
 
@@ -13,7 +13,7 @@ A two-sided US Letter summary of the Voice of the Guest for one casino or hospit
    - Which metric the trend chart shows (OSAT, NPS or Choctaw Language).
    - Footer notes for the front page.
 3. **Core KPIs:** enter fiscal-year goals for NPS, OSAT and Choctaw Language Observation Utilization, then monthly Medallia results for the current and prior fiscal year. Add OSAT and NPS response counts where you have them.
-4. **Narrative sections:** fill in drivers, positive trends, opportunities (with impact), operational metrics, looking-ahead risks, recommended actions and associate recognition. Each list has **Add** and **Remove** buttons.
+4. **Narrative sections:** fill in drivers (used for the Strongest Driver and Watch Area tiles), positive trends, opportunities (with impact), Year-over-Year Forecasting items and associate recognition. Each list has **Add** and **Remove** buttons.
 5. **Print / Save PDF:** prints exactly two pages, front and back. Choose two-sided printing, flip on long edge.
 6. The **Front fits / Back fits** badges turn red when text runs past the page. Shorten text until they're green again.
 7. **Export data** saves a JSON copy, and **Import data** loads one. Use this to keep a monthly archive or hand the file to someone else.
@@ -29,12 +29,14 @@ The sample data is fictional ("Sample Casino Resort") and marked **Sample data**
 | Front | Back |
 |---|---|
 | Header: Choctaw C monogram; "Choctaw Nation of Oklahoma · Division of Commerce · Voice of the Guest"; property, department, month, fiscal quarter | Same header, marked "Back" |
-| KPI cards, left to right: NPS, OSAT, Choctaw Language Utilization | **4** Guest experience drivers table, with Watch and Strongest tags |
-| Strongest Driver / Watch Area | **5** Operational Excellence Insights: Choctaw Language plus other metrics vs. goal, and the connection to guest feedback |
-| **1** OSAT Performance Review: Q1–Q4 vs. goal and prior year, FYTD and YoY, and a full-width monthly trend (current vs. prior FY) | **6** Looking Ahead: risks by category, each with a proactive action |
-| **2** Key Positive Trends + a guest quote | **7** Recommended Actions, sorted High → Low impact, with owner and due date |
-| **3** Key Improvement Opportunities (High / Medium / Low) + a guest quote | **★** Associate Recognition: names, departments, mention counts, praised behaviors, themes to reinforce |
+| KPI cards, left to right: NPS, OSAT, Choctaw Language Utilization | **4** Year-over-Year Forecasting: up to six items by category (Events, Cleanliness, Wait times, …), each with a proactive action, in two columns |
+| Strongest Driver / Watch Area | **5** Associate Recognition, filling the rest of the page: mention totals by department, then a card per associate (name, department, mentions, praised behaviors) sorted by mentions, and themes to reinforce |
+| **1** OSAT Performance Review: Q1–Q4 vs. goal and prior year, FYTD and YoY, and a full-width monthly trend (current vs. prior FY) | |
+| **2** Key Positive Trends + a guest quote | |
+| **3** Key Improvement Opportunities (High / Medium / Low) + a guest quote | |
 | Footer: notes, OE lockup | Footer: OE lockup |
+
+Associate Recognition shows cards in three columns and switches to four tighter columns above 21 associates. About 30 associates fit with short praise notes. If the **Back fits** badge turns red, shorten the praise text.
 
 Both pages carry the feathers mark as a faint background.
 
@@ -60,7 +62,7 @@ Both pages carry the feathers mark as a faint background.
 - **Type:** headings in a serif (Georgia) for a hospitality feel; body in the system sans-serif. Both work offline.
 - **Status colors:** green `#3D7A3A`, yellow `#D4A017`, red `#B3261E`. Each status also carries a text label.
 
-The Executive Summary section and the month/quarter/FYTD comparison chart from the original spec have been removed.
+Removed from the original spec: the Executive Summary, the month/quarter/FYTD comparison chart, and on the back, the Guest Experience Drivers table, Operational Excellence Insights (including Connection to guest feedback) and Recommended Actions. Driver scores are still entered in Edit data because they feed the front-page tiles.
 
 ## Maintenance
 
