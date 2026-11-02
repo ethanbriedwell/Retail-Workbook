@@ -142,10 +142,6 @@
   .item.opp { border-left-color: var(--red); }
   .item b { font-size: 11.5px; font-weight: 600; }
   .item p { font-size: 10.5px; color: #4A3C33; }
-  .impact { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; margin-left: 4px; vertical-align: 1px; }
-  .impact.High { background: var(--below-tint); color: var(--below-text); }
-  .impact.Medium { background: var(--at-tint); color: var(--at-text); }
-  .impact.Low { background: #EEF2F6; color: #1F4E79; }
   .quote { font-family: var(--serif); font-style: italic; font-size: 11px; color: #4A3C33; border-left: 2px solid var(--gold); padding-left: 8px; margin-top: 4px; }
 
   .note { font-size: 9.5px; color: var(--muted); margin-top: 4px; }
@@ -321,7 +317,7 @@
         <p class="quote">“Everyone from valet to the dealers made us feel like regulars on our first visit.”</p>
       </section>
       <section class="sec"><h2><span class="num">3</span>Key Improvement Opportunities</h2>
-        <div class="items"><div class="item opp"><b>Wait times at the cage and Players Club</b><span class="impact High">High</span><p>Lowest driver at 76.3% YTD and down 1.5 pts YoY; weekend evening lines cited in 31 negative comments.</p></div><div class="item opp"><b>Restroom upkeep during peak hours</b><span class="impact Medium">Medium</span><p>Down 1.5 pts vs. August; comments concentrate on Friday and Saturday nights near the high-limit area.</p></div><div class="item opp"><b>Slot availability on event nights</b><span class="impact Low">Low</span><p>Guests report popular titles fully occupied during concert weekends.</p></div></div>
+        <div class="items"><div class="item opp"><b>Wait times at the cage and Players Club</b><p>Lowest driver at 76.3% YTD and down 1.5 pts YoY; weekend evening lines cited in 31 negative comments.</p></div><div class="item opp"><b>Restroom upkeep during peak hours</b><p>Down 1.5 pts vs. August; comments concentrate on Friday and Saturday nights near the high-limit area.</p></div><div class="item opp"><b>Slot availability on event nights</b><p>Guests report popular titles fully occupied during concert weekends.</p></div></div>
         <p class="quote">“Waited almost 25 minutes at the Players Club desk on Saturday night.”</p>
       </section>
     </div>
@@ -380,7 +376,6 @@ const KPIS = [
 // Year-over-Year Forecasting categories. "Other" lets the user type their own label (risks[i].categoryOther).
 const RISK_CATEGORIES = ["Events", "Cleanliness", "Wait times", "Service quality", "Team member demeanor", "Communication", "Facility conditions", "Other"];
 const riskCategory = x => x.category === "Other" && (x.categoryOther || "").trim() ? x.categoryOther.trim() : (x.category || "Other");
-const IMPACTS = ["High", "Medium", "Low"];
 /* =========================================================================
  * Period helpers — "YYYY-MM"; fiscal year N runs Oct (N-1) – Sep N; Q1 = Oct–Dec
  * ========================================================================= */
@@ -612,7 +607,7 @@ function renderFront(m) {
         ${state.quotes.positive.trim() ? `<p class="quote">“${esc(state.quotes.positive.trim())}”</p>` : ""}
       </section>
       <section class="sec"><h2><span class="num">3</span>Key Improvement Opportunities</h2>
-        <div class="items">${opp.length ? opp.map(p => `<div class="item opp"><b>${esc(p.title)}</b><span class="impact ${esc(p.impact)}">${esc(p.impact)}</span>${(p.detail || "").trim() ? `<p>${esc(p.detail)}</p>` : ""}</div>`).join("") : `<p class="note">Add up to five opportunities in Edit data.</p>`}</div>
+        <div class="items">${opp.length ? opp.map(p => `<div class="item opp"><b>${esc(p.title)}</b>${(p.detail || "").trim() ? `<p>${esc(p.detail)}</p>` : ""}</div>`).join("") : `<p class="note">Add up to five opportunities in Edit data.</p>`}</div>
         ${state.quotes.negative.trim() ? `<p class="quote">“${esc(state.quotes.negative.trim())}”</p>` : ""}
       </section>
     </div>
@@ -822,7 +817,7 @@ function renderEditor() {
     </div></details>
 
     <details><summary>3 · Improvement opportunities</summary><div class="body">
-      ${listEditor("opportunities", [["title", "Opportunity", "text"], ["impact", "Impact", "select", IMPACTS], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add opportunity")}
+      ${listEditor("opportunities", [["title", "Opportunity", "text"], ["detail", "Supporting data / feedback theme", "textarea"]], 5, "Add opportunity")}
       <div class="f"><label>Guest quote shown under Key Improvement Opportunities (optional, leave blank to hide)</label>${inp("quotes.negative", "textarea")}</div>
     </div></details>
 
@@ -897,7 +892,7 @@ function wire() {
     const t = e.target.closest("button");
     if (!t) return;
     if (t.dataset.add) {
-      const blank = { drivers: { name: "" }, positives: { title: "", detail: "" }, opportunities: { title: "", impact: "Medium", detail: "" },
+      const blank = { drivers: { name: "" }, positives: { title: "", detail: "" }, opportunities: { title: "", detail: "" },
         risks: { category: "Events", detail: "", action: "" },
         recognition: { name: "", department: "", mentions: "", praise: "" } }[t.dataset.add];
       state[t.dataset.add].push(blank); save(); render(); renderEditor();
@@ -954,9 +949,9 @@ function sampleState() {
     { title: "Food & beverage quality trending up", detail: "Three consecutive monthly gains; buffet freshness mentioned in 24 positive comments." }
   ];
   s.opportunities = [
-    { title: "Wait times at the cage and Players Club", impact: "High", detail: "Lowest driver at 76.3% YTD and down 1.5 pts YoY; weekend evening lines cited in 31 negative comments." },
-    { title: "Restroom upkeep during peak hours", impact: "Medium", detail: "Down 1.5 pts vs. August; comments concentrate on Friday and Saturday nights near the high-limit area." },
-    { title: "Slot availability on event nights", impact: "Low", detail: "Guests report popular titles fully occupied during concert weekends." }
+    { title: "Wait times at the cage and Players Club", detail: "Lowest driver at 76.3% YTD and down 1.5 pts YoY; weekend evening lines cited in 31 negative comments." },
+    { title: "Restroom upkeep during peak hours", detail: "Down 1.5 pts vs. August; comments concentrate on Friday and Saturday nights near the high-limit area." },
+    { title: "Slot availability on event nights", detail: "Guests report popular titles fully occupied during concert weekends." }
   ];
   s.quotes = { positive: "Everyone from valet to the dealers made us feel like regulars on our first visit.", negative: "Waited almost 25 minutes at the Players Club desk on Saturday night." };
   s.risks = [

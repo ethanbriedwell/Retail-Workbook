@@ -14,7 +14,7 @@ A two-sided US Letter summary of the Voice of the Guest for one casino or hospit
    - Footer notes for the front page.
 3. **Core KPIs:** enter fiscal-year goals for NPS, OSAT and Choctaw Language Observation Utilization, then monthly Medallia results for the current and prior fiscal year. Add OSAT and NPS response counts where you have them.
 4. **Guest quotes:** sections 2 and 3 each show one optional guest quote underneath. Edit or clear them in Edit data (the "Guest quote shown under…" fields). Clear them if you don't want quotes on the page.
-5. **Narrative sections:** fill in drivers (used for the Strongest Driver and Watch Area tiles), positive trends, opportunities (with impact), Year-over-Year Forecasting items and associate recognition. Each list has **Add** and **Remove** buttons.
+5. **Narrative sections:** fill in drivers (used for the Strongest Driver and Watch Area tiles), positive trends and opportunities (enter them biggest first; the page keeps your order), Year-over-Year Forecasting items and associate recognition. Each list has **Add** and **Remove** buttons.
 6. **Print / Save PDF:** prints exactly two pages, front and back. Choose two-sided printing, flip on long edge.
 7. The **Front fits / Back fits** badges turn red when text runs past the page. Shorten text until they're green again.
 8. **Export data** saves a JSON copy, and **Import data** loads one. Use this to keep a monthly archive or hand the file to someone else.
@@ -34,7 +34,7 @@ The sample data is fictional ("Sample Casino Resort") and marked **Sample data**
 | Strongest Driver / Watch Area | **5** Associate Recognition, filling the rest of the page: mention totals by department, then a card per associate (name, department, mentions, praised behaviors) sorted by mentions, and themes to reinforce |
 | **1** OSAT Performance Review: Q1–Q4 vs. goal and prior year, FYTD and YoY, and a full-width monthly trend (current vs. prior FY) | |
 | **2** Key Positive Trends + a guest quote | |
-| **3** Key Improvement Opportunities (High / Medium / Low) + a guest quote | |
+| **3** Key Improvement Opportunities, in the order entered (biggest first) + a guest quote | |
 | Footer: notes, OE lockup | Footer: OE lockup |
 
 Associate Recognition shows cards in three columns and switches to four tighter columns above 21 associates. About 30 associates fit with short praise notes. If the **Back fits** badge turns red, shorten the praise text.
