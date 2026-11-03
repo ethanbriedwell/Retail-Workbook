@@ -102,6 +102,7 @@
   .kpi.above { border-top-color: var(--above); } .kpi.at { border-top-color: var(--at); } .kpi.below { border-top-color: var(--below); }
   .kpi-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
   .kpi-name { font-weight: 600; font-size: 11.5px; }
+  .kpi-sub { font-size: 10px; color: var(--muted); margin-top: -3px; }
   .pill { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 2px 7px; background: #F1ECE8; color: var(--neutral-text); white-space: nowrap; }
   .pill.above { background: var(--above-tint); color: var(--above-text); } .pill.at { background: var(--at-tint); color: var(--at-text); } .pill.below { background: var(--below-tint); color: var(--below-text); }
   .kpi-val { font-family: var(--serif); font-size: 30px; line-height: 1; }
@@ -254,7 +255,8 @@
   </header>
     <div class="kpis">
     <div class="kpi below">
-      <div class="kpi-top"><span class="kpi-name">NPS <span style="font-weight:400;color:var(--muted)">· Net Promoter Score</span></span><span class="pill below">Below goal</span></div>
+      <div class="kpi-top"><span class="kpi-name">NPS</span><span class="pill below">Below goal</span></div>
+      <div class="kpi-sub">Overall Property Net Promoter Score</div>
       <div class="kpi-val">48.5<small>pts</small></div>
       <div class="kpi-grid">
         <div><span>Goal</span><b>52.0</b></div>
@@ -265,7 +267,8 @@
       <div class="kpi-note">281 responses</div>
     </div>
     <div class="kpi below">
-      <div class="kpi-top"><span class="kpi-name">OSAT <span style="font-weight:400;color:var(--muted)">· Overall Satisfaction</span></span><span class="pill below">Below goal</span></div>
+      <div class="kpi-top"><span class="kpi-name">OSAT</span><span class="pill below">Below goal</span></div>
+      <div class="kpi-sub">Overall Department Satisfaction</div>
       <div class="kpi-val">86.9<small>%</small></div>
       <div class="kpi-grid">
         <div><span>Goal</span><b>87.0%</b></div>
@@ -277,6 +280,7 @@
     </div>
     <div class="kpi above">
       <div class="kpi-top"><span class="kpi-name">Choctaw Language Utilization</span><span class="pill above">Above goal</span></div>
+      <div class="kpi-sub">Overall Property Choctaw Language Utilization</div>
       <div class="kpi-val">82.0<small>%</small></div>
       <div class="kpi-grid">
         <div><span>Goal</span><b>75.0%</b></div>
@@ -367,11 +371,11 @@ const STORAGE_KEY = "cno-gaming-vog-summary-v1";
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const FISCAL_ORDER = [10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 // Core KPI cards. OSAT and NPS can carry monthly response counts so quarters and YTD are response-weighted.
-// Array order is the card order on the page: NPS, OSAT, Choctaw Language.
+// Array order is the card order on the page: NPS, OSAT, Choctaw Language. card/sub are the card title and gray subtitle.
 const KPIS = [
-  { key: "nps", label: "NPS", long: "Net Promoter Score", unit: "pts", counts: true, desc: "% promoters − % detractors" },
-  { key: "osat", label: "OSAT", long: "Overall Satisfaction", unit: "%", counts: true, desc: "Medallia OSAT, % top-box" },
-  { key: "clo", label: "Choctaw Language Observation Utilization", long: "Choctaw Language Observation Utilization", unit: "%", counts: false, desc: "Observed interactions using Choctaw language" }
+  { key: "nps", label: "NPS", long: "Net Promoter Score", card: "NPS", sub: "Overall Property Net Promoter Score", unit: "pts", counts: true, desc: "% promoters − % detractors" },
+  { key: "osat", label: "OSAT", long: "Overall Satisfaction", card: "OSAT", sub: "Overall Department Satisfaction", unit: "%", counts: true, desc: "Medallia OSAT, % top-box" },
+  { key: "clo", label: "Choctaw Language Observation Utilization", long: "Choctaw Language Observation Utilization", card: "Choctaw Language Utilization", sub: "Overall Property Choctaw Language Utilization", unit: "%", counts: false, desc: "Observed interactions using Choctaw language" }
 ];
 // Year-over-Year Forecasting categories. "Other" lets the user type their own label (risks[i].categoryOther).
 const RISK_CATEGORIES = ["Events", "Cleanliness", "Wait times", "Service quality", "Team member demeanor", "Communication", "Facility conditions", "Other"];
@@ -559,7 +563,8 @@ function header(m, side) {
 function kpiCards(m) {
   return `<div class="kpis">${m.kpis.map(k => `
     <div class="kpi ${k.status || ""}">
-      <div class="kpi-top"><span class="kpi-name">${k.key === "clo" ? "Choctaw Language Utilization" : `${k.label} <span style="font-weight:400;color:var(--muted)">· ${k.long}</span>`}</span><span class="pill ${k.status || ""}">${k.status ? STATUS[k.status] : "No status"}</span></div>
+      <div class="kpi-top"><span class="kpi-name">${k.card}</span><span class="pill ${k.status || ""}">${k.status ? STATUS[k.status] : "No status"}</span></div>
+      <div class="kpi-sub">${k.sub}</div>
       ${k.month === null ? `<div class="kpi-val empty">No data</div>` : `<div class="kpi-val">${fmt(k.month)}<small>${k.unit}</small></div>`}
       <div class="kpi-grid">
         <div><span>Goal</span><b>${fmt(k.goal, k.unit)}</b></div>
