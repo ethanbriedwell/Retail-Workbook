@@ -4,6 +4,8 @@ A home base for designing Choctaw Nation of Oklahoma (CNO) materials: decks, han
 
 **Monthly Retail Guest Experience report:** open [`dashboards/retail-guest-experience.html`](dashboards/retail-guest-experience.html) — guide in [`dashboards/retail-guest-experience.md`](dashboards/retail-guest-experience.md).
 
+**Retail Numbers Feed import:** open [`dashboards/retail-numbers-feed.html`](dashboards/retail-numbers-feed.html) and drop in the monthly numbers workbook (.xlsx) to see goals, Medallia, Choctaw Language Utilization and OpWalk results by location.
+
 **Gaming Voice of the Guest summary (front & back):** open [`dashboards/gaming-voice-of-guest.html`](dashboards/gaming-voice-of-guest.html) — guide in [`dashboards/gaming-voice-of-guest.md`](dashboards/gaming-voice-of-guest.md).
 
 Open **[`index.html`](index.html)** in a browser for a visual overview of palettes, motifs, logos and photography.
@@ -26,6 +28,7 @@ choctaw-nation/
 ├── dashboards/
 │   ├── retail-guest-experience.html   Monthly Retail GX Performance Summary (self-contained)
 │   ├── retail-guest-experience.md     How to use it + KPI calculation standards
+│   ├── retail-numbers-feed.html       Imports the monthly Retail Numbers Feed workbook (self-contained)
 │   ├── gaming-voice-of-guest.html     Gaming VoG one-page summary, front & back (self-contained)
 │   └── gaming-voice-of-guest.md       How to use it + calculation rules
 ├── templates/
